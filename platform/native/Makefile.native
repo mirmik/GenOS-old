@@ -1,0 +1,22 @@
+ifndef GENOS
+  $(error GENOS not defined! You must specify where GENOS resides!)
+endif
+
+
+
+
+
+PLATFORMFLAGS = -I$(GENOS)/platform/native -I$(GENOS)/platform/native/module/strm
+
+CPP = g++
+
+CPPFLAGS = $(GENOSFLAGS) $(PLATFORMFLAGS)
+
+VPATH += $(GENOS)/platform/native/module/strm
+
+
+TRACE_CPP = @echo "  CPP       " $<
+
+$(OBJDIR)/%.o: %.cpp 
+	@$(CPP) $(CPPFLAGS) -c $< -o $@
+	$(TRACE_CPP)

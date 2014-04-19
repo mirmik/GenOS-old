@@ -1,0 +1,13 @@
+
+ifndef GENOS
+  ${error GENOS not defined! You must specify where GENOS resides}
+endif
+
+ifndef TARGET
+  ${error TARGET not defined! You must specify where TARGET resides}
+endif
+
+include $(GENOS)/platform/$(TARGET)/Makefile.$(TARGET)
+
+all:
+	$(CPP) -c test.cpp -o test.o

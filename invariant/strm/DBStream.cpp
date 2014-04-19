@@ -1,0 +1,50 @@
+
+
+#include "strm/DBStream.h"
+
+DBStream::DBStream(uint32_t tx_size,uint32_t rx_size, uint8_t buftype) {
+if 	(buftype == RING)
+	{
+		tx = new ring_t(tx_size);
+		rx = new ring_t(rx_size); 
+	}
+
+if	(buftype == DYNAMICRING)
+	{
+		tx = new dynamicring(tx_size);
+		rx = new dynamicring(rx_size); 
+	}
+
+on_write = 0;
+on_rx_write = 0;
+}
+
+DBStream::DBStream() {
+on_write = 0;
+on_rx_write = 0;
+}
+
+DBStream::DBStream(Queue_p* _rx, Queue_p* _tx) {
+rx=_rx;
+tx=_tx;
+on_write = 0;
+on_rx_write = 0;
+}
+
+size_t DBStream::write(uint8_t c){
+	int temp = tx->push(c);
+	if (temp == 0) {
+					if (on_write != 0) on_write();
+					return(1);
+					}
+	else return 0;
+	}
+	
+ int DBStream::tx_read(){
+	 return(tx->pop());
+	 }
+
+ int DBStream::available(){}
+ int DBStream::read(){}
+ int DBStream::peek(){}
+ void DBStream::flush(){}
