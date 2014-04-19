@@ -1,7 +1,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-
+#include <inttypes.h>
 
 ///////arm926ejs///////////
 /*

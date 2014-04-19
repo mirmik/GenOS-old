@@ -4,7 +4,7 @@ TARGET =native
 
 OBJDIR = obj_$(TARGET)
 
-MODULES = debug
+MODULES = csh test microrl prototype transport intcom charqueue strm
 
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))
@@ -14,7 +14,7 @@ VPATH += $(GENOS)/invariant/
 PROJECT = hello-world
 
 
-src = hello-world.cpp debug_print.cpp
+src = hello-world.cpp csh.cpp Print.cpp Stream.cpp
 		
 OBJ = $(src:%.cpp=$(OBJDIR)/%.o)
 

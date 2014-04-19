@@ -1,8 +1,16 @@
 
 #include "platform.h"
 #include "prototype/Stream.h"
+#include "debug/debug.h"
 
 Stream* stdio;
 
-int main(){
+void debug_putchar(char c)
+{putchar(c);}
+
+
+int main(){	
+	
+	
+	
 	}

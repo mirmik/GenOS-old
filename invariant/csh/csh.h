@@ -5,8 +5,10 @@
 #define CSH_H
 
 #include "platform.h"
-#include "GenOS.h"
+#include "types.h"
 #include <stdlib.h>
+#include "linuxlist.h"
+#include "simple.h"
 
 #define ONCE 0
 #define REPEAT 1
