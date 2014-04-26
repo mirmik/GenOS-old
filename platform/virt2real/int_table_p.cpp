@@ -1,5 +1,6 @@
 #include "virtboard.h"
-#include "debug_serial.h"
+#include "platform_debug.h"
+#include "debug/debug.h"
 #include "int_macro.h"
 #include <inttypes.h>
 #include "string.h"

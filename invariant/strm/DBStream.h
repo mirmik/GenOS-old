@@ -6,7 +6,10 @@
 #include "charqueue/ring.h"
 #include "charqueue/dynamicring.h"
 #include "prototype/Stream.h"
+#include "simple.h"
 //#include "types.h"
+
+
 
 #define RING 0
 #define DYNAMICRING 1

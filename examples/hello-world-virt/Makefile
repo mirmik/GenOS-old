@@ -1,10 +1,10 @@
 
 GENOS = ../..
-TARGET =native
+TARGET =virt2real
 
 OBJDIR = obj_$(TARGET)
 
-MODULES = csh test microrl prototype transport intcom charqueue strm
+MODULES = debug local_heap prototype allocator shed charqueue strm microrl intcom readline
 
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))
@@ -14,7 +14,9 @@ VPATH += $(GENOS)/invariant/
 PROJECT = hello-world
 
 
-src = hello-world.cpp csh.cpp Print.cpp Stream.cpp
+src = hello-world.cpp local_linear_heap.cpp Print.cpp Stream.cpp allocator.cpp delay.cpp alloc_standart.cpp u_esh.cpp flag_sh.cpp \
+	ring.cpp queue.cpp DBStream.cpp dynamicring.cpp StrmNull.cpp BufferStrm.cpp transport.cpp debug_print.cpp microrl.cpp \
+	command_list.cpp utility.cpp readline.cpp rl_terminal.cpp
 		
 OBJ = $(src:%.cpp=$(OBJDIR)/%.o)
 
@@ -33,7 +35,7 @@ $(OBJDIR):
 	- mkdir $(OBJDIR)
 
 LINK:
-	$(CPP) $(CPPFLAGS) $(LDFLAGS) $(OBJ) $(PLATFORMOBJ) -o hello-world
+	$(CPP) $(CPPFLAGS)  $(LDFLAGS) $(OBJ) $(PLATFORMOBJ) -o hello-world
 
 clean:
 	- rm $(OBJDIR)/*.o

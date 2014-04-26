@@ -2,9 +2,16 @@
 
 #include "charqueue/dynamicring.h"
 #include "simple.h"
+#include "allocator/allocator.h"
+
+#define LOCAL_TRACERT 5
+
+//void * operator new (size_t size,Allocator_p* a);
+//void operator delete (void * ptr,Allocator_p* a);
 
 dynamicring::dynamicring(int _quantum)
 {
+tprln("constr dynamicring")
 quantum=_quantum;
 count=0;
 INIT_LIST_HEAD(&ring_head);

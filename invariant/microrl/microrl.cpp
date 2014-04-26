@@ -18,7 +18,7 @@ BUGS and TODO:
 
 microrl_t::microrl_t ()
 {
-	prompt_str = _PROMPT_DEFAUTL;	
+//	prompt_str = _PROMPT_DEFAUTL;	
 } 
 
 
@@ -32,7 +32,7 @@ microrl_t::microrl_t ()
 //*****************************************************************************
 // print buffer content on screen
 void ring_history_t::print_hist ()
-{
+{/*
 	printf ("\n");
 	for (int i = 0; i < _RING_HISTORY_LEN; i++) {
 		if (i == this->begin)
@@ -54,25 +54,25 @@ void ring_history_t::print_hist ()
 		else 
 			printf (" ");
 	}
-	printf ("\n");
+	printf ("\n");*/
 }
 #endif
 
 //*****************************************************************************
 // remove older message from ring buffer
 void ring_history_t::hist_erase_older ()
-{
+{/*
 	int new_pos = this->begin + this->ring_buf [this->begin] + 1;
 	if (new_pos >= _RING_HISTORY_LEN)
 		new_pos = new_pos - _RING_HISTORY_LEN;
 	
 	this->begin = new_pos;
-}
+*/}
 
 //*****************************************************************************
 // check space for new line, remove older while not space
 int ring_history_t::hist_is_space_for_new (int len)
-{
+{/*
 	if (this->ring_buf [this->begin] == 0)
 		return true;
 	if (this->end >= this->begin) {
@@ -82,13 +82,13 @@ int ring_history_t::hist_is_space_for_new (int len)
 		if (this->begin - this->end - 1> len)
 			return true;
 	}
-	return false;
+	return false;*/
 }
 
 //*****************************************************************************
 // put line to ring buffer
 void ring_history_t::hist_save_line (char * line, int len)
-{
+{/*
 	if (len > _RING_HISTORY_LEN - 2)
 		return;
 	while (!hist_is_space_for_new (len)) {
@@ -114,13 +114,13 @@ void ring_history_t::hist_save_line (char * line, int len)
 	this->cur = 0;
 #ifdef _HISTORY_DEBUG
 	print_hist (this);
-#endif
+#endif*/
 }
 
 //*****************************************************************************
 // copy saved line to 'line' and return size of line
 int ring_history_t::hist_restore_line (char * line, int dir)
-{
+{/*
 	int cnt = 0;
 	// count history record	
 	int header = this->begin;
@@ -177,12 +177,12 @@ int ring_history_t::hist_restore_line (char * line, int dir)
 				memcpy (line + part0, this->ring_buf, this->ring_buf[header] - part0);
 			}
 			return this->ring_buf[header];
-		} else {
+		} else {*/
 			/* empty line */
-			return 0;
+	/*		return 0;
 		}
 	}
-	return -1;
+	return -1;*/
 }
 #endif
 
@@ -196,7 +196,7 @@ int ring_history_t::hist_restore_line (char * line, int dir)
 //*****************************************************************************
 // split cmdline to tkn array and return nmb of token
 int microrl_t::split (int limit, char const ** tkn_arr)
-{
+{/*
 	int i = 0;
 	int ind = 0;
 	while (1) {
@@ -215,20 +215,20 @@ int microrl_t::split (int limit, char const ** tkn_arr)
 		}
 		if (!(ind < limit)) return i;
 	}
-	return i;
+	return i;*/
 }
 
 
 //*****************************************************************************
 inline void microrl_t::print_prompt ()
 {
-	strm->print (this->prompt_str);
+	//strm->print (this->prompt_str);
 }
 
 //*****************************************************************************
 inline void microrl_t::terminal_backspace ()
 {
-		strm->print ("\033[D \033[D");
+	strm->print ("\033[D \033[D");
 }
 
 //*****************************************************************************
@@ -243,7 +243,7 @@ inline void microrl_t::terminal_newline ()
 // 0 value not supported!!! just make empty string
 // Returns pointer to a buffer tail
 static char *u16bit_to_str (unsigned int nmb, char * buf)
-{
+{/*
 	char tmp_str [6] = {0,};
 	int i = 0, j;
 	if (nmb <= 0xFFFF) {
@@ -255,7 +255,7 @@ static char *u16bit_to_str (unsigned int nmb, char * buf)
 			*(buf++) = tmp_str [i-j-1];
 	}
 	*buf = '\0';
-	return buf;
+	return buf;*/
 }
 #endif
 
@@ -313,11 +313,12 @@ void microrl_t::terminal_print_line (int pos, int cursor)
 
 	char nch [] = {0,0};
 	int i;
-	for (i = pos; i < this->cmdlen; i++) {
-		nch [0] = this->cmdline [i];
+	for (i = pos; i < cmdlen; i++) {
+		nch [0] = cmdline [i];
 		if (nch[0] == '\0')
 			nch[0] = ' ';
 		strm->print (nch);
+		//strm->print (cmdline[i]);
 	}
 	
 	terminal_reset_cursor ();
@@ -344,38 +345,38 @@ void microrl_t::init (Stream& _strm)
 //	this->prompt_str = prompt_default;
 	this->strm = &_strm;
 #ifdef _ENABLE_INIT_PROMPT
-	print_prompt ();
+	//print_prompt ();
 #endif
 }
 
 //*****************************************************************************
 void microrl_t::set_complete_callback (char ** (*get_completion)(int, const char* const*))
 {
-	this->get_completion = get_completion;
+	//this->get_completion = get_completion;
 }
 
 //*****************************************************************************
 void microrl_t::set_execute_callback (int (*execute)(int, const char* const*))
 {
-	this->execute = execute;
+	//this->execute = execute;
 }
 #ifdef _USE_CTLR_C
 //*****************************************************************************
 void microrl_t::set_sigint_callback (void (*sigintf)(void))
 {
-	this->sigint = sigintf;
+	//this->sigint = sigintf;
 }
 #endif
 
 #ifdef _USE_ESC_SEQ
 void microrl_t::hist_search (int dir)
-{
+{/*
 	int len = ring_hist.hist_restore_line (this->cmdline, dir);
 	if (len >= 0) {
 		this->cursor = this->cmdlen = len;
 		terminal_reset_cursor ();
 		terminal_print_line (0, this->cursor);
-	}
+	}*/
 }
 
 //*****************************************************************************
@@ -428,7 +429,7 @@ int microrl_t::escape_process (char ch)
 	}
 
 	/* unknown escape sequence, stop */
-	return 1;
+	//return 1;
 }
 #endif
 
@@ -475,7 +476,7 @@ void microrl_t::backspace ()
 
 //*****************************************************************************
 static int common_len (char ** arr)
-{
+{/*
 	int len = 0;
 	int i = 1;
 	while (1) {
@@ -489,11 +490,11 @@ static int common_len (char ** arr)
 		i++;
 	}
 	return 0;
-}
+*/}
 
 //*****************************************************************************
 void microrl_t::get_complite () 
-{
+{/*
 	char const * tkn_arr[_COMMAND_TOKEN_NMB];
 	char ** compl_token; 
 	
@@ -530,12 +531,12 @@ void microrl_t::get_complite ()
 		}
 		terminal_reset_cursor ();
 		terminal_print_line (0, this->cursor);
-	} 
+	} */
 }
 #endif
 
 //*****************************************************************************
-void microrl_t::new_line_handler(){
+void microrl_t::new_line_handler(){/*
 	char const * tkn_arr [_COMMAND_TOKEN_NMB];
 	int status;
 
@@ -558,7 +559,7 @@ void microrl_t::new_line_handler(){
 	memset(this->cmdline, 0, _COMMAND_LINE_LEN);
 #ifdef _USE_HISTORY
 	this->ring_hist.cur = 0;
-#endif
+#endif*/
 }
 
 //*****************************************************************************

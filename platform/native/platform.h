@@ -18,6 +18,7 @@ static unsigned long micros(void)
     return ( ts.tv_sec * 1000000L + ts.tv_nsec / 1000L );
 }
 
+extern "C" void debug_putchar(char c);
 
 #include "stdlib.h"
 #define kmalloc(a) malloc(a)

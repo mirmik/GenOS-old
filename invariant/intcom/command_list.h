@@ -1,9 +1,19 @@
 #ifndef COMMAND_LIST_H
 #define COMMAND_LIST_H
 
+#include "linuxlist.h"
 #include "simple.h"
 #include "GenOS.h"
 #include "string.h"
+
+struct argvc_t {
+	char ** argv;
+	int argc;
+	};
+
+void split(char* temp, argvc_t &a);
+
+void execute(char* c);
 
  extern list_head command_head;
   

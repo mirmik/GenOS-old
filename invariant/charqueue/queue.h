@@ -9,7 +9,6 @@
 
 class Queue_p
 {
-
 public:
 unsigned char status;
 	Queue_p();

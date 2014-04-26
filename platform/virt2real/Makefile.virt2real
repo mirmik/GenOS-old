@@ -7,8 +7,8 @@ endif
 #include $(GENOS)/cpu/DM365/Makefile.DM365
 
 PLATFORMFLAGS := -I$(GENOS)/platform/virt2real -I$(GENOS)/cpu/DM365 
-PLATFORMSRCPP := 	int_table_p.cpp simple.cpp boot2.cpp init.cpp timer.cpp irq.cpp
-PLATFORMSRCC := 	base_func.c debug_serial.c debug_serial_c.c
+PLATFORMSRCPP := 	int_table_p.cpp simple.cpp boot2.cpp init.cpp timer.cpp irq.cpp platform_debug.cpp
+PLATFORMSRCC := 	base_func.c 
 
 
 PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 

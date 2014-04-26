@@ -23,21 +23,51 @@ prln();
 };
 };
 
-int interpreter(int argv, const char* const* argc){
+int interpreter(int argc, const char* const* argv){
 	//Stream* tempstrm
 	command_t* p;
 list_for_each_entry(p,&command_head,list)
 
-if (!strcmp(argc[0],p->mnem)) 
+if (!strcmp(argv[0],p->mnem)) 
 {
 //tempstrm=(Stream*)stdio;
 //stdio=strm;
-((void (*)(int, const char* const*))(p->func))(argv,argc);
+((void (*)(int, const char* const*))(p->func))(argc,argv);
 //stdio=tempstrm; 
 return 0;
 }
-prln("Command not found. Use \"\033[33mlist\033[0m\" instruction.");
+pr("Command \"\033[35m");
+pr(argv[0]);
+prln("\033[0m\" not found. Use \"\033[33mlist\033[0m\" instruction.");
 
 return 0;
 };
 		
+
+#define DROP_SPACE(c); for (;(*c!=0) && (*c==' '); c++);
+#define DROP_OP(c); for (;(*c!=0) && (*c!=' '); c++);
+
+// split cmdline to tkn array and return nmb of token
+void split (char* temp, argvc_t &a)
+{	a.argc=0;
+	while((*temp) !=0) {
+	DROP_SPACE(temp);
+	if (*temp != 0) {
+		a.argv[a.argc]=temp;
+		a.argc++;}
+	DROP_OP(temp);
+	if (*temp!=0) {*temp='\0';temp++;
+		}
+	}
+	//tprln(argc);
+}
+
+
+void execute(char* c)
+{
+		argvc_t a;
+		char* argv [10];
+		a.argv=argv;
+		split(c,a);
+		interpreter(a.argc,a.argv);
+};

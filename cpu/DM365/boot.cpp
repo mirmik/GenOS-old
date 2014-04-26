@@ -2,12 +2,15 @@
 // This module's header file 
 #include "boot.h"
 #include "leds.h"
+#include "debug/debug.h"
+#include "platform_debug.h"
 extern void boot2(void);
 
+extern "C" void _init();
 // Boot entry point to setup the C environment
 //const int STACKStart=0x90000000; //it is DTCM top
 
-void boot(void)
+extern "C" void boot(void)
 {asm(".EQU IRQ_STACK_SIZE, 0x100 \n\r \
 .EQU FIQ_STACK_SIZE, 0x100 \n\r \
 .EQU ABT_STACK_SIZE, 0x100 \n\r \
@@ -66,7 +69,7 @@ void boot(void)
 
 
   _init();
-  printd_c("boot\r\n");
+  printd("boot\r\n");
 
   // Call to boot2 entry point
   asm("b boot2");

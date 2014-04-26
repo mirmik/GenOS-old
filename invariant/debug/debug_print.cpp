@@ -1,6 +1,6 @@
 
-#include "debug.h"
-
+#include "debug/debug.h"
+#include "platform.h"
 
 void debug_write(const char*c,int i)
 {int k;

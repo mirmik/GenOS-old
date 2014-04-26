@@ -6,6 +6,7 @@
 #include <inttypes.h>
 #include <stdio.h> // for size_t
 #include "platform.h" // for kmalloc
+#include "simple.h"
 
 
 class ring_t : public Queue_p
@@ -18,7 +19,7 @@ char* buffer;
 
 
 ring_t(size_t a);
-ring_t(char* _buffer, size_t a);
+ring_t(void* _buffer, size_t a);
 int peek(int n);
 int available();
 

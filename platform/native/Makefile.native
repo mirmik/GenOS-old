@@ -7,12 +7,18 @@ endif
 
 
 PLATFORMFLAGS = -I$(GENOS)/platform/native -I$(GENOS)/platform/native/module/strm
+PLATFORMSRCPP := C_stream.cpp	debug_putchar.cpp
+#PLATFORMSRCC := 	
+
+PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 
+#PLATFORMOBJ += $(PLATFORMSRCC:%.c=$(OBJDIR)/%.o)
 
 CPP = g++
 
 CPPFLAGS = $(GENOSFLAGS) $(PLATFORMFLAGS)
 
-VPATH += $(GENOS)/platform/native/module/strm
+VPATH += $(GENOS)/platform/native/module/strm 
+VPATH += $(GENOS)/platform/native
 
 
 TRACE_CPP = @echo "  CPP       " $<

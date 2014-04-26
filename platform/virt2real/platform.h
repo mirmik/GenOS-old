@@ -7,7 +7,7 @@
 #include "Stream.h"
 #include "types.h"
 #include <inttypes.h>
-static volatile void delay_cpu (uint32_t d)
+/*static volatile void delay_cpu (uint32_t d)
 {volatile uint64_t dd;
 	dd=d*2000;
 while(1){
@@ -15,9 +15,9 @@ asm("nop");
 dd--;
 if ( dd == 0) return;
 }
-};
+};*/
 
-
+#include "hardware.h"
 
 #define systemError(a) {PROCESSOR_STATE_PRINT();systemError_h(a);} 
 
@@ -62,6 +62,45 @@ volatile void systemError_h(const char * c)__attribute__((noreturn));
 #include "stdlib.h"
 #define kmalloc(a) malloc(a)
 #define kfree(a) free(a)
+
+
+
+
+
+#include "leds.h"
+#include "int_macro.h"
+#include "debug/debug.h"
+
+#include <errno.h>
+#include <sys/stat.h>
+#include <sys/times.h>
+#include <sys/unistd.h>
+
+extern "C" void _exit(int status); 
+extern "C" int _close(int file);
+extern "C" int _execve(char *name, char **argv, char **env);
+extern "C" int _fork();
+extern "C" int _fstat(int file, struct stat *st);
+extern "C" int _getpid();
+extern "C" int _isatty(int file);
+extern "C" int _kill(int pid, int sig);
+extern "C" int _link(char *old, char *_new);
+extern "C" int _lseek(int file, int ptr, int dir);
+extern "C" caddr_t _sbrk(int incr);
+extern "C" int _read(int file, char *ptr, int len);
+extern "C" int _stat(const char *filepath, struct stat *st);
+extern "C" clock_t _times(struct tms *buf);
+extern "C" int _unlink(char *name);
+extern "C" int _wait(int *status);
+extern "C" int _write(int file, char *ptr, int len);
+
+
+
+
+
+
+
+
 
 #endif
 

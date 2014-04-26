@@ -5,7 +5,7 @@
 #ifndef DELAY_H
 #define DELAY_H
 
-
+#include "inttypes.h"
 
 void delay (uint32_t d);
 

@@ -1,11 +1,23 @@
 
 
+#define LOCAL_TRACERT 5
 
 #include "charqueue/ring.h"
 
 ring_t::ring_t(size_t sz)
-{	size=sz;
-	buffer=(char*)kmalloc(sz);
+{	tprln("constr ring_t 1");
+	size=sz;
+	buffer=(char*)stdalloc->allocate(sz);
+	tail=0;
+	head=0;
+	status = EMPTY;
+}
+
+
+ring_t::ring_t(void* pointer,size_t sz)
+{	tprln("constr ring_t 2");
+	size=sz;
+	buffer=(char*)pointer;
 	tail=0;
 	head=0;
 	status = EMPTY;

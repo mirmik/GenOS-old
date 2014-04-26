@@ -1,9 +1,9 @@
 #include "leds.h"
 #include "int_macro.h"
-#include "debug_serial.h"
+#include "debug/debug.h"
 void abort(const char * c){
 IRQ_D();
-printd_c(c);red_led_on();green_led_on();while(1);
+printd(c);red_led_on();green_led_on();while(1);
 }
 
 
@@ -217,7 +217,6 @@ int _wait(int *status)
 }
 
 
-#include "debug_serial.h"
 /*
  write - запись в файл - у нас есть только stderr/stdout
  */
@@ -226,7 +225,7 @@ int _wait(int *status)
 	
 	
 	
-	debug_serial_write_c(ptr,len);
+	debug_write(ptr,len);
 	/*
     int n;
     switch (file)

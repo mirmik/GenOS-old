@@ -2,7 +2,10 @@
 
 #include "strm/DBStream.h"
 
+#define LOCAL_TRACERT 5
+
 DBStream::DBStream(uint32_t tx_size,uint32_t rx_size, uint8_t buftype) {
+tprln("constr DBStream");
 if 	(buftype == RING)
 	{
 		tx = new ring_t(tx_size);
@@ -45,6 +48,7 @@ size_t DBStream::write(uint8_t c){
 	 }
 
  int DBStream::available(){}
- int DBStream::read(){}
+ int DBStream::read(){
+	 return(rx->pop());}
  int DBStream::peek(){}
  void DBStream::flush(){}

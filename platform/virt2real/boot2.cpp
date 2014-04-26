@@ -1,7 +1,7 @@
 
 #include "init.h"
 #include "int_macro.h"
-#include "debug_serial.h"
+#include "debug/debug.h"
 #include "platform.h"
 #include "delay.h"
 
@@ -52,12 +52,12 @@ delay_cpu(10);
 printd("boot2\r\n");
 delay_cpu(10);
 
-debug_serial_printhex_int((int)&__preinit_array_start);dln
-debug_serial_printhex_int((int)&__preinit_array_end);dln
-debug_serial_printhex_int((int)&__init_array_start);dln
-debug_serial_printhex_int((int)&__init_array_end);dln
-debug_serial_printhex_int((int)&_ctor_start);dln
-debug_serial_printhex_int((int)&_ctor_end);dln
+debug_printhex_int32((int)&__preinit_array_start);dln
+debug_printhex_int32((int)&__preinit_array_end);dln
+debug_printhex_int32((int)&__init_array_start);dln
+debug_printhex_int32((int)&__init_array_end);dln
+debug_printhex_int32((int)&_ctor_start);dln
+debug_printhex_int32((int)&_ctor_end);dln
 
 
 // BEGIN C++ support (2/2)

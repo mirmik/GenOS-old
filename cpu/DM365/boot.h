@@ -8,6 +8,8 @@
 #ifndef _BOOT_H_
 #define _BOOT_H_
 
+#include "platform.h"
+
 //#include "tistdtypes.h"
 
 // Prevent C++ name mangling
@@ -16,7 +18,7 @@
  * out of boot and it doesn't have an exit point). This setup requires
  * that the gnu compiler uses the -nostdlib option. 
  */
-void boot( void ) __attribute__((naked,section(".boot")));
+extern "C" void boot( void ) __attribute__((naked,section(".boot")));
 
 
 #endif //_BOOT_H_

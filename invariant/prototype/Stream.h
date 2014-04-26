@@ -25,6 +25,7 @@
 //#include "GenOS.h"
 #include "platform.h"
 #include <inttypes.h>
+#include "types.h"
 #include "simple.h"
 #include "prototype/Print.h"
 
