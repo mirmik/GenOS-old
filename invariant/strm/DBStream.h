@@ -28,6 +28,7 @@ Queue_p *rx;
 
 func_t on_write;
 func_t on_rx_write;
+func_t send_func;
 
 size_t write(uint8_t c);
 size_t rx_write(uint8_t c);

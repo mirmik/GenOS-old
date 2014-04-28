@@ -1,6 +1,6 @@
 
 #include "platform.h"
-
+#include "types.h"
 
 #define dtab {debug_putchar('\t');}
 #define dpr_inthex(a) debug_printhex_int32(a)

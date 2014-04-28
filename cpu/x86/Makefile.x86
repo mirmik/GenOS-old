@@ -1,0 +1,15 @@
+
+
+
+
+
+
+VPATH += $(GENOS)/cpu/$(CPU)/
+
+CPUSRC := 
+CPUSRCS := boot.S 
+
+CPUOBJ := $(CPUSRC:%.c=$(OBJDIR)/%.o) 
+CPUOBJ += $(CPUSRCS:%.S=$(OBJDIR)/%.o)
+
+PLATFORMOBJ += $(CPUOBJ)

@@ -1,10 +1,10 @@
 
 GENOS = ../..
-TARGET =native
+TARGET =PC
 
 OBJDIR = obj_$(TARGET)
 
-MODULES = debug local_heap prototype allocator shed charqueue strm  intcom readline error
+MODULES = 
 
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))
@@ -14,16 +14,14 @@ VPATH += $(GENOS)/invariant/
 PROJECT = hello-world
 
 
-src = hello-world.cpp local_linear_heap.cpp Print.cpp Stream.cpp allocator.cpp delay.cpp alloc_standart.cpp u_esh.cpp flag_sh.cpp \
-	ring.cpp queue.cpp DBStream.cpp dynamicring.cpp StrmNull.cpp BufferStrm.cpp debug_print.cpp \
-	command_list.cpp utility.cpp readline.cpp rl_terminal.cpp error.cpp
+src = hello-world.cpp 
 		
 OBJ = $(src:%.cpp=$(OBJDIR)/%.o)
 
 
 all: $(OBJDIR) $(OBJ) platform LINK
 	mv hello-world hello-world.$(TARGET)
-
+	objdump -Mintel -d hello-world.$(TARGET) > kkk
 
 
 include $(GENOS)/invariant/Makefile.invariant
@@ -36,7 +34,8 @@ $(OBJDIR):
 
 LINK:
 	$(CPP) $(CPPFLAGS)  $(LDFLAGS) $(OBJ) $(PLATFORMOBJ) -o hello-world
-
+	
+	
 clean:
 	- rm $(OBJDIR)/*.o
 	

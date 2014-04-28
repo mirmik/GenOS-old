@@ -19,12 +19,14 @@ int cmdlen;
 
 char* get_line();	
 //void split();
-void backspace ();
+int backspace ();
 int move_cursor (int offset);
 				
 				
 readline_t();
 void init();
+
+int del ();
 void insert_char(char c);
 void insert_text(char* c);
 void set_execute_callback (int (*_execute)(int, const char* const*));

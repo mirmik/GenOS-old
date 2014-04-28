@@ -91,6 +91,7 @@ void set_execute_callback (int (*_execute)(int, const char* const*));
 	inline void terminal_backspace ();	
 inline void terminal_char (char c);
 
+inline void terminal_del ();
 int escape_process (char ch);	
 };
 

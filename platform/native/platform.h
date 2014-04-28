@@ -24,4 +24,6 @@ extern "C" void debug_putchar(char c);
 #define kmalloc(a) malloc(a)
 #define kfree(a) free(a)
 
+void SystemError_platform();
+
 #endif

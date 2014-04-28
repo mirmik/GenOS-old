@@ -178,6 +178,10 @@ inline void rl_terminal::terminal_backspace ()
 	strm->print ("\033[D \033[D");
 }
 
+inline void rl_terminal::terminal_del ()
+{
+	strm->print (" \033[D");
+}
 
 inline void rl_terminal::terminal_char (char c)
 {
@@ -209,9 +213,10 @@ void	rl_terminal::print_prompt()
 	stdio=strm;
 	char* str=rl->get_line();
 	if (rl->cmdlen > 0)
+	{
 	ring_hist.hist_save_line (str, rl->cmdlen);
-	
 	execute(str);
+	}
 	stdio=strmtemp;
 	print_prompt();
 	
@@ -254,7 +259,7 @@ void	rl_terminal::print_prompt()
 			//-----------------------------------------------------
 			case KEY_NAK: // ^U
 					//while (cursor > 0) {
-					rl->backspace ();
+					//rl->backspace ();
 				
 				//terminal_print_line (0, this->cursor);
 			break;
@@ -304,8 +309,8 @@ void	rl_terminal::print_prompt()
 			//-----------------------------------------------------
 			case KEY_DEL: // Backspace
 			case KEY_BS: // ^U
-				rl->backspace ();
-	//			terminal_print_line (this->cursor, this->cursor);
+			if (rl->backspace ()) terminal_backspace();					
+				if (rl->cmdlen != rl->cursor) {strm->print ("\033[K");terminal_rewrite();}
 			break;
 
 			case KEY_ETX:
@@ -318,15 +323,14 @@ void	rl_terminal::print_prompt()
 		
 		default:
 		rl->insert_char((char)c);	
-		
-		if (rl->cmdlen != rl->cursor) terminal_rewrite();
-		else terminal_char(c);
+		terminal_char(c);
+		if (rl->cmdlen != rl->cursor) {terminal_rewrite();}
 		}
 	}
 }}
 
 void rl_terminal::terminal_rewrite(){
-terminal_write(rl->cmdline + rl->cursor - 1, rl->cmdlen - rl->cursor +1);
+terminal_write(rl->cmdline + rl->cursor, rl->cmdlen - rl->cursor);
 terminal_move_cursor(-rl->cmdlen + rl->cursor);
 }		
 
@@ -374,7 +378,11 @@ int rl_terminal::escape_process (char ch)
 		} else if (ch == '8') {
 			//escape_seq = _ESC_END;
 			return 0;
-		} 
+		} else if (ch == '3') {
+			if (rl->del ()) terminal_del();					
+			if (rl->cmdlen != rl->cursor) {strm->print ("\033[K");terminal_rewrite();}
+			return 0;
+} 
 	} else if (ch == '~') {
 		if (escape_seq == _ESC_HOME) {
 			//terminal_reset_cursor ();

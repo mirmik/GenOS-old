@@ -20,6 +20,7 @@ if	(buftype == DYNAMICRING)
 
 on_write = 0;
 on_rx_write = 0;
+send_func = 0;
 }
 
 DBStream::DBStream() {

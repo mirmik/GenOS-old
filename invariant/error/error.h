@@ -2,9 +2,9 @@
 #define ERROR_H
 
 #include "debug/debug.h"
+#include "platform.h"
 
-
-void systemError(); 
+void SystemError(); 
 
 
 

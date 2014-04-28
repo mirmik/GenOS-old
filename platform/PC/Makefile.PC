@@ -1,0 +1,44 @@
+ifndef GENOS
+  $(error GENOS not defined! You must specify where GENOS resides!)
+endif
+
+
+CPU=x86
+
+
+PLATFORMFLAGS =  -I$(GENOS)/platform/$(TARGET) -I$(GENOS)/cpu/$(CPU)
+PLATFORMSRCPP := boot2.cpp
+#PLATFORMSRCC := 	
+
+PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 
+#PLATFORMOBJ += $(PLATFORMSRCC:%.c=$(OBJDIR)/%.o)
+
+include $(GENOS)/cpu/$(CPU)/Makefile.$(CPU)
+
+
+CPP = g++
+OBJCOPY= objcopy
+AS=nasm
+NASMFLAGS = -f elf 
+
+LDFLAGS := -T$(GENOS)/platform/$(TARGET)/genos.lds
+
+CPPFLAGS = $(GENOSFLAGS) $(PLATFORMFLAGS)
+
+VPATH += $(GENOS)/platform/$(TARGET)
+
+
+TRACE_CPP = @echo "  CPP       " $<
+
+$(OBJDIR)/%.o: %.cpp 
+	@$(CPP) $(CPPFLAGS) -c $< -o $@
+	$(TRACE_CPP)
+$(OBJDIR)/%.o: %.S 
+	@$(AS) $(NASMFLAGS) $< -o $@
+	$(TRACE_CPP)
+
+
+install: 
+	$(OBJCOPY) -O binary $(PROJECT).$(TARGET) kernel.sys
+
+	

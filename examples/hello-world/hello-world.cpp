@@ -39,7 +39,15 @@ command ("about",about);
 
 	execute("list");
 	execute("about");
-	stdio=0;
+	/*
+	while(1){
+		int i;
+		i = term.read();
+		if (i!=-1) {pr(i);	prtab();
+			  prln((char)i);
+			  }
+		}*/
+	
 while(1){r.listen();};
 	
 		

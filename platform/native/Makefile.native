@@ -7,7 +7,7 @@ endif
 
 
 PLATFORMFLAGS = -I$(GENOS)/platform/native -I$(GENOS)/platform/native/module/strm
-PLATFORMSRCPP := C_stream.cpp	debug_putchar.cpp
+PLATFORMSRCPP := C_stream.cpp	debug_putchar.cpp platform_error.cpp
 #PLATFORMSRCC := 	
 
 PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 

@@ -73,7 +73,7 @@ int readline_t::move_cursor (int offset)
 
 
 
-void readline_t::backspace ()
+int readline_t::backspace ()
 {
 if (cursor > 0) {
 		memmove (cmdline + cursor-1,
@@ -82,27 +82,20 @@ if (cursor > 0) {
 		cursor--;
 		//cmdline [cmdlen] = '\0';
 		cmdlen--;
+		return 1;
 	}	
+return 0;
 }
 
-//void readline_t::set_execute_callback (int (*_execute)(int, const char* const*))
-//{execute=_execute;};
+int readline_t::del ()
+{
+if (cmdlen - cursor > 0) {
+		memmove (cmdline + cursor,
+						 cmdline + cursor + 1,
+						 cmdlen-cursor -1);
+		cmdlen--;
+		return 1;
+	}	
+return 0;
+}
 
-
-
-//#define DROP_SPACE(c); for (;(*c!=0) && (*c==' '); c++);
-//#define DROP_OP(c); for (;(*c!=0) && (*c!=' '); c++);
-
-// split cmdline to tkn array and return nmb of token
-/*void readline_t::split ()
-{	argc=0;
-	char* temp = cmdline;
-	while((*temp) !=0) {
-	DROP_SPACE(temp);
-	if (*temp != 0) {argv[argc]=temp;argc++;}
-	DROP_OP(temp);
-	if (*temp!=0) {*temp='\0';temp++;
-		}
-	}
-	tprln(argc);
-}*/
