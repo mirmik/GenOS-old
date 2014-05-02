@@ -1,0 +1,8 @@
+
+
+
+
+
+
+void systemError_platform()
+{};

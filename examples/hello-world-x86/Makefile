@@ -5,17 +5,18 @@ CPU=x86
 
 OBJDIR = obj_$(TARGET)
 
-MODULES = 
+MODULES = debug delay error prototype strm
 
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))
 VPATH += $(GENOS)/invariant/
 
 
-PROJECT = hello-world
+PROJECT = hello-world 
 
 
-src = hello-world.cpp 
+src = hello-world.cpp debug_print.cpp delay_cpu.cpp \
+	error.cpp Stream.cpp Print.cpp StrmDebug.cpp
 		
 OBJ = $(src:%.cpp=$(OBJDIR)/%.o)
 
@@ -42,6 +43,6 @@ clean:
 	
 install: 
 	cp kernel /mnt/boot/kernel
-
+	sync
 start:
 	qemu -hda ~/multiboot/hard_disk.img

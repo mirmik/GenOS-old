@@ -6,13 +6,13 @@
 #include "error/error.h"
 
 
-void SystemError(char* c)
+void systemError(const char* c)
 {
 	
 	//FULLSTOP OS SERVICE
 	
-	debug_print("SYSTEM ERROR:\n");
-	debug_print(c); dln
-	SystemError_platform();
+	debug_print("\r\nSYSTEM ERROR:\n\r");
+	debug_print(c);
+	systemError_platform();
 	while(1);	
 };

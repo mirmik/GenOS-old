@@ -1,45 +1,27 @@
 
-
-char* videomem = (char*)0xB8000;
-int cursor = 0;
-
-struct videochar
-{char c;
-char f;};
-
-void putchar(char c)
-{
-*(videomem + cursor * 2 + 1 ) = 10;
-*(videomem + cursor * 2) = c;
-cursor++; 
-};
-
-
-
-void outb(unsigned short port, unsigned char value)
-{
-asm volatile("outb %1, %0"::"dN"(port),"a"(value));
-}
-
-void move_cursor(unsigned char x, unsigned char y)
-{
-int cur = x + y*20;
-outb(0x3D4, 0x0E);
-outb(0x3D5, cur >> 8);
-outb(0x3D4,0x0F);
-outb(0x3D5,cur);
-}
+#include "video_page.h"
+#include "debug/debug.h"
+#include "prototype/Stream.h"
+#include "strm/StrmDebug.h"
+#include "delay.h"
+#include "video_page.h"
+Stream* stdio = &dbgio; 
 
 int main()
 {
-move_cursor(12,1);
-putchar('M');
-putchar('i');
-putchar('r');
-putchar('m');
-putchar('i');
-putchar('k');
-putchar('\n');
 
+prln("kekekeke1");
+prln("kekekeke2");
+prln("kekekeke3");
+prln("kekekeke4");
+prln("kekekeke5");
+//video_page_drop_str();
+//video_page_drop_str();
+
+//video_page_drop_str();
+
+//video_page_drop_str();
+
+prln("kekekeke");
 return 0;
 }

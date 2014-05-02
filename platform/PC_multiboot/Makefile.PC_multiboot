@@ -9,7 +9,7 @@ endif
 
 
 PLATFORMFLAGS =  -I$(GENOS)/platform/$(TARGET) -I$(GENOS)/cpu/$(CPU)
-PLATFORMSRCPP := 
+PLATFORMSRCPP := debug_putchar.cpp boot2.cpp error_platform.cpp
 #PLATFORMSRCC := 	
 
 PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 
@@ -18,14 +18,12 @@ PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o)
 include $(GENOS)/cpu/$(CPU)/Makefile.$(CPU)
 
 
-CPP = g++
+CPP = g++ 
 OBJCOPY= objcopy
 AS=as
 
 # Флаги компилятора языка C
-CFLAGS= -fno-builtin \
-	-fno-stack-protector \
-	-m32 -g
+CFLAGS= -O0
 
 # Флаги компоновщика
 LDFLAGS=-T $(GENOS)/platform/PC_multiboot/link.ld 

@@ -25,18 +25,35 @@
 #include <math.h>
 
 #include "Print.h"
+#include "delay.h"
+#include "debug/debug.h"
+
+inline size_t local_strlen(const char *c)
+{size_t i=0;
+while(*(c+i)!=0) i++;
+return i;};
+
 
 // Public Methods //////////////////////////////////////////////////////////////
 
 /* default implementation: may be overridden */
 size_t Print::write(const uint8_t *buffer, size_t size)
-{
+{ uint8_t* tmp  = (uint8_t *) buffer;
   size_t n = 0;
   while (size--) {
-    n += write(*buffer++);
+    n += write(*tmp++);
   }
   return n;
 }
+
+size_t Print::write(const char *buffer, size_t size) {
+      return write((const uint8_t *)buffer, size);
+    }
+
+size_t Print::write(const char *str) {
+      if (str == NULL) return 0;
+      return write((const uint8_t *)str, local_strlen(str));
+    }
 /*
 size_t Print::print(const __FlashStringHelper *ifsh)
 {

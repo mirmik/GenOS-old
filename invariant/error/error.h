@@ -4,8 +4,9 @@
 #include "debug/debug.h"
 #include "platform.h"
 
-void SystemError(); 
+void systemError(const char* c); 
 
+void systemError_platform();
 
 
 

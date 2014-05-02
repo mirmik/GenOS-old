@@ -1,0 +1,12 @@
+
+kernel.sys:     формат файла binary
+
+
+Дизассемблирование раздела .data:
+
+00000000 <.data>:
+   0:	fa                   	cli    
+   1:	53                   	push   %ebx
+   2:	e8 fc ff ff ff       	call   0x3
+   7:	f4                   	hlt    
+   8:	eb fe                	jmp    0x8

@@ -27,7 +27,7 @@
 #define NO_SKIP_CHAR  1  // a magic char not found in a valid ASCII numeric field
 
 // private method to read stream with timeout
-int Stream::timedRead()
+/*int Stream::timedRead()
 {
   int c;
   _startMillis = millis();
@@ -49,9 +49,10 @@ int Stream::timedPeek()
   } while(millis() - _startMillis < _timeout);
   return -1;     // -1 indicates timeout
 }
-
+*/
 // returns peek of the next digit in the stream or -1 if timeout
 // discards non-numeric characters
+/*
 int Stream::peekNextDigit()
 {
   int c;
@@ -62,11 +63,11 @@ int Stream::peekNextDigit()
     if (c >= '0' && c <= '9') return c;
     read();  // discard non-numeric
   }
-}
+}*/
 
 // Public Methods
 //////////////////////////////////////////////////////////////
-
+/*
 void Stream::setTimeout(unsigned long timeout)  // sets the maximum number of milliseconds to wait
 {
   _timeout = timeout;
@@ -123,11 +124,12 @@ bool Stream::findUntil(char *target, size_t targetLen, char *terminator, size_t 
   }
   return false;
 }
-
+*/
 
 // returns the first valid (long) integer value from the current position.
 // initial characters that are not digits (or the minus sign) are skipped
 // function is terminated by the first character that is not a digit.
+/*
 long Stream::parseInt()
 {
   return parseInt(NO_SKIP_CHAR); // terminate on first non-digit character (or timeout)
@@ -242,7 +244,7 @@ size_t Stream::readBytesUntil(char terminator, char *buffer, size_t length)
     index++;
   }
   return index; // return number of characters, not including null terminator
-}
+}*/
 /*
 String Stream::readString()
 {

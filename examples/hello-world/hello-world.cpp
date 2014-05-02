@@ -17,7 +17,7 @@
 #include "readline/rl_terminal.h"
 
 #include "debug/debug.h"
-
+#include "strm/StrmDebug.h"
 Stream* stdio=&term;
 Stream* tracert=&term;
 Allocator_p * stdalloc=&galloc;
@@ -26,16 +26,18 @@ readline_t rl;
 rl_terminal r(&term,&rl);
 
 int main(){
-
+StrmDebug k;
 term.begin();
 
 debug_print("HelloWorld");
+k.print("?kkekekek?");
+
 
 command ("list",command_print);
 command ("ptest",ptest);
 command ("about",about);
 
-
+dln;
 
 	execute("list");
 	execute("about");

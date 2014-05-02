@@ -4,7 +4,7 @@
 #include "platform.h"
 #include "debug/debug.h"
 
-void SystemError_platform()
+void systemError_platform()
 {
 	
 	

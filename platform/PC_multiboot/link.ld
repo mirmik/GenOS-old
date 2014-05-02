@@ -10,7 +10,6 @@ SECTIONS
 /DISCARD/ :
 		{*(.note.ABI-tag)}
   
-
     .text ALIGN (0x1000) :
     {
         *(.mboot)
@@ -58,19 +57,35 @@ SECTIONS
         KEEP (*(EXCLUDE_FILE (*crtend.o) .dtors))
         KEEP (*(SORT(.dtors.*)))
         KEEP (*crtend.o(.dtors))
-
+	. = ALIGN(4);
     }
+    
+    
 /* Секция инициализированных данных */
-    .data ALIGN (0x1000) :
+    .data :
     {
         *(.data)
+        . = ALIGN(4);
     }
+    
+    
+    
 /* Секция неинициализированных данных */    
-
-    .bss :
+	.bss :
     {
+		
         *(.bss)
+        . = ALIGN(4);
+        
     }
+    
+    _text_begin = LOADADDR(.text) ;
+    _text_end = LOADADDR(.text) + SIZEOF(.text) ;
+    _data_begin = LOADADDR(.data) ;
+    _data_end = LOADADDR(.data) + SIZEOF(.data) ;
+    _bss_begin = LOADADDR(.bss) ;
+    _bss_end = LOADADDR(.bss) + SIZEOF(.bss) ;
+    
 /* Место в памяти, где уже нет кода ядра */
     end = .; _end = .; __end = .;  
 }

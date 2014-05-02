@@ -4,12 +4,13 @@
 
 
 
-VPATH += $(GENOS)/cpu/$(CPU)/
+VPATH += $(GENOS)/cpu/$(CPU)/ 
+VPATH += $(GENOS)/cpu/$(CPU)/drv/video_page/
 
-CPUSRC := 
+CPUSRC := video_page.cpp
 CPUSRCS := boot.S 
 
-CPUOBJ := $(CPUSRC:%.c=$(OBJDIR)/%.o) 
+CPUOBJ := $(CPUSRC:%.cpp=$(OBJDIR)/%.o) 
 CPUOBJ += $(CPUSRCS:%.S=$(OBJDIR)/%.o)
 
 PLATFORMOBJ += $(CPUOBJ)
