@@ -1,0 +1,56 @@
+ifndef GENOS
+  $(error GENOS not defined! You must specify where GENOS resides!)
+endif
+
+ifndef CPU
+  $(error CPU not defined! You must specify where CPU resides!)
+endif
+
+
+
+PLATFORMFLAGS =  -I$(GENOS)/platform/$(TARGET) -I$(GENOS)/cpu/$(CPU)
+PLATFORMSRCPP := 
+#PLATFORMSRCC := 	
+
+PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 
+#PLATFORMOBJ += $(PLATFORMSRCC:%.c=$(OBJDIR)/%.o)
+
+include $(GENOS)/cpu/$(CPU)/Makefile.$(CPU)
+
+
+CPP = g++
+OBJCOPY= objcopy
+AS=as
+
+# Флаги компилятора языка C
+CFLAGS= -fno-builtin \
+	-fno-stack-protector \
+	-m32 -g
+
+# Флаги компоновщика
+LDFLAGS=-T $(GENOS)/platform/PC_multiboot/link.ld 
+
+# Флаги ассемблера
+ASFLAGS=--32
+
+CPPFLAGS = $(CFLAGS) $(GENOSFLAGS) $(PLATFORMFLAGS)
+
+VPATH += $(GENOS)/platform/$(TARGET)
+
+
+
+
+TRACE_CPP = @echo "  CPP       " $<
+
+$(OBJDIR)/%.o: %.cpp 
+	@$(CPP) $(CPPFLAGS) -c $< -o $@
+	$(TRACE_CPP)
+$(OBJDIR)/%.o: %.S 
+	@$(AS) $(ASFLAGS) $< -o $@
+	$(TRACE_CPP)
+
+
+install: 
+	$(OBJCOPY) -O binary $(PROJECT).$(TARGET) kernel.sys
+
+	

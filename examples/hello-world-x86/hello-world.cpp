@@ -1,40 +1,45 @@
 
-#include "platform.h"
-#include "debug/debug.h"
 
-extern "C" void _init();
+char* videomem = (char*)0xB8000;
+int cursor = 0;
 
-//void putstr(char *s,int x, int y,char* q)
-//{
-//while(*s !=4) // 25 строк по 80 символов по 2
-//{ // байта на символ
-//*(q+y*25*2+x*2+0) = *s++; // запись символа в видеопамять
-//*(q+y*25*2+x*2+1) = 0xE; // запись атрибута - желтый на черном
-//x++;
-//}}
+struct videochar
+{char c;
+char f;};
 
-
-	extern "C" void debug_str2();	extern "C" void debug_str();
-
-int main(){
-	//debug_str2();
-	//while(1);
-	
-asm("push %ebx");
-asm("push %eax");
-asm("mov %ah,0x0E");
-asm("mov %bx, 7");
-asm("mov %al,0x63");
-asm("int $0x10");
-asm("int $0x10");
-asm("int $0x10");
-asm("int $0x10");
-asm("int $0x10");
-asm("int $0x10");
-asm("pop %eax");
-asm("pop %ebx");
-	}
+void putchar(char c)
+{
+*(videomem + cursor * 2 + 1 ) = 10;
+*(videomem + cursor * 2) = c;
+cursor++; 
+};
 
 
 
+void outb(unsigned short port, unsigned char value)
+{
+asm volatile("outb %1, %0"::"dN"(port),"a"(value));
+}
 
+void move_cursor(unsigned char x, unsigned char y)
+{
+int cur = x + y*20;
+outb(0x3D4, 0x0E);
+outb(0x3D5, cur >> 8);
+outb(0x3D4,0x0F);
+outb(0x3D5,cur);
+}
+
+int main()
+{
+move_cursor(12,1);
+putchar('M');
+putchar('i');
+putchar('r');
+putchar('m');
+putchar('i');
+putchar('k');
+putchar('\n');
+
+return 0;
+}

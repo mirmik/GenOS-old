@@ -1,480 +1,332 @@
 
-hello-world.PC:     формат файла elf32-i386
+kernel:     формат файла elf32-i386
 
 
 Дизассемблирование раздела .text:
 
-00000000 <boot-0x600>:
-	...
+00100000 <_start-0xc>:
+  100000:	02 b0 ad 1b 01 00    	add    0x11bad(%eax),%dh
+  100006:	00 00                	add    %al,(%eax)
+  100008:	fd                   	std    
+  100009:	4f                   	dec    %edi
+  10000a:	52                   	push   %edx
+  10000b:	e4 31                	in     $0x31,%al
 
-00000600 <boot>:
- 600:	ea 05 06 00 00 0e 1f 	jmp    0x1f0e:0x605
+0010000c <_start>:
+  10000c:	31 ed                	xor    %ebp,%ebp
+  10000e:	5e                   	pop    %esi
+  10000f:	89 e1                	mov    %esp,%ecx
+  100011:	83 e4 f0             	and    $0xfffffff0,%esp
+  100014:	50                   	push   %eax
+  100015:	54                   	push   %esp
+  100016:	52                   	push   %edx
+  100017:	68 e0 02 10 00       	push   $0x1002e0
+  10001c:	68 70 02 10 00       	push   $0x100270
+  100021:	51                   	push   %ecx
+  100022:	56                   	push   %esi
+  100023:	68 e2 01 10 00       	push   $0x1001e2
+  100028:	e8 23 03 00 00       	call   100350 <__fini_array_end+0x24>
+  10002d:	f4                   	hlt    
+  10002e:	66 90                	xchg   %ax,%ax
 
-00000605 <Start>:
- 605:	0e                   	push   cs
- 606:	1f                   	pop    ds
- 607:	88 16                	mov    BYTE PTR [esi],dl
- 609:	08 0d 88 36 09 0d    	or     BYTE PTR ds:0xd093688,cl
- 60f:	66 89 1e             	mov    WORD PTR [esi],bx
- 612:	0a 0d 66 a3 0e 0d    	or     cl,BYTE PTR ds:0xd0ea366
- 618:	66 89 0e             	mov    WORD PTR [esi],cx
- 61b:	12 0d 31 c0 cd 12    	adc    cl,BYTE PTR ds:0x12cdc031
- 621:	83 e8 40             	sub    eax,0x40
- 624:	c1 e0 06             	shl    eax,0x6
- 627:	8e d0                	mov    ss,eax
- 629:	bc 00 20 e8 74       	mov    esp,0x74e82000
- 62e:	00 4d 69             	add    BYTE PTR [ebp+0x69],cl
- 631:	72 6d                	jb     6a0 <Start.1+0x30>
- 633:	69 6b 20 77 61 73 20 	imul   ebp,DWORD PTR [ebx+0x20],0x20736177
- 63a:	68 65 72 65 2e       	push   0x2e657265
- 63f:	0a 00                	or     al,BYTE PTR [eax]
- 641:	b4 0e                	mov    ah,0xe
- 643:	bb 07 00 b0 4d       	mov    ebx,0x4db00007
- 648:	cd 10                	int    0x10
- 64a:	b4 0e                	mov    ah,0xe
- 64c:	bb 07 00 b0 49       	mov    ebx,0x49b00007
- 651:	cd 10                	int    0x10
- 653:	b4 0e                	mov    ah,0xe
- 655:	bb 07 00 b0 52       	mov    ebx,0x52b00007
- 65a:	cd 10                	int    0x10
- 65c:	cd 10                	int    0x10
- 65e:	e8 42 00 0a 0a       	call   a0a06a5 <__heap_start+0xa09f98d>
- 663:	43                   	inc    ebx
- 664:	61                   	popa   
- 665:	6c                   	ins    BYTE PTR es:[edi],dx
- 666:	6c                   	ins    BYTE PTR es:[edi],dx
- 667:	42                   	inc    edx
- 668:	6f                   	outs   dx,DWORD PTR ds:[esi]
- 669:	6f                   	outs   dx,DWORD PTR ds:[esi]
- 66a:	74 32                	je     69e <Start.1+0x2e>
- 66c:	00 e8                	add    al,ch
- 66e:	32 02                	xor    al,BYTE PTR [edx]
+00100030 <__x86.get_pc_thunk.bx>:
+  100030:	8b 1c 24             	mov    (%esp),%ebx
+  100033:	c3                   	ret    
+  100034:	66 90                	xchg   %ax,%ax
+  100036:	66 90                	xchg   %ax,%ax
+  100038:	66 90                	xchg   %ax,%ax
+  10003a:	66 90                	xchg   %ax,%ax
+  10003c:	66 90                	xchg   %ax,%ax
+  10003e:	66 90                	xchg   %ax,%ax
 
-00000670 <Start.1>:
- 670:	e8 30 00 50 72       	call   725006a5 <__heap_start+0x724ff98d>
- 675:	65                   	gs
- 676:	73 73                	jae    6eb <PrintHexDigit+0xb>
- 678:	20 61 6e             	and    BYTE PTR [ecx+0x6e],ah
- 67b:	79 20                	jns    69d <Start.1+0x2d>
- 67d:	6b 65 79 20          	imul   esp,DWORD PTR [ebp+0x79],0x20
- 681:	66 6f                	outs   dx,WORD PTR ds:[esi]
- 683:	72 20                	jb     6a5 <Message+0x2>
- 685:	77 61                	ja     6e8 <PrintHexDigit+0x8>
- 687:	72 6d                	jb     6f6 <PrintChar+0x9>
- 689:	20 72 65             	and    BYTE PTR [edx+0x65],dh
- 68c:	62 6f 6f             	bound  ebp,QWORD PTR [edi+0x6f]
- 68f:	74 2e                	je     6bf <PrintEDAX+0x1>
- 691:	2e 2e 00 b4 00 cd 16 	cs add BYTE PTR cs:[eax+eax*1+0x6c716cd],dh
- 698:	c7 06 
- 69a:	72 04                	jb     6a0 <Start.1+0x30>
- 69c:	34 12                	xor    al,0x12
- 69e:	ea 00 00 ff ff 55 89 	jmp    0x8955:0xffff0000
+00100040 <deregister_tm_clones>:
+  100040:	b8 f3 10 10 00       	mov    $0x1010f3,%eax
+  100045:	2d f0 10 10 00       	sub    $0x1010f0,%eax
+  10004a:	83 f8 06             	cmp    $0x6,%eax
+  10004d:	77 01                	ja     100050 <deregister_tm_clones+0x10>
+  10004f:	c3                   	ret    
+  100050:	b8 00 00 00 00       	mov    $0x0,%eax
+  100055:	85 c0                	test   %eax,%eax
+  100057:	74 f6                	je     10004f <deregister_tm_clones+0xf>
+  100059:	55                   	push   %ebp
+  10005a:	89 e5                	mov    %esp,%ebp
+  10005c:	83 ec 18             	sub    $0x18,%esp
+  10005f:	c7 04 24 f0 10 10 00 	movl   $0x1010f0,(%esp)
+  100066:	ff d0                	call   *%eax
+  100068:	c9                   	leave  
+  100069:	c3                   	ret    
+  10006a:	8d b6 00 00 00 00    	lea    0x0(%esi),%esi
 
-000006a3 <Message>:
- 6a3:	55                   	push   ebp
- 6a4:	89 e5                	mov    ebp,esp
- 6a6:	50                   	push   eax
- 6a7:	56                   	push   esi
- 6a8:	8b 76 02             	mov    esi,DWORD PTR [esi+0x2]
- 6ab:	fc                   	cld    
+00100070 <register_tm_clones>:
+  100070:	b8 f0 10 10 00       	mov    $0x1010f0,%eax
+  100075:	2d f0 10 10 00       	sub    $0x1010f0,%eax
+  10007a:	c1 f8 02             	sar    $0x2,%eax
+  10007d:	89 c2                	mov    %eax,%edx
+  10007f:	c1 ea 1f             	shr    $0x1f,%edx
+  100082:	01 d0                	add    %edx,%eax
+  100084:	d1 f8                	sar    %eax
+  100086:	75 01                	jne    100089 <register_tm_clones+0x19>
+  100088:	c3                   	ret    
+  100089:	ba 00 00 00 00       	mov    $0x0,%edx
+  10008e:	85 d2                	test   %edx,%edx
+  100090:	74 f6                	je     100088 <register_tm_clones+0x18>
+  100092:	55                   	push   %ebp
+  100093:	89 e5                	mov    %esp,%ebp
+  100095:	83 ec 18             	sub    $0x18,%esp
+  100098:	89 44 24 04          	mov    %eax,0x4(%esp)
+  10009c:	c7 04 24 f0 10 10 00 	movl   $0x1010f0,(%esp)
+  1000a3:	ff d2                	call   *%edx
+  1000a5:	c9                   	leave  
+  1000a6:	c3                   	ret    
+  1000a7:	89 f6                	mov    %esi,%esi
+  1000a9:	8d bc 27 00 00 00 00 	lea    0x0(%edi,%eiz,1),%edi
 
-000006ac <Message.1>:
- 6ac:	2e ac                	lods   al,BYTE PTR cs:[esi]
- 6ae:	3c 00                	cmp    al,0x0
- 6b0:	74 05                	je     6b7 <Message.2>
- 6b2:	e8 38 00 eb f5       	call   f5eb06ef <__heap_start+0xf5eaf9d7>
+001000b0 <__do_global_dtors_aux>:
+  1000b0:	80 3d f0 10 10 00 00 	cmpb   $0x0,0x1010f0
+  1000b7:	75 13                	jne    1000cc <__do_global_dtors_aux+0x1c>
+  1000b9:	55                   	push   %ebp
+  1000ba:	89 e5                	mov    %esp,%ebp
+  1000bc:	83 ec 08             	sub    $0x8,%esp
+  1000bf:	e8 7c ff ff ff       	call   100040 <deregister_tm_clones>
+  1000c4:	c6 05 f0 10 10 00 01 	movb   $0x1,0x1010f0
+  1000cb:	c9                   	leave  
+  1000cc:	f3 c3                	repz ret 
+  1000ce:	66 90                	xchg   %ax,%ax
 
-000006b7 <Message.2>:
- 6b7:	89 76 02             	mov    DWORD PTR [esi+0x2],esi
- 6ba:	5e                   	pop    esi
- 6bb:	58                   	pop    eax
- 6bc:	5d                   	pop    ebp
- 6bd:	c3                   	ret    
+001000d0 <frame_dummy>:
+  1000d0:	a1 ec 10 10 00       	mov    0x1010ec,%eax
+  1000d5:	85 c0                	test   %eax,%eax
+  1000d7:	74 1f                	je     1000f8 <frame_dummy+0x28>
+  1000d9:	b8 00 00 00 00       	mov    $0x0,%eax
+  1000de:	85 c0                	test   %eax,%eax
+  1000e0:	74 16                	je     1000f8 <frame_dummy+0x28>
+  1000e2:	55                   	push   %ebp
+  1000e3:	89 e5                	mov    %esp,%ebp
+  1000e5:	83 ec 18             	sub    $0x18,%esp
+  1000e8:	c7 04 24 ec 10 10 00 	movl   $0x1010ec,(%esp)
+  1000ef:	ff d0                	call   *%eax
+  1000f1:	c9                   	leave  
+  1000f2:	e9 79 ff ff ff       	jmp    100070 <register_tm_clones>
+  1000f7:	90                   	nop
+  1000f8:	e9 73 ff ff ff       	jmp    100070 <register_tm_clones>
 
-000006be <PrintEDAX>:
- 6be:	66 92                	xchg   dx,ax
- 6c0:	e8 02 00 66 92       	call   926606c7 <__heap_start+0x9265f9af>
+001000fd <_Z7putcharc>:
+  1000fd:	55                   	push   %ebp
+  1000fe:	89 e5                	mov    %esp,%ebp
+  100100:	83 ec 04             	sub    $0x4,%esp
+  100103:	8b 45 08             	mov    0x8(%ebp),%eax
+  100106:	88 45 fc             	mov    %al,-0x4(%ebp)
+  100109:	a1 08 10 10 00       	mov    0x101008,%eax
+  10010e:	8b 15 f4 10 10 00    	mov    0x1010f4,%edx
+  100114:	01 d2                	add    %edx,%edx
+  100116:	83 c2 01             	add    $0x1,%edx
+  100119:	01 d0                	add    %edx,%eax
+  10011b:	c6 00 0a             	movb   $0xa,(%eax)
+  10011e:	8b 15 08 10 10 00    	mov    0x101008,%edx
+  100124:	a1 f4 10 10 00       	mov    0x1010f4,%eax
+  100129:	01 c0                	add    %eax,%eax
+  10012b:	01 c2                	add    %eax,%edx
+  10012d:	0f b6 45 fc          	movzbl -0x4(%ebp),%eax
+  100131:	88 02                	mov    %al,(%edx)
+  100133:	a1 f4 10 10 00       	mov    0x1010f4,%eax
+  100138:	83 c0 01             	add    $0x1,%eax
+  10013b:	a3 f4 10 10 00       	mov    %eax,0x1010f4
+  100140:	c9                   	leave  
+  100141:	c3                   	ret    
 
-000006c5 <PrintEAX>:
- 6c5:	66 c1 c0 10          	rol    ax,0x10
- 6c9:	e8 04 00 66 c1       	call   c16606d2 <__heap_start+0xc165f9ba>
- 6ce:	c0 10 86             	rcl    BYTE PTR [eax],0x86
+00100142 <_Z4outbth>:
+  100142:	55                   	push   %ebp
+  100143:	89 e5                	mov    %esp,%ebp
+  100145:	83 ec 08             	sub    $0x8,%esp
+  100148:	8b 55 08             	mov    0x8(%ebp),%edx
+  10014b:	8b 45 0c             	mov    0xc(%ebp),%eax
+  10014e:	66 89 55 fc          	mov    %dx,-0x4(%ebp)
+  100152:	88 45 f8             	mov    %al,-0x8(%ebp)
+  100155:	0f b7 55 fc          	movzwl -0x4(%ebp),%edx
+  100159:	0f b6 45 f8          	movzbl -0x8(%ebp),%eax
+  10015d:	ee                   	out    %al,(%dx)
+  10015e:	c9                   	leave  
+  10015f:	c3                   	ret    
 
-000006d0 <PrintAX>:
- 6d0:	86 c4                	xchg   ah,al
- 6d2:	e8 02 00 86 c4       	call   c48606d9 <__heap_start+0xc485f9c1>
+00100160 <_Z11move_cursorhh>:
+  100160:	55                   	push   %ebp
+  100161:	89 e5                	mov    %esp,%ebp
+  100163:	83 ec 20             	sub    $0x20,%esp
+  100166:	8b 55 08             	mov    0x8(%ebp),%edx
+  100169:	8b 45 0c             	mov    0xc(%ebp),%eax
+  10016c:	88 55 ec             	mov    %dl,-0x14(%ebp)
+  10016f:	88 45 e8             	mov    %al,-0x18(%ebp)
+  100172:	0f b6 4d ec          	movzbl -0x14(%ebp),%ecx
+  100176:	0f b6 55 e8          	movzbl -0x18(%ebp),%edx
+  10017a:	89 d0                	mov    %edx,%eax
+  10017c:	c1 e0 02             	shl    $0x2,%eax
+  10017f:	01 d0                	add    %edx,%eax
+  100181:	c1 e0 02             	shl    $0x2,%eax
+  100184:	01 c8                	add    %ecx,%eax
+  100186:	89 45 fc             	mov    %eax,-0x4(%ebp)
+  100189:	c7 44 24 04 0e 00 00 	movl   $0xe,0x4(%esp)
+  100190:	00 
+  100191:	c7 04 24 d4 03 00 00 	movl   $0x3d4,(%esp)
+  100198:	e8 a5 ff ff ff       	call   100142 <_Z4outbth>
+  10019d:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  1001a0:	c1 f8 08             	sar    $0x8,%eax
+  1001a3:	0f b6 c0             	movzbl %al,%eax
+  1001a6:	89 44 24 04          	mov    %eax,0x4(%esp)
+  1001aa:	c7 04 24 d5 03 00 00 	movl   $0x3d5,(%esp)
+  1001b1:	e8 8c ff ff ff       	call   100142 <_Z4outbth>
+  1001b6:	c7 44 24 04 0f 00 00 	movl   $0xf,0x4(%esp)
+  1001bd:	00 
+  1001be:	c7 04 24 d4 03 00 00 	movl   $0x3d4,(%esp)
+  1001c5:	e8 78 ff ff ff       	call   100142 <_Z4outbth>
+  1001ca:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  1001cd:	0f b6 c0             	movzbl %al,%eax
+  1001d0:	89 44 24 04          	mov    %eax,0x4(%esp)
+  1001d4:	c7 04 24 d5 03 00 00 	movl   $0x3d5,(%esp)
+  1001db:	e8 62 ff ff ff       	call   100142 <_Z4outbth>
+  1001e0:	c9                   	leave  
+  1001e1:	c3                   	ret    
 
-000006d7 <PrintAL>:
- 6d7:	c0 c0 04             	rol    al,0x4
- 6da:	e8 03 00 c0 c0       	call   c0c006e2 <__heap_start+0xc0bff9ca>
- 6df:	04 50                	add    al,0x50
+001001e2 <main>:
+  1001e2:	55                   	push   %ebp
+  1001e3:	89 e5                	mov    %esp,%ebp
+  1001e5:	83 ec 08             	sub    $0x8,%esp
+  1001e8:	c7 44 24 04 01 00 00 	movl   $0x1,0x4(%esp)
+  1001ef:	00 
+  1001f0:	c7 04 24 0c 00 00 00 	movl   $0xc,(%esp)
+  1001f7:	e8 64 ff ff ff       	call   100160 <_Z11move_cursorhh>
+  1001fc:	c7 04 24 4d 00 00 00 	movl   $0x4d,(%esp)
+  100203:	e8 f5 fe ff ff       	call   1000fd <_Z7putcharc>
+  100208:	c7 04 24 69 00 00 00 	movl   $0x69,(%esp)
+  10020f:	e8 e9 fe ff ff       	call   1000fd <_Z7putcharc>
+  100214:	c7 04 24 72 00 00 00 	movl   $0x72,(%esp)
+  10021b:	e8 dd fe ff ff       	call   1000fd <_Z7putcharc>
+  100220:	c7 04 24 6d 00 00 00 	movl   $0x6d,(%esp)
+  100227:	e8 d1 fe ff ff       	call   1000fd <_Z7putcharc>
+  10022c:	c7 04 24 69 00 00 00 	movl   $0x69,(%esp)
+  100233:	e8 c5 fe ff ff       	call   1000fd <_Z7putcharc>
+  100238:	c7 04 24 6b 00 00 00 	movl   $0x6b,(%esp)
+  10023f:	e8 b9 fe ff ff       	call   1000fd <_Z7putcharc>
+  100244:	c7 04 24 0a 00 00 00 	movl   $0xa,(%esp)
+  10024b:	e8 ad fe ff ff       	call   1000fd <_Z7putcharc>
+  100250:	b8 00 00 00 00       	mov    $0x0,%eax
+  100255:	c9                   	leave  
+  100256:	c3                   	ret    
 
-000006e0 <PrintHexDigit>:
- 6e0:	50                   	push   eax
- 6e1:	24 0f                	and    al,0xf
- 6e3:	3c 0a                	cmp    al,0xa
- 6e5:	1c 69                	sbb    al,0x69
- 6e7:	2f                   	das    
- 6e8:	e8 02 00 58 c3       	call   c35806ef <__heap_start+0xc357f9d7>
+00100257 <init>:
+  100257:	fa                   	cli    
+  100258:	53                   	push   %ebx
+  100259:	e8 84 ff ff ff       	call   1001e2 <main>
+  10025e:	f4                   	hlt    
 
-000006ed <PrintChar>:
- 6ed:	66 60                	pushaw 
- 6ef:	b4 0e                	mov    ah,0xe
- 6f1:	bb 07 00 3c 0a       	mov    ebx,0xa3c0007
- 6f6:	75 04                	jne    6fc <PrintChar.1>
- 6f8:	cd 10                	int    0x10
- 6fa:	b0 0d                	mov    al,0xd
+0010025f <loop>:
+  10025f:	eb fe                	jmp    10025f <loop>
+  100261:	66 90                	xchg   %ax,%ax
+  100263:	66 90                	xchg   %ax,%ax
+  100265:	66 90                	xchg   %ax,%ax
+  100267:	66 90                	xchg   %ax,%ax
+  100269:	66 90                	xchg   %ax,%ax
+  10026b:	66 90                	xchg   %ax,%ax
+  10026d:	66 90                	xchg   %ax,%ax
+  10026f:	90                   	nop
 
-000006fc <PrintChar.1>:
- 6fc:	cd 10                	int    0x10
- 6fe:	66 61                	popaw  
- 700:	c3                   	ret    
+00100270 <__libc_csu_init>:
+  100270:	55                   	push   %ebp
+  100271:	57                   	push   %edi
+  100272:	31 ff                	xor    %edi,%edi
+  100274:	56                   	push   %esi
+  100275:	53                   	push   %ebx
+  100276:	e8 b5 fd ff ff       	call   100030 <__x86.get_pc_thunk.bx>
+  10027b:	81 c3 95 0d 00 00    	add    $0xd95,%ebx
+  100281:	83 ec 1c             	sub    $0x1c,%esp
+  100284:	8b 6c 24 30          	mov    0x30(%esp),%ebp
+  100288:	8d b3 04 f3 ff ff    	lea    -0xcfc(%ebx),%esi
+  10028e:	e8 59 00 00 00       	call   1002ec <_init>
+  100293:	8d 83 00 f3 ff ff    	lea    -0xd00(%ebx),%eax
+  100299:	29 c6                	sub    %eax,%esi
+  10029b:	c1 fe 02             	sar    $0x2,%esi
+  10029e:	85 f6                	test   %esi,%esi
+  1002a0:	74 27                	je     1002c9 <__libc_csu_init+0x59>
+  1002a2:	8d b6 00 00 00 00    	lea    0x0(%esi),%esi
+  1002a8:	8b 44 24 38          	mov    0x38(%esp),%eax
+  1002ac:	89 2c 24             	mov    %ebp,(%esp)
+  1002af:	89 44 24 08          	mov    %eax,0x8(%esp)
+  1002b3:	8b 44 24 34          	mov    0x34(%esp),%eax
+  1002b7:	89 44 24 04          	mov    %eax,0x4(%esp)
+  1002bb:	ff 94 bb 00 f3 ff ff 	call   *-0xd00(%ebx,%edi,4)
+  1002c2:	83 c7 01             	add    $0x1,%edi
+  1002c5:	39 f7                	cmp    %esi,%edi
+  1002c7:	75 df                	jne    1002a8 <__libc_csu_init+0x38>
+  1002c9:	83 c4 1c             	add    $0x1c,%esp
+  1002cc:	5b                   	pop    %ebx
+  1002cd:	5e                   	pop    %esi
+  1002ce:	5f                   	pop    %edi
+  1002cf:	5d                   	pop    %ebp
+  1002d0:	c3                   	ret    
+  1002d1:	eb 0d                	jmp    1002e0 <__libc_csu_fini>
+  1002d3:	90                   	nop
+  1002d4:	90                   	nop
+  1002d5:	90                   	nop
+  1002d6:	90                   	nop
+  1002d7:	90                   	nop
+  1002d8:	90                   	nop
+  1002d9:	90                   	nop
+  1002da:	90                   	nop
+  1002db:	90                   	nop
+  1002dc:	90                   	nop
+  1002dd:	90                   	nop
+  1002de:	90                   	nop
+  1002df:	90                   	nop
 
-00000701 <PrintDecimal>:
- 701:	66 50                	push   ax
- 703:	66 53                	push   bx
- 705:	51                   	push   ecx
- 706:	66 52                	push   dx
- 708:	57                   	push   edi
- 709:	83 ec 0a             	sub    esp,0xa
- 70c:	89 e7                	mov    edi,esp
- 70e:	31 c9                	xor    ecx,ecx
- 710:	66 bb 0a 00          	mov    bx,0xa
-	...
+001002e0 <__libc_csu_fini>:
+  1002e0:	f3 c3                	repz ret 
 
-00000716 <PrintDecimal.1>:
- 716:	66 31 d2             	xor    dx,dx
- 719:	66 f7 f3             	div    bx
- 71c:	36 88 15 47 41 66 85 	mov    BYTE PTR ss:0x85664147,dl
- 723:	c0                   	(bad)  
- 724:	75 f0                	jne    716 <PrintDecimal.1>
+001002e2 <_fp_hw>:
+  1002e2:	03 00 00 00 66 90                                   ....f.
 
-00000726 <PrintDecimal.2>:
- 726:	4f                   	dec    edi
- 727:	36 8a 05 04 30 e8 be 	mov    al,BYTE PTR ss:0xbee83004
- 72e:	ff e2                	jmp    edx
- 730:	f5                   	cmc    
- 731:	83 c4 0a             	add    esp,0xa
- 734:	5f                   	pop    edi
- 735:	66 5a                	pop    dx
- 737:	59                   	pop    ecx
- 738:	66 5b                	pop    bx
- 73a:	66 58                	pop    ax
- 73c:	c3                   	ret    
+001002e8 <_IO_stdin_used>:
+  1002e8:	01 00 02 00                                         ....
 
-0000073d <debug_str>:
- 73d:	66 60                	pushaw 
- 73f:	e8 61 ff 4d 69       	call   694e06a5 <__heap_start+0x694df98d>
- 744:	72 6d                	jb     7b3 <deregister_tm_clones+0x23>
- 746:	69 6b 20 77 61 73 20 	imul   ebp,DWORD PTR [ebx+0x20],0x20736177
- 74d:	68 65 72 65 21       	push   0x21657265
- 752:	21 21                	and    DWORD PTR [ecx],esp
- 754:	2e 0a 00             	or     al,BYTE PTR cs:[eax]
- 757:	66 61                	popaw  
- 759:	c3                   	ret    
+001002ec <_init>:
+  1002ec:	53                   	push   %ebx
+  1002ed:	83 ec 08             	sub    $0x8,%esp
+  1002f0:	e8 3b fd ff ff       	call   100030 <__x86.get_pc_thunk.bx>
+  1002f5:	81 c3 1b 0d 00 00    	add    $0xd1b,%ebx
+  1002fb:	8b 83 fc ff ff ff    	mov    -0x4(%ebx),%eax
+  100301:	85 c0                	test   %eax,%eax
+  100303:	74 05                	je     10030a <_init+0x1e>
+  100305:	e8 36 00 00 00       	call   100340 <__fini_array_end+0x14>
+  10030a:	83 c4 08             	add    $0x8,%esp
+  10030d:	5b                   	pop    %ebx
+  10030e:	c3                   	ret    
+  10030f:	90                   	nop
 
-0000075a <_start>:
- 75a:	31 ed                	xor    ebp,ebp
- 75c:	5e                   	pop    esi
- 75d:	89 e1                	mov    ecx,esp
- 75f:	83 e4 f0             	and    esp,0xfffffff0
- 762:	50                   	push   eax
- 763:	54                   	push   esp
- 764:	52                   	push   edx
- 765:	68 b0 09 00 00       	push   0x9b0
- 76a:	68 40 09 00 00       	push   0x940
- 76f:	51                   	push   ecx
- 770:	56                   	push   esi
- 771:	68 4d 08 00 00       	push   0x84d
- 776:	e8 a5 02 00 00       	call   a20 <__exidx_start+0x24>
- 77b:	f4                   	hlt    
- 77c:	66 90                	xchg   ax,ax
- 77e:	66 90                	xchg   ax,ax
+00100310 <__init_array_start>:
+  100310:	d0 00                	rolb   (%eax)
+  100312:	10 00                	adc    %al,(%eax)
 
-00000780 <__x86.get_pc_thunk.bx>:
- 780:	8b 1c 24             	mov    ebx,DWORD PTR [esp]
- 783:	c3                   	ret    
- 784:	66 90                	xchg   ax,ax
- 786:	66 90                	xchg   ax,ax
- 788:	66 90                	xchg   ax,ax
- 78a:	66 90                	xchg   ax,ax
- 78c:	66 90                	xchg   ax,ax
- 78e:	66 90                	xchg   ax,ax
+00100314 <_fini>:
+  100314:	53                   	push   %ebx
+  100315:	83 ec 08             	sub    $0x8,%esp
+  100318:	e8 13 fd ff ff       	call   100030 <__x86.get_pc_thunk.bx>
+  10031d:	81 c3 f3 0c 00 00    	add    $0xcf3,%ebx
+  100323:	83 c4 08             	add    $0x8,%esp
+  100326:	5b                   	pop    %ebx
+  100327:	c3                   	ret    
 
-00000790 <deregister_tm_clones>:
- 790:	b8 07 0d 00 00       	mov    eax,0xd07
- 795:	2d 04 0d 00 00       	sub    eax,0xd04
- 79a:	83 f8 06             	cmp    eax,0x6
- 79d:	77 01                	ja     7a0 <deregister_tm_clones+0x10>
- 79f:	c3                   	ret    
- 7a0:	b8 00 00 00 00       	mov    eax,0x0
- 7a5:	85 c0                	test   eax,eax
- 7a7:	74 f6                	je     79f <deregister_tm_clones+0xf>
- 7a9:	55                   	push   ebp
- 7aa:	89 e5                	mov    ebp,esp
- 7ac:	83 ec 18             	sub    esp,0x18
- 7af:	c7 04 24 04 0d 00 00 	mov    DWORD PTR [esp],0xd04
- 7b6:	ff d0                	call   eax
- 7b8:	c9                   	leave  
- 7b9:	c3                   	ret    
- 7ba:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-
-000007c0 <register_tm_clones>:
- 7c0:	b8 04 0d 00 00       	mov    eax,0xd04
- 7c5:	2d 04 0d 00 00       	sub    eax,0xd04
- 7ca:	c1 f8 02             	sar    eax,0x2
- 7cd:	89 c2                	mov    edx,eax
- 7cf:	c1 ea 1f             	shr    edx,0x1f
- 7d2:	01 d0                	add    eax,edx
- 7d4:	d1 f8                	sar    eax,1
- 7d6:	75 01                	jne    7d9 <register_tm_clones+0x19>
- 7d8:	c3                   	ret    
- 7d9:	ba 00 00 00 00       	mov    edx,0x0
- 7de:	85 d2                	test   edx,edx
- 7e0:	74 f6                	je     7d8 <register_tm_clones+0x18>
- 7e2:	55                   	push   ebp
- 7e3:	89 e5                	mov    ebp,esp
- 7e5:	83 ec 18             	sub    esp,0x18
- 7e8:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
- 7ec:	c7 04 24 04 0d 00 00 	mov    DWORD PTR [esp],0xd04
- 7f3:	ff d2                	call   edx
- 7f5:	c9                   	leave  
- 7f6:	c3                   	ret    
- 7f7:	89 f6                	mov    esi,esi
- 7f9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-
-00000800 <__do_global_dtors_aux>:
- 800:	80 3d 04 0d 00 00 00 	cmp    BYTE PTR ds:0xd04,0x0
- 807:	75 13                	jne    81c <__do_global_dtors_aux+0x1c>
- 809:	55                   	push   ebp
- 80a:	89 e5                	mov    ebp,esp
- 80c:	83 ec 08             	sub    esp,0x8
- 80f:	e8 7c ff ff ff       	call   790 <deregister_tm_clones>
- 814:	c6 05 04 0d 00 00 01 	mov    BYTE PTR ds:0xd04,0x1
- 81b:	c9                   	leave  
- 81c:	f3 c3                	repz ret 
- 81e:	66 90                	xchg   ax,ax
-
-00000820 <frame_dummy>:
- 820:	a1 00 0d 00 00       	mov    eax,ds:0xd00
- 825:	85 c0                	test   eax,eax
- 827:	74 1f                	je     848 <frame_dummy+0x28>
- 829:	b8 00 00 00 00       	mov    eax,0x0
- 82e:	85 c0                	test   eax,eax
- 830:	74 16                	je     848 <frame_dummy+0x28>
- 832:	55                   	push   ebp
- 833:	89 e5                	mov    ebp,esp
- 835:	83 ec 18             	sub    esp,0x18
- 838:	c7 04 24 00 0d 00 00 	mov    DWORD PTR [esp],0xd00
- 83f:	ff d0                	call   eax
- 841:	c9                   	leave  
- 842:	e9 79 ff ff ff       	jmp    7c0 <register_tm_clones>
- 847:	90                   	nop
- 848:	e9 73 ff ff ff       	jmp    7c0 <register_tm_clones>
-
-0000084d <main>:
- 84d:	55                   	push   ebp
- 84e:	89 e5                	mov    ebp,esp
- 850:	53                   	push   ebx
- 851:	50                   	push   eax
- 852:	88 25 0e 00 00 00    	mov    BYTE PTR ds:0xe,ah
- 858:	66 89 1d 07 00 00 00 	mov    WORD PTR ds:0x7,bx
- 85f:	a2 63 00 00 00       	mov    ds:0x63,al
- 864:	cd 10                	int    0x10
- 866:	cd 10                	int    0x10
- 868:	cd 10                	int    0x10
- 86a:	cd 10                	int    0x10
- 86c:	cd 10                	int    0x10
- 86e:	cd 10                	int    0x10
- 870:	58                   	pop    eax
- 871:	5b                   	pop    ebx
- 872:	b8 00 00 00 00       	mov    eax,0x0
- 877:	5d                   	pop    ebp
- 878:	c3                   	ret    
-
-00000879 <_ZL17call_constructorsPmS_>:
- 879:	55                   	push   ebp
- 87a:	89 e5                	mov    ebp,esp
- 87c:	83 ec 18             	sub    esp,0x18
- 87f:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
- 882:	89 45 f0             	mov    DWORD PTR [ebp-0x10],eax
- 885:	eb 11                	jmp    898 <_ZL17call_constructorsPmS_+0x1f>
- 887:	8b 45 f0             	mov    eax,DWORD PTR [ebp-0x10]
- 88a:	8b 00                	mov    eax,DWORD PTR [eax]
- 88c:	89 45 f4             	mov    DWORD PTR [ebp-0xc],eax
- 88f:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
- 892:	ff d0                	call   eax
- 894:	83 45 f0 04          	add    DWORD PTR [ebp-0x10],0x4
- 898:	8b 45 f0             	mov    eax,DWORD PTR [ebp-0x10]
- 89b:	3b 45 0c             	cmp    eax,DWORD PTR [ebp+0xc]
- 89e:	72 e7                	jb     887 <_ZL17call_constructorsPmS_+0xe>
- 8a0:	c9                   	leave  
- 8a1:	c3                   	ret    
-
-000008a2 <boot2>:
- 8a2:	55                   	push   ebp
- 8a3:	89 e5                	mov    ebp,esp
- 8a5:	83 ec 10             	sub    esp,0x10
- 8a8:	53                   	push   ebx
- 8a9:	50                   	push   eax
- 8aa:	88 25 0e 00 00 00    	mov    BYTE PTR ds:0xe,ah
- 8b0:	66 89 1d 07 00 00 00 	mov    WORD PTR ds:0x7,bx
- 8b7:	a2 63 00 00 00       	mov    ds:0x63,al
- 8bc:	cd 10                	int    0x10
- 8be:	cd 10                	int    0x10
- 8c0:	cd 10                	int    0x10
- 8c2:	cd 10                	int    0x10
- 8c4:	cd 10                	int    0x10
- 8c6:	cd 10                	int    0x10
- 8c8:	58                   	pop    eax
- 8c9:	5b                   	pop    ebx
- 8ca:	a1 04 0d 00 00       	mov    eax,ds:0xd04
- 8cf:	89 45 fc             	mov    DWORD PTR [ebp-0x4],eax
- 8d2:	eb 04                	jmp    8d8 <boot2+0x36>
- 8d4:	83 45 fc 01          	add    DWORD PTR [ebp-0x4],0x1
- 8d8:	a1 18 0d 00 00       	mov    eax,ds:0xd18
- 8dd:	3b 45 fc             	cmp    eax,DWORD PTR [ebp-0x4]
- 8e0:	7f f2                	jg     8d4 <boot2+0x32>
- 8e2:	53                   	push   ebx
- 8e3:	50                   	push   eax
- 8e4:	88 25 0e 00 00 00    	mov    BYTE PTR ds:0xe,ah
- 8ea:	66 89 1d 07 00 00 00 	mov    WORD PTR ds:0x7,bx
- 8f1:	a2 63 00 00 00       	mov    ds:0x63,al
- 8f6:	cd 10                	int    0x10
- 8f8:	cd 10                	int    0x10
- 8fa:	cd 10                	int    0x10
- 8fc:	cd 10                	int    0x10
- 8fe:	cd 10                	int    0x10
- 900:	cd 10                	int    0x10
- 902:	58                   	pop    eax
- 903:	5b                   	pop    ebx
- 904:	eb fe                	jmp    904 <boot2+0x62>
- 906:	66 90                	xchg   ax,ax
- 908:	66 90                	xchg   ax,ax
- 90a:	66 90                	xchg   ax,ax
- 90c:	66 90                	xchg   ax,ax
- 90e:	66 90                	xchg   ax,ax
-
-00000910 <debug_str2>:
- 910:	66 60                	pushaw 
- 912:	e8 8e fd 4d 69       	call   694e06a5 <__heap_start+0x694df98d>
- 917:	72 6d                	jb     986 <__libc_csu_init+0x46>
- 919:	69 6b 20 77 61 73 20 	imul   ebp,DWORD PTR [ebx+0x20],0x20736177
- 920:	68 65 72 65 21       	push   0x21657265
- 925:	21 21                	and    DWORD PTR [ecx],esp
- 927:	0a 00                	or     al,BYTE PTR [eax]
- 929:	66 61                	popaw  
- 92b:	c3                   	ret    
-
-0000092c <PrintChar2>:
- 92c:	66 60                	pushaw 
- 92e:	b0 3f                	mov    al,0x3f
- 930:	b4 0e                	mov    ah,0xe
- 932:	bb 07 00 90 cd       	mov    ebx,0xcd900007
- 937:	10 66 61             	adc    BYTE PTR [esi+0x61],ah
- 93a:	c3                   	ret    
- 93b:	66 90                	xchg   ax,ax
- 93d:	66 90                	xchg   ax,ax
- 93f:	90                   	nop
-
-00000940 <__libc_csu_init>:
- 940:	55                   	push   ebp
- 941:	57                   	push   edi
- 942:	31 ff                	xor    edi,edi
- 944:	56                   	push   esi
- 945:	53                   	push   ebx
- 946:	e8 35 fe ff ff       	call   780 <__x86.get_pc_thunk.bx>
- 94b:	81 c3 d9 02 00 00    	add    ebx,0x2d9
- 951:	83 ec 1c             	sub    esp,0x1c
- 954:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
- 958:	8d b3 c0 fd ff ff    	lea    esi,[ebx-0x240]
- 95e:	e8 59 00 00 00       	call   9bc <_init>
- 963:	8d 83 bc fd ff ff    	lea    eax,[ebx-0x244]
- 969:	29 c6                	sub    esi,eax
- 96b:	c1 fe 02             	sar    esi,0x2
- 96e:	85 f6                	test   esi,esi
- 970:	74 27                	je     999 <__libc_csu_init+0x59>
- 972:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
- 978:	8b 44 24 38          	mov    eax,DWORD PTR [esp+0x38]
- 97c:	89 2c 24             	mov    DWORD PTR [esp],ebp
- 97f:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
- 983:	8b 44 24 34          	mov    eax,DWORD PTR [esp+0x34]
- 987:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
- 98b:	ff 94 bb bc fd ff ff 	call   DWORD PTR [ebx+edi*4-0x244]
- 992:	83 c7 01             	add    edi,0x1
- 995:	39 f7                	cmp    edi,esi
- 997:	75 df                	jne    978 <__libc_csu_init+0x38>
- 999:	83 c4 1c             	add    esp,0x1c
- 99c:	5b                   	pop    ebx
- 99d:	5e                   	pop    esi
- 99e:	5f                   	pop    edi
- 99f:	5d                   	pop    ebp
- 9a0:	c3                   	ret    
- 9a1:	eb 0d                	jmp    9b0 <__libc_csu_fini>
- 9a3:	90                   	nop
- 9a4:	90                   	nop
- 9a5:	90                   	nop
- 9a6:	90                   	nop
- 9a7:	90                   	nop
- 9a8:	90                   	nop
- 9a9:	90                   	nop
- 9aa:	90                   	nop
- 9ab:	90                   	nop
- 9ac:	90                   	nop
- 9ad:	90                   	nop
- 9ae:	90                   	nop
- 9af:	90                   	nop
-
-000009b0 <__libc_csu_fini>:
- 9b0:	f3 c3                	repz ret 
-
-000009b2 <_fp_hw>:
- 9b2:	03 00 00 00 66 90                                   ....f.
-
-000009b8 <_IO_stdin_used>:
- 9b8:	01 00 02 00                                         ....
-
-000009bc <_init>:
- 9bc:	53                   	push   ebx
- 9bd:	83 ec 08             	sub    esp,0x8
- 9c0:	e8 bb fd ff ff       	call   780 <__x86.get_pc_thunk.bx>
- 9c5:	81 c3 5f 02 00 00    	add    ebx,0x25f
- 9cb:	8b 83 fc ff ff ff    	mov    eax,DWORD PTR [ebx-0x4]
- 9d1:	85 c0                	test   eax,eax
- 9d3:	74 05                	je     9da <_init+0x1e>
- 9d5:	e8 36 00 00 00       	call   a10 <__exidx_start+0x14>
- 9da:	83 c4 08             	add    esp,0x8
- 9dd:	5b                   	pop    ebx
- 9de:	c3                   	ret    
- 9df:	90                   	nop
-
-000009e0 <__init_array_start>:
- 9e0:	20 08                	and    BYTE PTR [eax],cl
-	...
-
-000009e4 <_fini>:
- 9e4:	53                   	push   ebx
- 9e5:	83 ec 08             	sub    esp,0x8
- 9e8:	e8 93 fd ff ff       	call   780 <__x86.get_pc_thunk.bx>
- 9ed:	81 c3 37 02 00 00    	add    ebx,0x237
- 9f3:	83 c4 08             	add    esp,0x8
- 9f6:	5b                   	pop    ebx
- 9f7:	c3                   	ret    
-
-000009f8 <__fini_array_start>:
- 9f8:	00 08                	add    BYTE PTR [eax],cl
-	...
+00100328 <__fini_array_start>:
+  100328:	b0 00                	mov    $0x0,%al
+  10032a:	10 00                	adc    %al,(%eax)
 
 Дизассемблирование раздела .plt:
 
-00000a00 <.plt>:
- a00:	ff 35 28 0c 00 00    	push   DWORD PTR ds:0xc28
- a06:	ff 25 2c 0c 00 00    	jmp    DWORD PTR ds:0xc2c
- a0c:	00 00                	add    BYTE PTR [eax],al
- a0e:	00 00                	add    BYTE PTR [eax],al
- a10:	ff 25 30 0c 00 00    	jmp    DWORD PTR ds:0xc30
- a16:	68 00 00 00 00       	push   0x0
- a1b:	e9 e0 ff ff ff       	jmp    a00 <__exidx_start+0x4>
- a20:	ff 25 34 0c 00 00    	jmp    DWORD PTR ds:0xc34
- a26:	68 08 00 00 00       	push   0x8
- a2b:	e9 d0 ff ff ff       	jmp    a00 <__exidx_start+0x4>
+00100330 <.plt>:
+  100330:	ff 35 14 10 10 00    	pushl  0x101014
+  100336:	ff 25 18 10 10 00    	jmp    *0x101018
+  10033c:	00 00                	add    %al,(%eax)
+  10033e:	00 00                	add    %al,(%eax)
+  100340:	ff 25 1c 10 10 00    	jmp    *0x10101c
+  100346:	68 00 00 00 00       	push   $0x0
+  10034b:	e9 e0 ff ff ff       	jmp    100330 <__fini_array_end+0x4>
+  100350:	ff 25 20 10 10 00    	jmp    *0x101020
+  100356:	68 08 00 00 00       	push   $0x8
+  10035b:	e9 d0 ff ff ff       	jmp    100330 <__fini_array_end+0x4>
