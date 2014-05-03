@@ -1,6 +1,5 @@
 
 #include "platform.h"
-//#include "C_stream.h"
 #include "allocator/allocator.h"
 #include "delay.h"
 #include "allocator/alloc_standart.h"
@@ -9,8 +8,7 @@
 #include "strm/DBStream.h"
 #include "strm/StrmNull.h"
 #include "strm/BufferStrm.h"
-#include "transport.h"
-#include "microrl/microrl.h"
+//#include "transport.h"
 #include "intcom/command_list.h"
 #include "utility.h"
 #include "readline/readline.h" 

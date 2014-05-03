@@ -3,8 +3,8 @@
 #include "debug/debug.h"
 #include "int_macro.h"
 #include <inttypes.h>
-#include "string.h"
 #include "platform.h"
+#include "error/error.h"
 
 extern "C" int SPSR_REGISTER();
 extern "C" int CPU_MODE();

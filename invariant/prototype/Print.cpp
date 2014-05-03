@@ -19,21 +19,9 @@
  Modified 23 November 2006 by David A. Mellis
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-
-#include "Print.h"
-#include "delay.h"
-#include "debug/debug.h"
-
-inline size_t local_strlen(const char *c)
-{size_t i=0;
-while(*(c+i)!=0) i++;
-return i;};
-
-
+#include "math.h"
+//#include "stdio.h"
+#include "prototype/Print.h"
 // Public Methods //////////////////////////////////////////////////////////////
 
 /* default implementation: may be overridden */
@@ -52,7 +40,7 @@ size_t Print::write(const char *buffer, size_t size) {
 
 size_t Print::write(const char *str) {
       if (str == NULL) return 0;
-      return write((const uint8_t *)str, local_strlen(str));
+      return write((const uint8_t *)str, strlen(str));
     }
 /*
 size_t Print::print(const __FlashStringHelper *ifsh)

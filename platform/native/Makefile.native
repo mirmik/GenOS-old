@@ -21,6 +21,10 @@ VPATH += $(GENOS)/platform/native/module/strm
 VPATH += $(GENOS)/platform/native
 
 
+all: $(OBJDIR) $(OBJ) platform LINK
+	mv hello-world hello-world.$(TARGET)
+
+
 TRACE_CPP = @echo "  CPP       " $<
 
 $(OBJDIR)/%.o: %.cpp 

@@ -4,7 +4,7 @@ TARGET =virt2real
 
 OBJDIR = obj_$(TARGET)
 
-MODULES = debug local_heap prototype allocator shed charqueue strm microrl intcom readline
+MODULES = debug local_heap prototype allocator shed charqueue strm intcom readline error
 
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))
@@ -15,8 +15,8 @@ PROJECT = hello-world
 
 
 src = hello-world.cpp local_linear_heap.cpp Print.cpp Stream.cpp allocator.cpp delay.cpp alloc_standart.cpp u_esh.cpp flag_sh.cpp \
-	ring.cpp queue.cpp DBStream.cpp dynamicring.cpp StrmNull.cpp BufferStrm.cpp transport.cpp debug_print.cpp microrl.cpp \
-	command_list.cpp utility.cpp readline.cpp rl_terminal.cpp
+	ring.cpp queue.cpp DBStream.cpp dynamicring.cpp StrmNull.cpp BufferStrm.cpp  debug_print.cpp delay_cpu.cpp error.cpp \
+	command_list.cpp utility.cpp readline.cpp rl_terminal.cpp genoslib.cpp 
 		
 OBJ = $(src:%.cpp=$(OBJDIR)/%.o)
 

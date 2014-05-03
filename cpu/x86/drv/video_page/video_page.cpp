@@ -1,12 +1,9 @@
 #include "drv/video_page/video_page.h"
 
-#define WIDTH 80
-#define LENGTH 25
-
 char* videomem = (char*)0xB8000;
 void video_page_putchar(int cursor, char c)
 {
-*(videomem + cursor * 2 + 1 ) = 10;
+*(videomem + cursor * 2 + 1 ) = LIGHT_GREEN;
 *(videomem + cursor * 2) = c;
 cursor++; 
 };
@@ -33,20 +30,20 @@ for (int i =0 ;i< 25*80; i++)
  
 void video_page_clr_str(int str)
 {
-for (int i =str*WIDTH ;i< (str+1)*WIDTH; i++) 
+for (int i =str*SCREEN_WIDTH ;i< (str+1)*SCREEN_WIDTH; i++) 
  video_page_putchar(i, ' ');
  }
 
 void video_page_copy_str(int src,int dest)
 {
-for (int i=0; i<WIDTH*2; i++) 
-*(videomem + dest*WIDTH*2 + i) = *(videomem + src*WIDTH*2 + i);
+for (int i=0; i<SCREEN_WIDTH*2; i++) 
+*(videomem + dest*SCREEN_WIDTH*2 + i) = *(videomem + src*SCREEN_WIDTH*2 + i);
 }
 
 
 void video_page_drop_str()
 {
-for (int i=1;i<LENGTH;i++)
+for (int i=1;i<SCREEN_HEIGHT;i++)
 video_page_copy_str(i,i-1);
 video_page_clr_str(24);
 	}

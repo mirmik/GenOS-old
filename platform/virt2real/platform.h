@@ -19,7 +19,7 @@ if ( dd == 0) return;
 
 #include "hardware.h"
 
-#define systemError(a) {PROCESSOR_STATE_PRINT();systemError_h(a);} 
+//#define systemError(a) {PROCESSOR_STATE_PRINT();systemError_h(a);} 
 
 extern "C" int SPSR_REGISTER();
 extern "C" int CPU_MODE();

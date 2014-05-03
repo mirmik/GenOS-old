@@ -25,34 +25,21 @@ Allocator_p * stdalloc=&galloc;
 readline_t rl;
 rl_terminal r(&term,&rl);
 
+char mas[16*4];
+
 int main(){
 StrmDebug k;
 term.begin();
+memset(mas,0xFF,32);
+strcpy(mas,"Mirmik");
+debug_print_dump(mas,16*4);dln;
+strcpy(mas+2,mas);
+debug_print_dump(mas,16*4);dln;
+strcpy(mas,mas+2);
+debug_print_dump(mas,16*4);dln;
 
-debug_print("HelloWorld");
-k.print("?kkekekek?");
+memmove(mas,mas+8,16);
+debug_print_dump(mas,16*4);dln;
 
-
-command ("list",command_print);
-command ("ptest",ptest);
-command ("about",about);
-
-dln;
-
-	execute("list");
-	execute("about");
-	/*
-	while(1){
-		int i;
-		i = term.read();
-		if (i!=-1) {pr(i);	prtab();
-			  prln((char)i);
-			  }
-		}*/
-	
-while(1){r.listen();};
-	
-		
-	
 term.end();
 	}

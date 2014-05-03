@@ -16,7 +16,7 @@ size_t StrmDebug::write(uint8_t c)
 
 
  int StrmDebug::available(){};
- int StrmDebug::read(){return(fgetc(stdin));};
+ int StrmDebug::read(){};
  int StrmDebug::peek(){};
  void StrmDebug::flush(){};
 

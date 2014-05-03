@@ -1,6 +1,7 @@
 
 
 #include "command_list.h"
+#include "genoslib.h"
 
 
 LIST_HEAD (command_head);

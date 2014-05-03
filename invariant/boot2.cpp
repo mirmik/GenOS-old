@@ -24,7 +24,7 @@ static void call_constructors(unsigned long *start, unsigned long *end)
   {
 	  
 	  debug_print("call constr:");
-debug_printhex_int32((int)i);dln;
+	debug_printhex_int32((int)i);dln;
 
     funcptr=(void (*)())(*i);
     funcptr();
@@ -33,18 +33,16 @@ debug_printhex_int32((int)i);dln;
 // END C++ support (1/2)
 
 //extern void hmain();
-extern int main();
+extern int boot3();
 extern unsigned int _text_begin;
 extern unsigned int _text_end;
 extern unsigned int _data_begin;
 extern unsigned int _data_end;
 extern unsigned int _bss_begin;
 extern unsigned int _bss_end;
-extern "C" void _init();
 
 extern "C" void boot2(){
-
-printd("GenOS boot function successful load\r\n");
+printd("GenOS boot2 function successful load\r\n");
 printd("Section info:\r\n");
 printd("_text_begin :"); dpr_inthex((int)&_text_begin);dln;
 printd("_text_end   :"); dpr_inthex((int)&_text_end);dln;
@@ -81,16 +79,14 @@ printd("constr call:\r\n");
   // END C++ support (2/2)
 printd("constr call OK\r\n");
 
-dln
-
 delay_cpu(10);
 //	second_init();
 
 
 //	drivers_init();
-printd("Call main function...\r\n");
+printd("Call boot3 function...");
 
-	main();
+	boot3();
 	
-systemError("MAIN FUNCTION END. Kernel bewilderment :)");	
+systemError("BOOT2 FUNCTION END. Kernel bewilderment :)");	
 }

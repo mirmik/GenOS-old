@@ -1,6 +1,6 @@
 
 #include "readline/readline.h"
-
+#include "genoslib.h"
 
 
 readline_t::readline_t()

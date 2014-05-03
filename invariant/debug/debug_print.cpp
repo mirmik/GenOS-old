@@ -2,6 +2,7 @@
 #include "debug/debug.h"
 #include "platform.h"
 
+
 void debug_write(const char*c,int i)
 {int k;
 for (k=0;k<i;k++)
@@ -76,36 +77,58 @@ void debug_print(const char *c)
 };
 
 
-void debug_print_test(){
-char * teststr = "TESTSTR";
-debug_print(teststr);  
-debug_write("\n\r",2);
-debug_print("\n\rit should be 0xABCDABCD");
-debug_write("\n\r",2);
-debug_printhex_int32(0xABCDABCD);
-debug_write("\n\r",2);
-
-
-return;
-};
-
-
-void debug_print_memory_as_byte(int64_t start,int64_t count)
-{int64_t i;
-char* p=0;
-for (i=start;i<start+count;i++){
-debug_printhex_byte(*(p+i));
-debug_write("\t",1);
+/*--------------------------------------------
+// Печать дампа памяти заданного размера
+//------------------------------------------*/
+void debug_print_dump(void* address, uint32_t size)
+{
+  /* Преобразуем указатель в массив байт */
+  uint8_t* dump = (uint8_t*) address; 
+  /* Преобразуем указатель просто в число */  
+  uint32_t addr_tmp = (uint32_t) address;
+  /* Вспомогательные переменные */
+  uint32_t i = 0;
+  uint32_t mark = 0;
+ 
+  for (i = 0; i < size; i++)
+  {
+    //set_text_color(LIGHT_GRAY);
+   
+    if (mark == 0)
+    {
+    dpr_inthex(addr_tmp);
+   // char sss[20];
+   // num2base_str(sss,addr_tmp,16);
+   // dpr_str(sss);
+    
+    debug_print(": ");
+    }
+   
+    if (dump[i] != 0)
+   ;//   set_text_color(LIGHT_GREEN);
+    else
+     // set_text_color(LIGHT_GRAY);
+   ;
+    debug_printhex_byte(dump[i]);
+   
+    //set_text_color(LIGHT_GRAY);
+   
+    if ( mark == 7 )
+    {
+      debug_print("|");
+      mark++;
+    }
+    else if ( mark == 15 )
+    {
+      debug_print("\n");
+      mark = 0;
+     
+      addr_tmp += 0x10;
+    }
+    else
+    {
+      debug_print(" ");
+      mark++;
+    }
+  } 
 }
-};
-
-
-
-void debug_print_memory_as_char(int64_t start,int64_t count)
-{int64_t i;
-int* p=0;
-for (i=start;i<start+count;i++){
-debug_putchar(*(p+i));
-}
-};
-

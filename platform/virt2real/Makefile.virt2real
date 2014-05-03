@@ -7,7 +7,7 @@ endif
 #include $(GENOS)/cpu/DM365/Makefile.DM365
 
 PLATFORMFLAGS := -I$(GENOS)/platform/virt2real -I$(GENOS)/cpu/DM365 
-PLATFORMSRCPP := 	int_table_p.cpp simple.cpp boot2.cpp init.cpp timer.cpp irq.cpp platform_debug.cpp
+PLATFORMSRCPP := 	int_table_p.cpp simple.cpp boot3.cpp init.cpp timer.cpp irq.cpp platform_debug.cpp boot2.cpp
 PLATFORMSRCC := 	base_func.c 
 
 
@@ -34,6 +34,9 @@ $(OBJDIR)/%.o: %.c
 	$(CC) $(CPPFLAGS) -c $< -o $@
 $(OBJDIR)/%.o: %.S
 	$(CC) $(CPPFLAGS) -c $< -o $@
+
+all: $(OBJDIR) $(OBJ) platform LINK
+	mv hello-world hello-world.$(TARGET)
 
 
 ECHO=$(V)echo -e

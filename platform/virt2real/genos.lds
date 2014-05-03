@@ -35,6 +35,8 @@ SECTIONS
     {
         KEEP(*(.isr_vector .isr_vector.*))
         *(.text .text.* .gnu.linkonce.t.*)
+    
+        KEEP(*(.isr_vector .isr_vector.*))
         *(.glue_7t) *(.glue_7)
         *(.rodata .rodata* .gnu.linkonce.r.*)
 
@@ -76,26 +78,42 @@ SECTIONS
         KEEP (*(EXCLUDE_FILE (*crtend.o) .dtors))
         KEEP (*(SORT(.dtors.*)))
         KEEP (*crtend.o(.dtors))
-
-    } 
-      
+	. = ALIGN(4);
+    }
+    
+    
+/* Секция инициализированных данных */
+    .data :
+    {
+        *(.data)
+        . = ALIGN(4);
+    }
+    
 __exidx_start = .;
 .ARM.exidx : { *(ARM.exidx*)}
 
 	__exidx_end =  . ;
+    
+    
+/* Секция неинициализированных данных */    
+	.bss :
+    {
+		
+        *(.bss)
+        . = ALIGN(4);
+        
+    }
+    
+    _text_begin = LOADADDR(.text) ;
+    _text_end = LOADADDR(.text) + SIZEOF(.text) ;
+    _data_begin = LOADADDR(.data) ;
+    _data_end = LOADADDR(.data) + SIZEOF(.data) ;
+    _bss_begin = LOADADDR(.bss) ;
+    _bss_end = LOADADDR(.bss) + SIZEOF(.bss) ;
+    
+/* Место в памяти, где уже нет кода ядра */
+    end = .; _end = .; __end = .;  
 
-
-
-_bss_start = .;
-  .bss    : 
-  {
-    KEEP(*(.bss))
-    #KEEP (*(COMMON))
-    . = ALIGN(4);
-  }
-_bss_end = .;
-
-	
 
 
 __heap_start = .;

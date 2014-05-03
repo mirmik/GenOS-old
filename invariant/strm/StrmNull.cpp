@@ -13,7 +13,7 @@ size_t NullStream_t::write(uint8_t c)
 
 
  int NullStream_t::available(){};
- int NullStream_t::read(){return(fgetc(stdin));};
+ int NullStream_t::read(){};
  int NullStream_t::peek(){};
  void NullStream_t::flush(){};
 

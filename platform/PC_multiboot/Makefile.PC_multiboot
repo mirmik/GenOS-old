@@ -7,13 +7,14 @@ ifndef CPU
 endif
 
 
+VPATH += $(GENOS)/platform/$(TARGET)/descriptor_tables
 
 PLATFORMFLAGS =  -I$(GENOS)/platform/$(TARGET) -I$(GENOS)/cpu/$(CPU)
-PLATFORMSRCPP := debug_putchar.cpp boot2.cpp error_platform.cpp
-#PLATFORMSRCC := 	
+PLATFORMSRCPP := debug_putchar.cpp boot3.cpp error_platform.cpp  descriptor_tables.cpp  boot2.cpp 
+PLATFORMSRCAS := gdt.S 	
 
 PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 
-#PLATFORMOBJ += $(PLATFORMSRCC:%.c=$(OBJDIR)/%.o)
+PLATFORMOBJ += $(PLATFORMSRCAS:%.S=$(OBJDIR)/%.o)
 
 include $(GENOS)/cpu/$(CPU)/Makefile.$(CPU)
 
@@ -35,6 +36,10 @@ CPPFLAGS = $(CFLAGS) $(GENOSFLAGS) $(PLATFORMFLAGS)
 
 VPATH += $(GENOS)/platform/$(TARGET)
 
+all: $(OBJDIR) $(OBJ) platform LINK
+	mv hello-world hello-world.$(TARGET)
+	cp hello-world.$(TARGET) kernel
+	objdump -d kernel > kkk
 
 
 
@@ -49,6 +54,7 @@ $(OBJDIR)/%.o: %.S
 
 
 install: 
-	$(OBJCOPY) -O binary $(PROJECT).$(TARGET) kernel.sys
+	cp kernel /mnt/boot/kernel
+	sync
 
 	

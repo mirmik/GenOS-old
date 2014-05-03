@@ -4,7 +4,6 @@
 #include "linuxlist.h"
 #include "simple.h"
 #include "GenOS.h"
-#include "string.h"
 
 struct argvc_t {
 	char ** argv;

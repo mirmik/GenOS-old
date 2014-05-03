@@ -19,13 +19,18 @@
 
 #ifndef Print_h
 #define Print_h
-#include <string.h>
-#include <inttypes.h>
-#include <stdio.h> // for size_t
+//#include <inttypes.h>
+//#include <stdio.h> // for size_t
+
+
+#include "Print.h"
+#include "genoslib.h"
 
 
 //#include "mvirt/WString.h"
 //#include "Printable.h"
+
+#include "genoslib.h"
 
 #define DEC 10
 #define HEX 16
@@ -33,12 +38,6 @@
 #define BIN 2
 class Print;
 
-//class Printable
-//{
-//  public:
-//    virtual size_t printTo(Print& p) const = 0;
-//};
-#include "delay.h"
 class Print
 {
   private:

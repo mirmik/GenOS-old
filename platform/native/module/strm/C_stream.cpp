@@ -3,7 +3,7 @@
 
 
 #include "C_stream.h"
-
+#include "stdio.h"
 
 C_stream_t term;
 

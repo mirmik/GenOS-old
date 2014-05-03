@@ -4,7 +4,6 @@
 #include "debug/debug.h"
 #include "simple.h"
 #include "leds.h"
-#include "delay.h"
 #include "GenOS.h"
 
 uint8_t statusBit(uint8_t &f,uint8_t a)
@@ -50,9 +49,8 @@ PROCESSOR_t *PROCESSOR;
 #include "interrupts.h"
 
 #define SYSERRORLEDPERIOD 100
-volatile void systemError_h(const char * c) 
+void systemError_platform() 
 {//asm("mov r0,lr");
-printd(c);
 IRQ_D();
 FIQ_D();
 while(1)	

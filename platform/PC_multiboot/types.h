@@ -18,6 +18,8 @@ typedef unsigned short int uint16_t;
 typedef unsigned char uint8_t;
 typedef unsigned char byte;
 */
+typedef unsigned int uint;
+
 
 typedef unsigned char byte;
 typedef unsigned int size_t;
