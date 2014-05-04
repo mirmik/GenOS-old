@@ -5,7 +5,7 @@ CPU=x86
 
 OBJDIR = obj_$(TARGET)
 
-MODULES = debug delay error prototype strm abstract_irq
+MODULES = debug delay error prototype strm abstract_irq charqueue allocator
 
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))
@@ -17,7 +17,8 @@ PROJECT = hello-world
 
 src = hello-world.cpp debug_print.cpp delay_cpu.cpp \
 	error.cpp Stream.cpp Print.cpp StrmDebug.cpp genoslib.cpp \
-	abstract_irq.cpp
+	abstract_irq.cpp DBStream.cpp staticring.cpp queue.cpp \
+	dynamicring.cpp ring.cpp allocator.cpp
 		
 OBJ = $(src:%.cpp=$(OBJDIR)/%.o)
 

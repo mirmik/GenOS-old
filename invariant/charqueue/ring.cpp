@@ -25,7 +25,7 @@ ring_t::ring_t(void* pointer,size_t sz)
 
 ring_t::~ring_t()
 {
-kfree(buffer);	
+stdalloc->deallocate(buffer);	
 }
 
 

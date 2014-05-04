@@ -48,6 +48,10 @@ size_t DBStream::write(uint8_t c){
 	 return(tx->pop());
 	 }
 
+size_t DBStream::rx_write(uint8_t c){
+rx->push(c);
+};
+
  int DBStream::available(){}
  int DBStream::read(){
 	 return(rx->pop());}

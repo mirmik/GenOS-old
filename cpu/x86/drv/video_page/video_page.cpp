@@ -1,5 +1,5 @@
 #include "drv/video_page/video_page.h"
-
+#include "cpu.h"
 char* videomem = (char*)0xB8000;
 void video_page_putchar(int cursor, char c)
 {
@@ -7,11 +7,6 @@ void video_page_putchar(int cursor, char c)
 *(videomem + cursor * 2) = c;
 cursor++; 
 };
-
-void outb(unsigned short port, unsigned char value)
-{
-asm volatile("outb %1, %0"::"dN"(port),"a"(value));
-}
 
 void video_page_move_cursor(int cur)
 {

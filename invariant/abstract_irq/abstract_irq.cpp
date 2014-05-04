@@ -28,11 +28,8 @@ void abstract_irq_controller(interrupt_info_t info)
 {
 uint32_t num = info.int_num;
 (abstract_irq_table+num)->irq_count++;
-switch ((abstract_irq_table+num)->type){
-case DEBUG : ((aic_func)((abstract_irq_table+num)->func))(&info);
-case NORMAL: ((void (*)(void))((abstract_irq_table+num)->func))();
-default    : systemError("aic_errorType");
-}
+platform_abstract_irq_handler(&info);
+((aic_func)((abstract_irq_table+num)->func))(&info);
 }
 
 void abstract_irq_debug_attach(uint32_t n,aic_func func)

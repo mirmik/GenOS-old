@@ -118,6 +118,23 @@ void init_idt(void)
   /* Очистка памяти */
   memset(&idt_entries, 0, sizeof(idt_entry_t)*256);   
  
+  /* Инициализация обоих PIC */
+  outb(0x20, PIC1_ICW1); /* ICW1 */
+  outb(0xA0, PIC2_ICW1);
+
+  outb(0x21, PIC1_ICW2); /* ICW2 */
+  outb(0xA1, PIC2_ICW2);
+
+  outb(0x21, PIC1_ICW3); /* ICW3 */
+  outb(0xA1, PIC2_ICW3);
+
+  outb(0x21, PIC1_ICW4); /* ICW4 */
+  outb(0xA1, PIC2_ICW4);
+ 
+  /* Разрешаем прерывания на всех линиях */
+  outb(0x21, 0x00);      /* OCW1 */
+  outb(0xA1, 0x00);
+ 
   /* Создание записей в таблице на первые 32 прерывания */ 
   for(int i=0;i<256;i++)
   idt_set_gate(i, (uint32_t) StubISR, 0x08, 0x8E);
@@ -153,6 +170,23 @@ void init_idt(void)
   idt_set_gate(29, (uint32_t) isr29, 0x08, 0x8E);
   idt_set_gate(30, (uint32_t) isr30, 0x08, 0x8E);
   idt_set_gate(31, (uint32_t) isr31, 0x08, 0x8E);
+ //Дескрипторы для IRQ
+  idt_set_gate(32, (uint32_t) isr32, 0x08, 0x8E);
+  idt_set_gate(33, (uint32_t) isr33, 0x08, 0x8E);
+  idt_set_gate(34, (uint32_t) isr34, 0x08, 0x8E);
+  idt_set_gate(35, (uint32_t) isr35, 0x08, 0x8E);
+  idt_set_gate(36, (uint32_t) isr36, 0x08, 0x8E);
+  idt_set_gate(37, (uint32_t) isr37, 0x08, 0x8E);
+  idt_set_gate(38, (uint32_t) isr38, 0x08, 0x8E);
+  idt_set_gate(39, (uint32_t) isr39, 0x08, 0x8E);
+  idt_set_gate(40, (uint32_t) isr40, 0x08, 0x8E);
+  idt_set_gate(41, (uint32_t) isr41, 0x08, 0x8E);
+  idt_set_gate(42, (uint32_t) isr42, 0x08, 0x8E);
+  idt_set_gate(43, (uint32_t) isr43, 0x08, 0x8E);
+  idt_set_gate(44, (uint32_t) isr44, 0x08, 0x8E);
+  idt_set_gate(45, (uint32_t) isr45, 0x08, 0x8E);
+  idt_set_gate(46, (uint32_t) isr46, 0x08, 0x8E);
+  idt_set_gate(47, (uint32_t) isr47, 0x08, 0x8E);
   
   /* Загрузка регистра IDTR */
   idt_flush((uint32_t) &idt_ptr);

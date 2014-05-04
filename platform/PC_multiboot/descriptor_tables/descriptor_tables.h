@@ -1,6 +1,17 @@
 #ifndef        DESCRIPTOR_TABLES_H
 #define        DESCRIPTOR_TABLES_H
 #include "types.h"
+
+#define        PIC1_ICW1    0x11
+#define        PIC1_ICW2    0x20
+#define        PIC1_ICW3    0x04
+#define        PIC1_ICW4    0x01
+
+#define        PIC2_ICW1    0x11
+#define        PIC2_ICW2    0x28
+#define        PIC2_ICW3    0x02
+#define        PIC2_ICW4    0x01
+
 /*---------------------------------------------------
 //    Запись глобальной таблицы дескрипторов (GDT)
 //-------------------------------------------------*/
@@ -99,4 +110,20 @@ extern "C" void isr28(void);
 extern "C" void isr29(void);
 extern "C" void isr30(void);
 extern "C" void isr31(void);
+extern "C" void isr32(void);
+extern "C" void isr33(void);
+extern "C" void isr34(void);
+extern "C" void isr35(void);
+extern "C" void isr36(void);
+extern "C" void isr37(void);
+extern "C" void isr38(void);
+extern "C" void isr39(void);
+extern "C" void isr40(void);
+extern "C" void isr41(void);
+extern "C" void isr42(void);
+extern "C" void isr43(void);
+extern "C" void isr44(void);
+extern "C" void isr45(void);
+extern "C" void isr46(void);
+extern "C" void isr47(void);
 #endif

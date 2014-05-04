@@ -9,7 +9,18 @@
 
 
 
+static void outb(unsigned short port, unsigned char value)
+{
+asm volatile("outb %1, %0"::"dN"(port),"a"(value));
+}
 
+
+static unsigned char inb(unsigned short port)
+{
+unsigned short c;
+asm volatile("inb %1, %0":"=a"(c):"dN"(port));
+return(c);
+}
 
 
 

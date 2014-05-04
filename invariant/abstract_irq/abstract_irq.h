@@ -3,7 +3,7 @@
 #ifndef ABSTRACT_IRQ_H
 #define ABSTRACT_IRQ_H
 
-#include "isr.h"
+#include "isr.h" 
 
 enum{
 NORMAL,
@@ -25,5 +25,6 @@ uint32_t irq_count;
 uint8_t type;
 }__attribute__((packed));
 	
+extern abstract_irq_handler * abstract_irq_table;
 	
 #endif
