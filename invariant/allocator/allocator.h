@@ -15,6 +15,7 @@ class Allocator_p {
 Allocator_p * father;
 virtual void * allocate (size_t size)=0;
 virtual void deallocate (void * p)=0;
+virtual int freeinfo (void)=0;
 };
 
 
@@ -33,11 +34,13 @@ void deallocate (void * p);
 
 void engage(void* pointer, size_t cachesz);
 
-int freeblocks();
+int freeinfo ();
 };
 
 
 
+void * operator new (size_t size);
+void operator delete (void * ptr);
 void * operator new (size_t size,void*p);
 void * operator new (size_t size,Allocator_p* a);
 void operator delete (void * ptr,void*p);

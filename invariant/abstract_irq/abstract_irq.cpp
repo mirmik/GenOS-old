@@ -4,9 +4,9 @@
 #include "debug/debug.h"
 #include "error/error.h"
 abstract_irq_handler * abstract_irq_table; 
-
+uint8_t abstract_irq_status=0;
 void abstract_StubISR(interrupt_info_t* info){
-dpr("abstract_irq_num:"); dpr_inthex((uint)(info->int_num));dln
+dpr(">>AIC_UNDEFINED_IRQ: irq_num:"); dpr_inthex((uint)(info->int_num));dln
 systemError("abstract_irq_controller_StubIRQ");
 };
 
@@ -22,10 +22,12 @@ void abstract_irq_init(void* table, uint n)
 	memset(table,0,n*sizeof(abstract_irq_handler));
 	for(int i=0;i<n;i++) (abstract_irq_table + i) -> func = (void*)abstract_StubISR; 
 	for(int i=0;i<n;i++) (abstract_irq_table + i) -> type = DEBUG; 
+	abstract_irq_status = 1;
 }
 
 void abstract_irq_controller(interrupt_info_t info)
 {
+if (abstract_irq_status == 0) systemError("aic has been called, but not init");
 uint32_t num = info.int_num;
 (abstract_irq_table+num)->irq_count++;
 platform_abstract_irq_handler(&info);

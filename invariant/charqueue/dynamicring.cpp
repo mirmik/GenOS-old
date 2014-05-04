@@ -54,11 +54,11 @@ return 0;
 
 int dynamicring::pop(){
 	int c=tail->ring->pop();
-	if (c==-1)
+	if (c==0)
 		if (count>1)
 		{
 		absolve_ring();
 		c=tail->ring->pop();	
 		}
-		else return -1;
+		else return 0;
 return c;};

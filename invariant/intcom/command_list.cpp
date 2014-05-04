@@ -8,7 +8,7 @@ LIST_HEAD (command_head);
 
 
  void command_add (char* a,size_t c)
- {command_t* temp=new(command_t);
+ {command_t* temp=new command_t;
  list_add_tail(&temp->list,&command_head);
  temp->mnem=a;
  temp->func=c;
@@ -37,9 +37,11 @@ if (!strcmp(argv[0],p->mnem))
 //stdio=tempstrm; 
 return 0;
 }
-pr("Command \"\033[35m");
+//pr("Command \"\033[35m");
+pr("Command \"");
 pr(argv[0]);
-prln("\033[0m\" not found. Use \"\033[33mlist\033[0m\" instruction.");
+//prln("\033[0m\" not found. Use \"\033[33mlist\033[0m\" instruction.");
+prln("\" not found. Use \"list\" instruction.");
 
 return 0;
 };

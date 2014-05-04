@@ -1,0 +1,14 @@
+
+boot.o:     формат файла elf32-i386
+
+
+Дизассемблирование раздела .text:
+
+00000000 <init>:
+   0:	fa                   	cli    
+   1:	53                   	push   %ebx
+   2:	e8 fc ff ff ff       	call   3 <init+0x3>
+   7:	f4                   	hlt    
+
+00000008 <loop>:
+   8:	eb fe                	jmp    8 <loop>

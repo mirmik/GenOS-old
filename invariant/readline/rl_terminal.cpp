@@ -197,7 +197,9 @@ inline void rl_terminal::terminal_write (char* c, int len)
 #include "GenOS.h"
 void	rl_terminal::print_prompt()
 {
-	strm->print("\033[36m"); strm->print(MACHINE_NAME); strm->print(":");strm->print("\033[0m");
+	//strm->print("\033[36m"); 
+	strm->print(MACHINE_NAME); strm->print(":");
+	//strm->print("\033[0m");
 }
 
 
@@ -235,7 +237,7 @@ void	rl_terminal::print_prompt()
 		
 		int c;
 		c= strm->read();
-		if (c!=-1) {
+		if ((c!=0) && (c!=-1)) {
 			
 			
 			if (escape) {

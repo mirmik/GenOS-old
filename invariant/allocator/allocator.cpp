@@ -37,7 +37,7 @@ p->next=list.next;
 list.next=(monolist*)pointer;
 }
 
-int Object_cache::freeblocks()
+int Object_cache::freeinfo()
 {//monolist* p = list.next;
 	//while (p!=&list)	
 	//{prlnhex(p);
@@ -49,7 +49,7 @@ int Object_cache::freeblocks()
 	{temp++;
 		p=p->next;
 		}
-		return temp;
+		return temp*objsz;
 }
 
 

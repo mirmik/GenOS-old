@@ -12,7 +12,6 @@ size_t strlen(const char *c);
 void swap_char(char* a, char* b);
 void num2base_str(char* dec_str, uint32_t value, int base);
 void str_reverse(char* str);
-int scan2ascii(int scan);
 
 void strformat(char* str, int n, char c);
 char* strcpy(char * __dest, const char * __src);

@@ -3,7 +3,8 @@
 
 #include "linuxlist.h"
 #include "simple.h"
-#include "GenOS.h"
+//#include "allocator/allocator.h"
+//#include "GenOS.h"
 
 struct argvc_t {
 	char ** argv;

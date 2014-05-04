@@ -10,29 +10,3 @@ endif
 include $(GENOS)/platform/$(TARGET)/Makefile.$(TARGET)
 
 GENOSFLAGS:= -I$(GENOS)/invariant -I$(GENOS)/invariant/prototype
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

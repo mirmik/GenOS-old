@@ -128,11 +128,6 @@ void* memset(void *__s,int __c, size_t __n)
 
 
 
-int scan2ascii(int scan)
-{
-//if ((scan >= 48) && (scan <= 57)) return(scan-48 +'0');	
-return scan;
-}
 
 
 

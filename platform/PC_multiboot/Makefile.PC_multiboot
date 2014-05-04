@@ -10,7 +10,8 @@ endif
 VPATH += $(GENOS)/platform/$(TARGET)/descriptor_tables
 
 PLATFORMFLAGS =  -I$(GENOS)/platform/$(TARGET) -I$(GENOS)/cpu/$(CPU)
-PLATFORMSRCPP := debug_putchar.cpp boot3.cpp error_platform.cpp  descriptor_tables.cpp  boot2.cpp timer.cpp
+PLATFORMSRCPP := debug_putchar.cpp boot3.cpp error_platform.cpp  descriptor_tables.cpp timer.cpp \
+				keyscan.cpp pci_search.cpp
 PLATFORMSRCAS := gdt.S 	
 
 PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 

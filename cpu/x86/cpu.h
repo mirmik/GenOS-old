@@ -17,7 +17,7 @@ asm volatile("outb %1, %0"::"dN"(port),"a"(value));
 
 static unsigned char inb(unsigned short port)
 {
-unsigned short c;
+unsigned char c;
 asm volatile("inb %1, %0":"=a"(c):"dN"(port));
 return(c);
 }

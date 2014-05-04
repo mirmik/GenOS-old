@@ -26,6 +26,7 @@ DBStream();
 Queue_p *tx; 	
 Queue_p *rx;		
 
+int (*send)(char c);
 func_t on_write;
 func_t on_rx_write;
 func_t send_func;
