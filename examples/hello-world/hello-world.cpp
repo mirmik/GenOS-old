@@ -27,6 +27,8 @@ rl_terminal r(&term,&rl);
 
 char mas[16*4];
 
+extern "C" void __cxa_pure_virtual() { while (1); }
+
 int main(){
 StrmDebug k;
 term.begin();

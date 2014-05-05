@@ -24,7 +24,7 @@
 
 
 #include "genoslib.h"
-
+#include "types.h"
 
 //#include "mvirt/WString.h"
 //#include "Printable.h"

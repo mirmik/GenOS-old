@@ -31,7 +31,7 @@ void Object_cache::engage(void* pointer, size_t cachesz)
 {
 monolist* p = (monolist*) pointer;
 for (int i=0;i < cachesz / objsz; i++)
-	{p->next = (monolist*)((unsigned int)pointer + i*objsz);
+	{p->next = (monolist*)((size_t)pointer + i*objsz);
 	p=p->next;}
 p->next=list.next;
 list.next=(monolist*)pointer;
