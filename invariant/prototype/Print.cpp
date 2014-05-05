@@ -19,8 +19,11 @@
  Modified 23 November 2006 by David A. Mellis
  */
 
-#include "math.h"
+//#include "math.h"
 //#include "stdio.h"
+#define isnan(a) 0
+#define isinf(a) 0
+
 #include "prototype/Print.h"
 // Public Methods //////////////////////////////////////////////////////////////
 

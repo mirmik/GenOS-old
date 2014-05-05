@@ -19,7 +19,12 @@
 char O_buf[1000];
 Object_cache O(sizeof(command_t));
 
+<<<<<<< HEAD
 Keyscan key;
+=======
+extern "C" void __cxa_pure_virtual() { while (1); }
+
+>>>>>>> 878b7e1f524b31ee4cf5b7e3d54daba1032233c6
 Allocator_p * stdalloc=&O;
 Stream* stdio;
 staticring_t rx,tx;

@@ -31,7 +31,7 @@ stdalloc->deallocate(buffer);
 
 int ring_t::pop()
 {
-if (status == EMPTY) return 0;
+if (status == EMPTY) return -1;
 char c = buffer[tail];
 tail = (tail + 1) % size;
 if (head==tail) status = EMPTY;
@@ -42,7 +42,7 @@ return c;
 
 int ring_t::push(char c)
 {
-  if (status == FULL) return(0);
+  if (status == FULL) return(-1);
   buffer[head] = c;
   head = (head + 1) % size;
 if (head==tail) status = FULL;
@@ -58,5 +58,5 @@ return((head-tail+size)%size);
 
 int ring_t::peek(int n)
 {
-return(0);	
+return(-1);	
 }

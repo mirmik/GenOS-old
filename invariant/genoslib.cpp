@@ -126,6 +126,8 @@ void* memset(void *__s,int __c, size_t __n)
 }
 
 
+int abs(int __x)
+{return __x>0 ? __x : -__x;}
 
 
 

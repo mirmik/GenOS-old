@@ -85,7 +85,7 @@ void debug_print_dump(void* address, uint32_t size)
   /* Преобразуем указатель в массив байт */
   uint8_t* dump = (uint8_t*) address; 
   /* Преобразуем указатель просто в число */  
-  uint32_t addr_tmp = (uint32_t) address;
+  uint32_t addr_tmp = (size_t) address;
   /* Вспомогательные переменные */
   uint32_t i = 0;
   uint32_t mark = 0;

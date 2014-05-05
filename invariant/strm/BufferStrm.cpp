@@ -32,7 +32,7 @@ on_write = 0;
 
 size_t BufferStream::write(uint8_t c){
 	int temp = q->push(c);
-	if (temp == 0) {
+	if (temp == -1) {
 					if (on_write != 0) on_write();
 					return(1);
 					}

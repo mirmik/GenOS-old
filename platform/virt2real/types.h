@@ -20,9 +20,9 @@ typedef unsigned char byte;
 */
 typedef unsigned int uint;
 
-#include "stddef.h"
+
 typedef unsigned char byte;
-//typedef unsigned int size_t;
+typedef unsigned int size_t;
 typedef unsigned char boolean;
 
 typedef volatile unsigned long long vuint64_t;
@@ -34,6 +34,13 @@ typedef volatile long long vint64_t;
 typedef volatile int vint32_t; 
 typedef volatile short vint16_t; 
 typedef volatile char vint8_t;  
+
+
+typedef  uint64_t u64 ;
+typedef  uint32_t u32; 
+typedef  uint16_t u16; 
+typedef  uint8_t  u8 ; 
+
 
 ///////////////////////////
 

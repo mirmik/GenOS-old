@@ -11,13 +11,13 @@ Standart_alloc galloc;
 void * Standart_alloc::allocate (size_t size)
 {	
 	tpr("alloc global"); tprtab(); tprdec(size);
-	void* ptr=malloc(size); tprtab(); tprlnhex(ptr);
+	void* ptr=malloc(size); tprtab(); tprlnhex((size_t)ptr);
 	return ptr;
 }
 
 
 void Standart_alloc::deallocate (void * p)
 {
-	tpr ("alloc global free "); tprlnhex(p);
+	tpr ("alloc global free "); tprlnhex((size_t)p);
 	free(p);
 }

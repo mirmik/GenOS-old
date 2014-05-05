@@ -25,13 +25,22 @@ OBJCOPY= objcopy
 AS=as
 
 # Флаги компилятора языка C
+<<<<<<< HEAD
 CFLAGS:= -O2 -fno-exceptions  
+=======
+CFLAGS= -O0  -m32 -nostdlib -fno-exceptions -fno-unwind-tables -fno-rtti
+>>>>>>> 878b7e1f524b31ee4cf5b7e3d54daba1032233c6
 
 # Флаги компоновщика
 LDFLAGS:=-T $(GENOS)/platform/PC_multiboot/link.ld  
 
 # Флаги ассемблера
+<<<<<<< HEAD
 ASFLAGS:=--32
+=======
+ASFLAGS=--32
+#ASFLAGS=--64
+>>>>>>> 878b7e1f524b31ee4cf5b7e3d54daba1032233c6
 
 CPPFLAGS:= $(CFLAGS) $(GENOSFLAGS) $(PLATFORMFLAGS)
 

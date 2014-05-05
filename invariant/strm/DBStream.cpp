@@ -37,12 +37,11 @@ send = 0;
 }
 
 size_t DBStream::write(uint8_t c){
-	if (c==0) return 0;
 	if (send(c)!=0) return(1);
 	else 
 	{
 	int temp = tx->push(c);
-	if (temp == 0) {
+	if (temp == -1) {
 					if (on_write != 0) on_write();
 					return(1);
 					}
@@ -55,7 +54,6 @@ size_t DBStream::write(uint8_t c){
 	 }
 
 size_t DBStream::rx_write(uint8_t c){
-if (c==0) return 0;
 rx->push(c);
 };
 

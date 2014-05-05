@@ -14,7 +14,7 @@ VPATH += $(GENOS)/invariant/
 PROJECT = hello-world
 
 
-src = hello-world.cpp local_linear_heap.cpp Print.cpp Stream.cpp allocator.cpp delay.cpp alloc_standart.cpp u_esh.cpp flag_sh.cpp \
+src = hello-world.cpp Print.cpp Stream.cpp allocator.cpp delay.cpp alloc_standart.cpp u_esh.cpp flag_sh.cpp \
 	ring.cpp queue.cpp DBStream.cpp dynamicring.cpp StrmNull.cpp BufferStrm.cpp  debug_print.cpp delay_cpu.cpp error.cpp \
 	command_list.cpp utility.cpp readline.cpp rl_terminal.cpp genoslib.cpp 
 		

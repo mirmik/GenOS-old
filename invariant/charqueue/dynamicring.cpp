@@ -60,5 +60,5 @@ int dynamicring::pop(){
 		absolve_ring();
 		c=tail->ring->pop();	
 		}
-		else return 0;
+		else return -1;
 return c;};
