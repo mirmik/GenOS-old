@@ -1862,7 +1862,7 @@ Disassembly of section .text:
   1013fb:	5d                   	pop    %ebp
   1013fc:	c3                   	ret    
 
-001013fd <_Z3absi>:
+001013fd <abs>:
   1013fd:	55                   	push   %ebp
   1013fe:	89 e5                	mov    %esp,%ebp
   101400:	8b 45 08             	mov    0x8(%ebp),%eax
@@ -4007,8 +4007,10 @@ Disassembly of section .text:
   102cc0:	89 04 24             	mov    %eax,(%esp)
   102cc3:	e8 fe da ff ff       	call   1007c6 <_ZN5Print5printEPKc>
   102cc8:	8b 45 0c             	mov    0xc(%ebp),%eax
-  102ccb:	89 04 24             	mov    %eax,(%esp)
-  102cce:	e8 2a e7 ff ff       	call   1013fd <_Z3absi>
+  102ccb:	99                   	cltd   
+  102ccc:	89 d0                	mov    %edx,%eax
+  102cce:	33 45 0c             	xor    0xc(%ebp),%eax
+  102cd1:	29 d0                	sub    %edx,%eax
   102cd3:	8b 55 08             	mov    0x8(%ebp),%edx
   102cd6:	8b 52 04             	mov    0x4(%edx),%edx
   102cd9:	c7 44 24 08 0a 00 00 	movl   $0xa,0x8(%esp)
