@@ -4,8 +4,8 @@
 
 #include "initenv/initenv.h"
 
-static void call_constructors(unsigned long *start, unsigned long *end) __attribute__((noinline));
-static void call_constructors(unsigned long *start, unsigned long *end)
+static void volatile call_constructors(unsigned long *start, unsigned long *end) __attribute__((noinline));
+static void volatile call_constructors(unsigned long *start, unsigned long *end)
 {
   unsigned long *i;
   void (*funcptr)();
@@ -20,7 +20,7 @@ static void call_constructors(unsigned long *start, unsigned long *end)
   }
 }
 
-extern "C" void initenv_cpp_global_constructors(){
+extern "C" volatile void initenv_cpp_global_constructors(){
 printd(">>CALL GLOBAL CONSTRUCTORS\r\n");
 printd("constr call:\r\n");
  call_constructors(&__preinit_array_start, &__preinit_array_end);
@@ -34,9 +34,10 @@ printd("global constructors succesfualy called...\r\n");
 
 
 
-extern "C" void initenv_bss_clean(){
+extern "C" volatile void initenv_bss_clean(){
+unsigned int i;
 printd(">>BSS_CLEAN...   ");
-  for (unsigned int i = (unsigned int)&_bss_begin; i < (unsigned int)&_bss_end; i++)
+  for (i = (unsigned int)&_bss_begin; i < (unsigned int)&_bss_end; i++)
   {
     *((char*) i)=0;
   }

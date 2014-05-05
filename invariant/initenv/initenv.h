@@ -18,7 +18,7 @@ extern unsigned int _data_end;
 extern unsigned int _bss_begin;
 extern unsigned int _bss_end;
 
-extern "C" void initenv_cpp_global_constructors();
-extern "C" void initenv_bss_clean();
+extern "C" volatile void initenv_cpp_global_constructors();
+extern "C" volatile void initenv_bss_clean();
 extern "C" void initenv_sections_info();
 extern "C" void initenv_bss_test();

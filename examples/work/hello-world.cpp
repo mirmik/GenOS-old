@@ -12,9 +12,14 @@
 #include "utility.h"
 #include "intcom/command_list.h"
 #include "pci_search.h"
+#include "keyboard_scan/keyboard_scan.h"
+
+#include "video_page_command.h"
+
 char O_buf[1000];
 Object_cache O(sizeof(command_t));
 
+Keyscan key;
 Allocator_p * stdalloc=&O;
 Stream* stdio;
 staticring_t rx,tx;
@@ -27,24 +32,38 @@ char aic[0x900];
 void DoNothing(){};
 void KeyboardHandler()
 {
-vkstream.rx_write(scan2ascii(inb(0x60)));
+key.scan2ascii(inb(0x60));
+}
+
+void KeyboardHandler_keyscan()
+{
+unsigned char i = inb(0x60);
+dpr_inthex(i); dln;
 }
 
 int send(char c)
 {debug_putchar(c);
 return 1;}
 
+void keyscan_init()
+{
+abstract_irq_attach(0x21, KeyboardHandler_keyscan);
+}
+
+video_page_command v;
+void test()
+{v.putchar('G');}
+
 extern void kmain();
 int main()
 {	
 	debug_print("HelloWorld");
-
+//while(1);
 	//Enviroment Init
 	initenv_sections_info();
 	initenv_bss_test();
 	initenv_bss_clean();
 	initenv_cpp_global_constructors();
-	
 	//Platform init
 	platform_init();
 	//
@@ -53,12 +72,15 @@ int main()
 	abstract_irq_attach(0x21, KeyboardHandler);
 	vkstream.send=send;
 	O.engage(O_buf,1000);
+	key.out_strm = &vkstream;
+	
 	SEI();	
 	
 	registry_standart_utility();
 	registry_alloc_utility();
-	command("pcisearch",kmain);
-	
+	command("pciscan",kmain);
+	command("keyscan",keyscan_init);
+	command("test",test);
 	while(1) {
 		//vkstream.write(vkstream.read());
 		rlt.listen();

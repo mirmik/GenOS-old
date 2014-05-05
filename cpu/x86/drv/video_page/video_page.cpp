@@ -4,8 +4,7 @@ char* videomem = (char*)0xB8000;
 void video_page_putchar(int cursor, char c)
 {
 *(videomem + cursor * 2 + 1 ) = LIGHT_GREEN;
-*(videomem + cursor * 2) = c;
-cursor++; 
+*(videomem + cursor * 2) = c; 
 };
 
 void video_page_move_cursor(int cur)

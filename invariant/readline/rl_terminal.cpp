@@ -230,7 +230,7 @@ void	rl_terminal::print_prompt()
 
 
 //#define terminal_print_line(a,b);  
-
+#include "debug/debug.h"
    void	rl_terminal::listen()
 	{
 		if (mode==0) {print_prompt();mode=1;}
@@ -245,6 +245,7 @@ void	rl_terminal::print_prompt()
 			escape = 0;
 	} else 
 {
+		//		dpr_inthex(c); dln;
 			
 		switch(c){			
 			

@@ -1,51 +1,8 @@
-/*
- * Keyboard driver
- * Copyright (c) 2001,2004 David H. Hovemeyer <daveho@cs.umd.edu>
- * $Revision: 1.14 $
- * 
- * This is free software.  You are permitted to use,
- * redistribute, and modify it as specified in the file "COPYING".
- */
 
-/*
- * Information sources:
- * - Chapter 8 of _The Undocumented PC_, 2nd ed, by Frank van Gilluwe,
- *   ISBN 0-201-47950-8.
- * - Pages 400-409 of _The Programmers PC Sourcebook_, by Thom Hogan,
- *   ISBN 1-55615-118-7.
- */
-
-/*
- * Credits:
- * - Peter Gnodde <peter@pcswebdesign.nl> added support for
- *   the CTRL and ALT modifiers
- */
-
-/*
- * TODO list:
- * - Right now we're assuming an 83-key keyboard.
- *   Should add support for 101+ keyboards.
- * - Should toggle keyboard LEDs.
- */
-
+#include "keyboard_scan/keyboard_scan.h"
 #include "keyscan.h"
-/* ----------------------------------------------------------------------
- * Private data and functions
- * ---------------------------------------------------------------------- */
+#include "debug/debug.h"
 
-/*
- * Current shift state.
- */
-#define LEFT_SHIFT  0x01
-#define RIGHT_SHIFT 0x02
-#define LEFT_CTRL   0x04
-#define RIGHT_CTRL  0x08
-#define LEFT_ALT    0x10
-#define RIGHT_ALT   0x20
-#define SHIFT_MASK  (LEFT_SHIFT | RIGHT_SHIFT)
-#define CTRL_MASK   (LEFT_CTRL | RIGHT_CTRL)
-#define ALT_MASK    (LEFT_ALT | RIGHT_ALT)
-unsigned int s_shiftState = 0;
 /*
  * Translate from scan code to key code, when shift is not pressed.
  */
@@ -104,11 +61,31 @@ const Keycode s_scanTableWithShift[] = {
     KEY_KPDOWN, KEY_KPPGDN, KEY_KPINSERT, KEY_KPDEL,  /* 0x50 - 0x53 */
     KEY_SYSREQ, KEY_UNKNOWN, KEY_UNKNOWN, KEY_UNKNOWN,  /* 0x54 - 0x57 */
 };
+#define SCAN_TABLE_SIZE (sizeof(s_scanTableNoShift) / sizeof(Keycode))
 
-/*
- * Handler for keyboard processing.
- */
-int scan2ascii(char scan)
+
+Keyscan::Keyscan()
+{init();}
+
+void Keyscan::init()
+{s_shiftState = 0;
+in_strm=0;out_strm=0;}
+
+char Keyscan::scan2ascii()
+{
+	if (in_strm == 0) return 0; 
+	char c = in_strm->read();
+	if ((c!=0) && (c!=-1)) scan2ascii(c); 
+}
+
+
+void Keyscan::strm(const char* str)
+{
+if (out_strm != 0)
+	out_strm->print(str);
+}
+
+char Keyscan::scan2ascii(char scan)
 {
 	unsigned int shift=0,release=0,keycode=0,flag=0;
 	
@@ -127,13 +104,6 @@ int scan2ascii(char scan)
 
 	/* Update shift, control and alt state */
 	switch (keycode) {
-		case KEY_KPUP:
-		case KEY_KPLEFT:
-		case KEY_KPDOWN:
-		case KEY_KPRIGHT:
-		case KEY_KPDEL: 
-		case KEY_KPHOME:
-		case KEY_KPEND:return 0;
 	case KEY_LSHIFT:
 	    flag = LEFT_SHIFT;
 	    break;
@@ -173,7 +143,19 @@ symbol:
 	if (release)
 	    keycode |= KEY_RELEASE_FLAG;
 	*/
-	if (!release) return keycode;
-	else return 0;
+	if (keycode ==0) return 0;
+	if (!release) 
+	{
+	switch (keycode) {
+		case KEY_KPUP: 		if(out_strm !=0) {out_strm->rx_write(27);out_strm->rx_write('[');out_strm->rx_write(0x41);}; return 0;
+		case KEY_KPLEFT: 	if(out_strm !=0) {out_strm->rx_write(27);out_strm->rx_write('[');out_strm->rx_write(0x44);}; return 0;
+		case KEY_KPDOWN: 	if(out_strm !=0) {out_strm->rx_write(27);out_strm->rx_write('[');out_strm->rx_write(0x42);}; return 0;
+		case KEY_KPRIGHT:	if(out_strm !=0) {out_strm->rx_write(27);out_strm->rx_write('[');out_strm->rx_write(0x43);}; return 0;
+		case KEY_KPDEL: 	if(out_strm !=0) {}; return 0;
+		case KEY_KPHOME: 	if(out_strm !=0) {}; return 0;
+		case KEY_KPEND: 	if(out_strm !=0) {}; return 0;
+	};	
+	if (out_strm!=0) {out_strm->rx_write(keycode); };
+	return keycode;}
+	else {return 0;}	 
 }
-
