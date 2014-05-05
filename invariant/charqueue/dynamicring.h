@@ -5,7 +5,7 @@
 #include "charqueue/queue.h"
 #include "charqueue/ring.h"
 #include <inttypes.h>
-#include <stdio.h> // for size_t
+//#include <stdio.h> // for size_t
 #include "platform.h" // for kmalloc
 #include "linuxlist.h"
 

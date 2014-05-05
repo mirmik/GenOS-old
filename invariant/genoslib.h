@@ -20,4 +20,6 @@ void* memmove(void * __dest, const void * __src, size_t __n);
 void* memcpy(void * __dest, const void * __src, size_t __n);
 void* memset(void *__s,int __c, size_t __n);
 
+#define abs(a) (a>0 ? a : -a)  
+
 #endif

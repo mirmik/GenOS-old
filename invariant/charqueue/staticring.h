@@ -4,7 +4,7 @@
 
 #include "charqueue/queue.h"
 #include <inttypes.h>
-#include <stdio.h> // for size_t
+//#include <stdio.h> // for size_t
 #include "platform.h" // for kmalloc
 
 #define STATICRING_SIZE 40

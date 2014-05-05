@@ -32,7 +32,7 @@ $(OBJDIR):
 	- mkdir $(OBJDIR)
 
 LINK:
-	$(CPP) $(LDFLAGS)  $(OBJ) $(PLATFORMOBJ) -o hello-world
+	$(CPP) $(LDFLAGS) $(CFLAGS)  $(OBJ) $(PLATFORMOBJ) -o hello-world
 	
 	
 clean:
