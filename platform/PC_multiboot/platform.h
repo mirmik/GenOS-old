@@ -6,7 +6,6 @@
 #include "cpu.h"
 #include "video_page.h"
 
-
 void platform_init();
 
 #include "isr.h"

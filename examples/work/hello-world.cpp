@@ -15,6 +15,8 @@
 char O_buf[1000];
 Object_cache O(sizeof(command_t));
 
+extern "C" void __cxa_pure_virtual() { while (1); }
+
 Allocator_p * stdalloc=&O;
 Stream* stdio;
 staticring_t rx,tx;

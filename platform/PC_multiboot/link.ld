@@ -8,7 +8,7 @@ SECTIONS
 /* Секция кода */
 
 /DISCARD/ :
-		{*(.note.ABI-tag)}
+		{*(.note.ABI-tag) *(.eh_frame) *(.note*)}
   
     .text ALIGN (0x1000) :
     {
