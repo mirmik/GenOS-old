@@ -129,11 +129,8 @@ void* memset(void *__s,int __c, size_t __n)
 int abs(int __x)
 {return __x>0 ? __x : -__x;}
 
-
-
-
-
-
-
-
-
+int limitation(int a,int min,int max){
+		if (a<min) return min;
+		if (a>max) return max;
+		return a;
+	}

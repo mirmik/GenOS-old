@@ -2,6 +2,8 @@
 #ifndef _READLINE_H_
 #define _READLINE_H_
 
+#include "prototype/KeyCom.h"
+
 #undef ENDL
 #define ENDL '\n'
 
@@ -10,25 +12,24 @@
 #define false 0
 
 // microrl struct, contain internal library data
-class  readline_t
+class  readline_t : public KeyCom
 {public:
-char cmdline[50];
+char cmdline[160];
 int cursor;
 int cmdlen;
-//int (*execute)(int, const char* const*);
 
-char* get_line();	
-//void split();
-int backspace ();
+char* get_line();
 int move_cursor (int offset);
-				
-				
+								
 readline_t();
 void init();
 
-int del ();
-void insert_char(char c);
-void insert_text(char* c);
-void set_execute_callback (int (*_execute)(int, const char* const*));
+int backspace();
+int del(int i);
+int right(int i);
+int left(int i);
+//int del(int i);
+size_t write(uint8_t c);
+//void set_execute_callback (int (*_execute)(int, const char* const*));
 };
 #endif

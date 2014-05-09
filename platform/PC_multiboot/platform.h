@@ -5,6 +5,7 @@
 
 #include "cpu.h"
 #include "video_page.h"
+#include "timer.h"
 
 void platform_init();
 
@@ -19,5 +20,6 @@ if (info->int_num >= 32) outb (0x20,0x20);
 
 void debug_reset_cursor();
 
+uint64_t millis();
 
 #endif

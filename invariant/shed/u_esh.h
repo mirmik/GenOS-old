@@ -30,9 +30,8 @@ class TSH
 {public:
 	
 	Allocator_p* alloc;
-	TSH(void(*c)(void),Allocator_p* b);
+	TSH();
 	
-	void (*idle)(void);
 	uint8_t TimerPANIC;
 	
 	

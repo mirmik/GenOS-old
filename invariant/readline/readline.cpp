@@ -1,7 +1,7 @@
 
 #include "readline/readline.h"
 #include "genoslib.h"
-
+#include "intcom/command_list.h"
 
 readline_t::readline_t()
 {
@@ -22,55 +22,27 @@ return cmdline;
 #include "simple.h"
 #define LOCAL_TRACERT 7
 
-void readline_t::insert_text(char* c)
-{
-	while(*c!=0) {insert_char(*c);c++;}
-}
 
 
-void readline_t::insert_char(char c)
-{
-//if (c != ENDL) {
-	
-	//**********************************************
-	
+size_t readline_t::write(uint8_t c)
+{	
+	switch(c)
+	{
+	case '\b': backspace();break;
+	case '\n': if(cmdlen!=0) {get_line();execute(cmdline);} ;init();break;
+	default:
 	cmdlen++;
 	if (cursor!=cmdlen-1)
 		{
-		//tprhex(cmdline + cursor); tprtab();tprhex(cmdline + cursor+1);tprtab();tprln(cmdlen - cursor);
 		memmove (cmdline + cursor + 1,
 						 cmdline + cursor,
 						 cmdlen-cursor-1);
 		}
 		
 	cmdline[cursor]=c;cursor++;
-	
-	//twrite(cmdline,cmdlen); tprtab(); tpr(cmdline); tprln();
-	//}
-
-	//*************************************************
-
-/*
-else {cmdline[cmdlen]='\0';cursor=0;
-		
-		tprln("execute call");
-		if (execute!=0) {
-		split();
-		cmdlen=0;
-		tprln("execute");
-		execute(argc,argv);}; 
-	} 	*/
+	}
+	return(1);
 }
-
-int readline_t::move_cursor (int offset)
-{
-	int lastcursor=cursor;
-	cursor=cursor+offset;
-	if (cursor < 0) cursor=0;
-	if (cursor > cmdlen) cursor=cmdlen;
-	return (cursor - lastcursor);
-}
-
 
 
 int readline_t::backspace ()
@@ -87,7 +59,24 @@ if (cursor > 0) {
 return 0;
 }
 
-int readline_t::del ()
+int readline_t::move_cursor (int offset)
+{
+	int lastcursor=cursor;
+	cursor=cursor+offset;
+	if (cursor < 0) cursor=0;
+	if (cursor > cmdlen) cursor=cmdlen;
+	return (cursor - lastcursor);
+}
+
+
+int readline_t::right (int i)
+{return(move_cursor(i));}
+
+int readline_t::left (int i)
+{return(-move_cursor(-i));}
+
+
+int readline_t::del (int i)
 {
 if (cmdlen - cursor > 0) {
 		memmove (cmdline + cursor,
@@ -98,4 +87,3 @@ if (cmdlen - cursor > 0) {
 	}	
 return 0;
 }
-

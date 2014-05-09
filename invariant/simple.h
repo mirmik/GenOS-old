@@ -5,6 +5,7 @@
 //#include "time.h"
 #include <inttypes.h>
 #include "prototype/Stream.h"
+#include "prototype/Print.h"
 #include "allocator/allocator.h"
 #include "charqueue/queue.h"
 
@@ -13,16 +14,16 @@ void DoNothing();
 //typedef uint8_t boolean;
 
 class Stream;
-extern Stream * stdio; 
+extern Print * stdprint; 
 extern Stream * tracert;
 class Allocator_p;
 extern Allocator_p * stdalloc; 
 
-#define prlnhex(a) 	stdio->println((int)a,HEX);
-#define prhex(a) 	stdio->print((int)a,HEX);
-#define pr(a) stdio->print(a);
-#define prln(a) stdio->println(a);
-#define prtab() stdio->write('\t');
+#define prlnhex(a) 	stdprint->println((int)a,HEX);
+#define prhex(a) 	stdprint->print((int)a,HEX);
+#define pr(a) 	stdprint->print(a);
+#define prln(a) stdprint->println(a);
+#define prtab() stdprint->write('\t');
 
 #define TRACERT 1
 

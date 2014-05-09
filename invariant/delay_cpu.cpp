@@ -1,11 +1,10 @@
 
-extern "C" volatile void delay_cpu (unsigned int d)
-{volatile unsigned long long dd;
-	dd=d*2000;
+extern "C" volatile void delay_cpu (unsigned long long d)
+{volatile unsigned long long ddd;
+ddd=d;
 while(1){
-asm("nop");
-dd--;
-if ( dd == 0) return;
+ddd--;
+if ( ddd == 0) return;
 }
 };
 

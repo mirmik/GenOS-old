@@ -100,7 +100,7 @@ void idt_set_gate(uint8_t num,       /* номер прерывания */
   idt_entries[num].flags = flags; /* | 0x60 - для пользовательского */
                                   /* режима */ ;
 }
-int a=0;
+
 #include "error/error.h"
 void StubISR(){
 systemError("StubIRQ");

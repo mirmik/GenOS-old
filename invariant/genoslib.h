@@ -24,6 +24,8 @@ void* memset(void *__s,int __c, size_t __n);
 //#define abs(a) (a>0 ? a : -a)  
 //#endif
 
+int limitation(int a,int min,int max);
+
 extern "C" int abs(int __x);
 
 

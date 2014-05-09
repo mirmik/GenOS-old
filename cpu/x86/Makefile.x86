@@ -7,7 +7,7 @@
 VPATH += $(GENOS)/cpu/$(CPU)/ 
 VPATH += $(GENOS)/cpu/$(CPU)/drv/video_page/
 
-CPUSRC := video_page.cpp regread.cpp isr.cpp
+CPUSRC := regread.cpp isr.cpp
 CPUSRCS := boot.S   cpu_interrupt.S
 
 CPUOBJ := $(CPUSRC:%.cpp=$(OBJDIR)/%.o) 

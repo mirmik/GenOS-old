@@ -18,7 +18,7 @@ class Keyscan
 public:
 unsigned int s_shiftState;
 Stream* in_strm;
-DBStream* out_strm;
+Print* out_strm;
 Keyscan();
 void strm(const char* str);
 void init();	

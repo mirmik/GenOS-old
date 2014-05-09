@@ -3,7 +3,7 @@
 #include "prototype/Stream.h"
 #include "platform.h"
 #include "abstract_irq/abstract_irq.h"
-#include "strm/DBStream.h"
+//#include "strm/DBStream.h"
 #include "keyscan.h"
 #include "charqueue/staticring.h"
 #include "allocator/allocator.h"
@@ -13,83 +13,130 @@
 #include "intcom/command_list.h"
 #include "pci_search.h"
 #include "keyboard_scan/keyboard_scan.h"
+#include "VideoPage/VideoPage.h"
+#include "VideoPage/VideoPagePrint.h"
+#include "PrintTransformer/Scan2KeyCom.h"
 
-#include "video_page_command.h"
+VideoPage 		v(0xB8000,80,25);
+VideoPagePrint 	vp(&v);
 
-char O_buf[1000];
-Object_cache O(sizeof(command_t));
+void OS_init();
+char O_buf[10000];
+Object_cache O(500);
 
-<<<<<<< HEAD
-Keyscan key;
-=======
+Allocator_p * stdalloc=&O;
+readline_t rl;
+rl_terminal rlt(&rl,&vp);
+//Keyscan key;
+Scan2KeyCom s2k(&rlt);
+
 extern "C" void __cxa_pure_virtual() { while (1); }
 
->>>>>>> 878b7e1f524b31ee4cf5b7e3d54daba1032233c6
-Allocator_p * stdalloc=&O;
-Stream* stdio;
-staticring_t rx,tx;
-DBStream vkstream(&rx,&tx);
-readline_t rl;
-rl_terminal rlt(&vkstream,&rl);
+uint64_t tim=0;
 
+void timerprint()
+{
+prln((uint32_t)millis());	
+}
 char aic[0x900];
 
+Print* stdprint = &vp;
 void DoNothing(){};
 void KeyboardHandler()
 {
-key.scan2ascii(inb(0x60));
+s2k.scan2ascii(inb(0x60));
 }
 
-void KeyboardHandler_keyscan()
+void TimerHandler()
 {
-unsigned char i = inb(0x60);
-dpr_inthex(i); dln;
+tim++;
 }
-
-int send(char c)
-{debug_putchar(c);
-return 1;}
-
-void keyscan_init()
+int a=0;
+void ddd()
 {
-abstract_irq_attach(0x21, KeyboardHandler_keyscan);
+prln(a++);
 }
 
-video_page_command v;
+
+//void KeyboardHandler_keyscan()
+//{
+//unsigned char i = inb(0x60);
+//dpr_inthex(i); dln;
+//}
+
+//void keyscan_init()
+//{
+//abstract_irq_attach(0x21, KeyboardHandler_keyscan);
+//}
+
 void test()
-{v.putchar('G');}
+{//v.putchar('G');
+}
+
+void clr(){v.clean();}
+
+#include "shed/u_esh.h"
+TSH sh;
 
 extern void kmain();
 int main()
 {	
-	debug_print("HelloWorld");
-//while(1);
-	//Enviroment Init
-	initenv_sections_info();
-	initenv_bss_test();
-	initenv_bss_clean();
-	initenv_cpp_global_constructors();
-	//Platform init
-	platform_init();
-	//
-	abstract_irq_init(aic,256);
-	abstract_irq_attach(0x20, DoNothing);
-	abstract_irq_attach(0x21, KeyboardHandler);
-	vkstream.send=send;
-	O.engage(O_buf,1000);
-	key.out_strm = &vkstream;
+	
+	OS_init();
+	
+//	O.engage(O_buf,1000);
 	
 	SEI();	
-	
+	O.engage(O_buf,10000);
 	registry_standart_utility();
 	registry_alloc_utility();
 	command("pciscan",kmain);
-	command("keyscan",keyscan_init);
 	command("test",test);
+	command("timer",timerprint);
+	command("clr",clr);
+
+vp.init();
+rlt.print_prompt();
+//sh.newTimer(ddd,1000,REPEAT);
+//ddd();
+alloca(28);
+init_timer(1000);
+prlnhex(sh.timer_head.next);
+prlnhex(sh.timer_head.next->next);
+prlnhex(sh.timer_head.next->next->next);
+//prln((uint32_t)tim);
+//sh.start();
 	while(1) {
+		sh.start();
 		//vkstream.write(vkstream.read());
-		rlt.listen();
+//		rlt.listen();
 	}
 	
 	systemError("Programm end");
+}
+
+
+
+
+
+void OS_init()
+{
+	debug_print("HelloWorld");
+	//Enviroment Init
+	initenv_sections_info();
+	//delay_cpu(10000000);
+	initenv_bss_test();
+	//delay_cpu(10000000);
+	initenv_bss_clean();
+	//delay_cpu(10000000);
+	initenv_cpp_global_constructors();
+	//delay_cpu(10000000);
+	//Platform init
+	platform_init();
+	//delay_cpu(10000000);
+	//abstract_irq_system_init
+	abstract_irq_init(aic,256);
+	abstract_irq_attach(0x20, TimerHandler);
+	abstract_irq_attach(0x21, KeyboardHandler);
+	//delay_cpu(10000000);
 }

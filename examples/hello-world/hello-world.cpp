@@ -15,33 +15,33 @@
 #include "utility.h"
 #include "readline/readline.h" 
 #include "readline/rl_terminal.h"
-
+#include "PrintTransformer/ASCII2KeyCom.h"
 #include "debug/debug.h"
 #include "strm/StrmDebug.h"
-Stream* stdio=&term;
+
+#include "PrintTransformer/KeyCom2ASCII.h"
+Print* stdprint=&term;
 Stream* tracert=&term;
 Allocator_p * stdalloc=&galloc;
 
+KeyCom2ASCII t(&term);
 readline_t rl;
-rl_terminal r(&term,&rl);
+rl_terminal r(&rl,&t);
+ASCII2KeyCom f(&r);
 
 char mas[16*4];
 
 extern "C" void __cxa_pure_virtual() { while (1); }
 
 int main(){
-StrmDebug k;
 term.begin();
-memset(mas,0xFF,32);
-strcpy(mas,"Mirmik");
-debug_print_dump(mas,16*4);dln;
-strcpy(mas+2,mas);
-debug_print_dump(mas,16*4);dln;
-strcpy(mas,mas+2);
-debug_print_dump(mas,16*4);dln;
 
-memmove(mas,mas+8,16);
-debug_print_dump(mas,16*4);dln;
+registry_standart_utility();
+r.print_prompt();
+while(1) {
+int i =term.read();
+if (i!=-1)f.write(i);	
+}
 
 term.end();
 	}

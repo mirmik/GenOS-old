@@ -23,7 +23,7 @@ void registry_standart_utility()
 command("about",about);
 command("ptest",ptest);
 command("list",command_print);
-command("sectioninfo",initenv_sections_info);
+//command("sectioninfo",initenv_sections_info);
 }
 
 void registry_alloc_utility()

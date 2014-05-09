@@ -91,6 +91,18 @@ void ring_history_t::hist_save_line (char * line, int len)
 	this->cur = 0;
 }
 
+void rl_terminal::hist_search (int dir)
+{
+	int len = ring_hist.hist_restore_line (rl->cmdline, dir);
+	if (len >= 0) {
+		echo->left(rl->cursor);
+		echo->del(rl->cmdlen);
+		rl->cursor = rl->cmdlen = len;
+		echo->print(rl->get_line());
+	}
+}
+
+
 //*****************************************************************************
 // copy saved line to 'line' and return size of line
 int ring_history_t::hist_restore_line (char * line, int dir)
@@ -159,254 +171,50 @@ int ring_history_t::hist_restore_line (char * line, int dir)
 	return -1;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-inline void rl_terminal::terminal_backspace ()
-{
-	strm->print ("\033[D \033[D");
-}
-
-inline void rl_terminal::terminal_del ()
-{
-	strm->print (" \033[D");
-}
-
-inline void rl_terminal::terminal_char (char c)
-{
-	strm->write (c);
-}
-
-
-inline void rl_terminal::terminal_write (char* c, int len)
-{
-	strm->write (c,len);
-}
-
 #include "GenOS.h"
 void	rl_terminal::print_prompt()
 {
-	//strm->print("\033[36m"); 
-	strm->print(MACHINE_NAME); strm->print(":");
-	//strm->print("\033[0m");
+	echo->print(MACHINE_NAME);echo->print(":");
 }
 
 
-	rl_terminal::rl_terminal(Stream* _strm,readline_t* _rl)
-	{init(_strm,_rl);}
+	rl_terminal::rl_terminal(readline_t* _rl,KeyCom* _echo)
+	{init(_rl,_echo);}
 	
-   void	rl_terminal::init(Stream* _strm,readline_t* _rl)
-	{strm=_strm; rl=_rl; mode=0;}
+   void	rl_terminal::init(readline_t* _rl,KeyCom* _echo)
+	{echo=_echo; rl=_rl;mode=0;}
 
 #include "intcom/command_list.h"
-   void	rl_terminal::new_line_handler()
-   {Stream* strmtemp=stdio;
-	stdio=strm;
-	char* str=rl->get_line();
-	if (rl->cmdlen > 0)
-	{
-	ring_hist.hist_save_line (str, rl->cmdlen);
-	execute(str);
-	}
-	stdio=strmtemp;
-	print_prompt();
-	
-	ring_hist.cur = 0;
-	rl->init();
-	}
-
-
-
-
-//#define terminal_print_line(a,b);  
 #include "debug/debug.h"
-   void	rl_terminal::listen()
+   size_t	rl_terminal::write(uint8_t c)
 	{
-		if (mode==0) {print_prompt();mode=1;}
-		
-		int c;
-		c= strm->read();
-		if ((c!=0) && (c!=-1)) {
-			
-			
-			if (escape) {
-		if (escape_process(c))
-			escape = 0;
-	} else 
-{
-		//		dpr_inthex(c); dln;
-			
-		switch(c){			
-			
-		case KEY_CR:
-		break;
-		case KEY_LF:
-			terminal_char('\n');
-			new_line_handler();
-		break;		
-		
-		case KEY_ESC:
-				escape = 1;
-		break;
-			//-----------------------------------------------------
-			case KEY_NAK: // ^U
-					//while (cursor > 0) {
-					//rl->backspace ();
-				
-				//terminal_print_line (0, this->cursor);
-			break;
-			//-----------------------------------------------------
-			case KEY_VT:  // ^K
-				//this->print ("\033[K");
-				//this->cmdlen = this->cursor;
-			break;
-			//-----------------------------------------------------
-			case KEY_ENQ: // ^E
-				//terminal_move_cursor (this->cmdlen-this->cursor);
-				//this->cursor = this->cmdlen;
-			break;
-			//-----------------------------------------------------
-			case KEY_SOH: // ^A
-				//terminal_reset_cursor ();
-				//this->cursor = 0;
-			break;
-			//-----------------------------------------------------
-			case KEY_ACK: // ^F
-			//if (this->cursor < this->cmdlen) {
-				//terminal_move_cursor (1);
-				//this->cursor++;
-			//}
-			break;
-			//-----------------------------------------------------
-			case KEY_STX: // ^B
-			//if (this->cursor) {
-				//terminal_move_cursor (-1);
-				//this->cursor--;
-			
-			break;
-			//-----------------------------------------------------
-			
-		
-		
-		
-		
-		
-			case KEY_DLE: //^P
-//			hist_search (_HIST_UP);
-			break;
-			//-----------------------------------------------------
-			case KEY_SO: //^N
-//			hist_search (_HIST_DOWN);
-			break;
-			//-----------------------------------------------------
-			case KEY_DEL: // Backspace
-			case KEY_BS: // ^U
-			if (rl->backspace ()) terminal_backspace();					
-				if (rl->cmdlen != rl->cursor) {strm->print ("\033[K");terminal_rewrite();}
-			break;
-
-			case KEY_ETX:
-			//if (this->sigint != NULL)
-			//	this->sigint();
-			break;
-
-		
-		
-		
+		switch(c)
+		{
+		case '\r': break;
+		case '\b': if (left(1)) del(1); break;
+		case '\n': ring_hist.hist_save_line (rl->get_line(), rl->cmdlen);
+		echo->write(c);rl->write(c);print_prompt();break;		
 		default:
-		rl->insert_char((char)c);	
-		terminal_char(c);
-		if (rl->cmdlen != rl->cursor) {terminal_rewrite();}
+		if (rl->write(c)) 
+		if (rl->cmdlen - rl->cursor > 0) {rl->left(1);rl_rewrite();rl->right(1);echo->right(1);}
+		else echo->write(c);
 		}
 	}
-}}
 
-void rl_terminal::terminal_rewrite(){
-terminal_write(rl->cmdline + rl->cursor, rl->cmdlen - rl->cursor);
-terminal_move_cursor(-rl->cmdlen + rl->cursor);
-}		
-
-
-//*****************************************************************************
-// set cursor at position from begin cmdline (after prompt) + offset
-void rl_terminal::terminal_move_cursor (int offset)
-{
-	if (offset==0) return;
-	strm->print ("\033[");
-	strm->print (abs(offset));
-	if (offset > 0) strm->print ("C");
-	if (offset < 0) strm->print ("D");
-}
-
-
-// handling escape sequences
-int rl_terminal::escape_process (char ch)
-{
-	if (ch == '[') {
-		escape_seq = _ESC_BRACKET;
-		return 0;
-	} else if (escape_seq == _ESC_BRACKET) {
-		if (ch == 'A') {
-			hist_search (_HIST_UP);
-			return 1;
-		} else if (ch == 'B') {
-			hist_search (_HIST_DOWN);
-			return 1;
-		} else if (ch == 'C') {
-			//if (cursor < cmdlen) {
-				terminal_move_cursor (rl->move_cursor(1));
-				//cursor++;
-			//}
-			return 1;
-		} else if (ch == 'D') {
-			//if (cursor > 0) {
-				terminal_move_cursor (rl->move_cursor(-1));
-				//cursor--;
-			//}
-			return 1;
-		} else if (ch == '7') {
-			//escape_seq = _ESC_HOME;
-			return 0;
-		} else if (ch == '8') {
-			//escape_seq = _ESC_END;
-			return 0;
-		} else if (ch == '3') {
-			if (rl->del ()) terminal_del();					
-			if (rl->cmdlen != rl->cursor) {strm->print ("\033[K");terminal_rewrite();}
-			return 0;
-} 
-	} else if (ch == '~') {
-		if (escape_seq == _ESC_HOME) {
-			//terminal_reset_cursor ();
-			//cursor = 0;
-			return 1;
-		} else if (escape_seq == _ESC_END) {
-			//terminal_move_cursor (cmdlen-cursor);
-			//cursor = cmdlen;
-			return 1;
-		}
+	int rl_terminal::left(int i) {int temp=rl->left(1); echo->left (temp);return(temp);}
+	int rl_terminal::right(int i){echo->right(rl->right(1));}
+	int rl_terminal::del(int i){
+		if (rl->del(1)) 
+			{
+			rl_rewrite();
+			};
 	}
-}
-
-void rl_terminal::hist_search (int dir)
-{
-	int len = ring_hist.hist_restore_line (rl->cmdline, dir);
-	if (len >= 0) {
-		terminal_move_cursor(- rl->cursor);
-		rl->cursor = rl->cmdlen = len;
+	int rl_terminal::up(int i) {hist_search (_HIST_UP);}
+	int rl_terminal::down(int i){hist_search (_HIST_DOWN);}
 	
-		strm->print ("\033[K");
-		strm->print(rl->get_line());
-	}
-}
+	void rl_terminal::rl_rewrite(){
+			echo->del(rl->cmdlen - rl->cursor);
+			rl->get_line();
+			echo->print(rl->cmdline + rl->cursor);
+			echo->left(rl->cmdlen - rl->cursor);
+		}

@@ -31,3 +31,8 @@ void init_timer(uint32_t frequency)
   outb(0x40, low);
   outb(0x40, high); 
 }
+
+extern uint64_t tim;
+uint64_t millis(){
+return(tim);
+}

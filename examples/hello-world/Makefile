@@ -4,7 +4,7 @@ TARGET =native
 
 OBJDIR = obj_$(TARGET)
 
-MODULES = debug local_heap prototype allocator shed charqueue strm  intcom readline error strm
+MODULES = debug local_heap prototype allocator shed charqueue strm  intcom readline error strm PrintTransformer
 
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))
@@ -16,7 +16,8 @@ PROJECT = hello-world
 
 src = hello-world.cpp Print.cpp Stream.cpp allocator.cpp delay.cpp alloc_standart.cpp u_esh.cpp flag_sh.cpp \
 	ring.cpp queue.cpp DBStream.cpp dynamicring.cpp StrmNull.cpp BufferStrm.cpp debug_print.cpp \
-	command_list.cpp utility.cpp readline.cpp rl_terminal.cpp error.cpp StrmDebug.cpp genoslib.cpp
+	command_list.cpp utility.cpp readline.cpp rl_terminal.cpp error.cpp StrmDebug.cpp genoslib.cpp KeyCom.cpp KeyCom2ASCII.cpp \
+	ASCII2KeyCom.cpp
 		
 OBJ = $(src:%.cpp=$(OBJDIR)/%.o)
 

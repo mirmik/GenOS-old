@@ -8,9 +8,8 @@ void sh_timer_t::restart() {start=millis();}
 //***************************************************Основной цикл*******************************
 void TSH::start()
 {
-	while(1)										
-	{
-	loop:
+	//while(1)										
+	//{
 	uint64_t m = millis();
 	
 	sh_timer_t* tP,*next;
@@ -23,11 +22,10 @@ void TSH::start()
 			if (tP->status==REPEAT) 
 			{tP->restart();}
 			else {deleteTimer(tP);}	
-			goto loop;
 			}			
 		}		
-	idle();
-	}														
+	//idle();
+	//}														
 	
 }
 	
@@ -44,7 +42,7 @@ sh_timer_t* TSH::newTimer(void (*task) (void),unsigned int timer,uint8_t status)
 uint64_t m=millis();
 timercount++;
 	//if (timercount > TimerPANIC)  {while(1);}
-	sh_timer_t* tP=(sh_timer_t*)alloc->allocate(sizeof(sh_timer_t));
+	sh_timer_t* tP=(sh_timer_t*)stdalloc->allocate(sizeof(sh_timer_t));
 	new (tP) sh_timer_t;
 	list_add(&tP->list,&timer_head);	
 	tP->start=m;
@@ -77,10 +75,8 @@ timercount++;
 	
 	
 	//**********************constructor*****************
-TSH::TSH(void(*c)(void),Allocator_p* b)
+TSH::TSH()
 {	
 timercount=0;
-	idle=c;
 	INIT_LIST_HEAD(&timer_head);
-	alloc = b;
 }

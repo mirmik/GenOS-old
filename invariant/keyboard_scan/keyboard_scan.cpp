@@ -147,15 +147,15 @@ symbol:
 	if (!release) 
 	{
 	switch (keycode) {
-		case KEY_KPUP: 		if(out_strm !=0) {out_strm->rx_write(27);out_strm->rx_write('[');out_strm->rx_write(0x41);}; return 0;
-		case KEY_KPLEFT: 	if(out_strm !=0) {out_strm->rx_write(27);out_strm->rx_write('[');out_strm->rx_write(0x44);}; return 0;
-		case KEY_KPDOWN: 	if(out_strm !=0) {out_strm->rx_write(27);out_strm->rx_write('[');out_strm->rx_write(0x42);}; return 0;
-		case KEY_KPRIGHT:	if(out_strm !=0) {out_strm->rx_write(27);out_strm->rx_write('[');out_strm->rx_write(0x43);}; return 0;
+		case KEY_KPUP: 		if(out_strm !=0) {out_strm->write(27);out_strm->write('[');out_strm->write(0x41);}; return 0;
+		case KEY_KPLEFT: 	if(out_strm !=0) {out_strm->write(27);out_strm->write('[');out_strm->write(0x44);}; return 0;
+		case KEY_KPDOWN: 	if(out_strm !=0) {out_strm->write(27);out_strm->write('[');out_strm->write(0x42);}; return 0;
+		case KEY_KPRIGHT:	if(out_strm !=0) {out_strm->write(27);out_strm->write('[');out_strm->write(0x43);}; return 0;
 		case KEY_KPDEL: 	if(out_strm !=0) {}; return 0;
 		case KEY_KPHOME: 	if(out_strm !=0) {}; return 0;
 		case KEY_KPEND: 	if(out_strm !=0) {}; return 0;
 	};	
-	if (out_strm!=0) {out_strm->rx_write(keycode); };
+	if (out_strm!=0) {out_strm->write(keycode); };
 	return keycode;}
 	else {return 0;}	 
 }
