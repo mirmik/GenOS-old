@@ -10,12 +10,17 @@ struct monolist {
 monolist* next;
 };
 
+struct freelist {
+size_t sz;
+freelist* nx;
+};
+
 class Allocator_p {
 	public:
 Allocator_p * father;
 virtual void * allocate (size_t size)=0;
 virtual void deallocate (void * p)=0;
-virtual int freeinfo (void)=0;
+virtual size_t freeinfo (void)=0;
 };
 
 
@@ -34,9 +39,28 @@ void deallocate (void * p);
 
 void engage(void* pointer, size_t cachesz);
 
-int freeinfo ();
+size_t freeinfo ();
 };
 
+
+
+
+class Linear_allocator : public Allocator_p {
+public:
+Linear_allocator(Allocator_p* _father = 0);
+void init(Allocator_p* _father = 0);
+
+freelist* __flp;
+
+char* __end;
+char* __brkval;
+void * allocate (size_t size);
+void deallocate (void * p);
+
+void engage(void* pointer, size_t cachesz);
+
+size_t freeinfo ();
+};
 
 
 void * operator new (size_t size);

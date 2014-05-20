@@ -17,7 +17,7 @@ LIST_HEAD (command_head);
 
 void command_print()
 {command_t* p;
-list_for_each_entry(p,&command_head,list)
+list_for_each_entry(p,command_t,&command_head,list)
 {
 pr(p->mnem); 
 prln();
@@ -27,7 +27,7 @@ prln();
 int interpreter(int argc, const char* const* argv){
 	//Stream* tempstrm
 	command_t* p;
-list_for_each_entry(p,&command_head,list)
+list_for_each_entry(p,command_t,&command_head,list)
 
 if (!strcmp(argv[0],p->mnem)) 
 {

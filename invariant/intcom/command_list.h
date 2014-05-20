@@ -1,7 +1,7 @@
 #ifndef COMMAND_LIST_H
 #define COMMAND_LIST_H
 
-#include "linuxlist.h"
+#include "glist.h"
 #include "simple.h"
 //#include "allocator/allocator.h"
 //#include "GenOS.h"

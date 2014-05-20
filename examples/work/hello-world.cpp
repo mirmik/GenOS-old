@@ -16,15 +16,16 @@
 #include "VideoPage/VideoPage.h"
 #include "VideoPage/VideoPagePrint.h"
 #include "PrintTransformer/Scan2KeyCom.h"
+#include "genoslib.h"
+#include "filtration/aperiodic.h"
+#include "filtration/median3.h"
+//#include "filtration/median3_t.h"
 
 VideoPage 		v(0xB8000,80,25);
 VideoPagePrint 	vp(&v);
 
 void OS_init();
-char O_buf[10000];
-Object_cache O(500);
-
-Allocator_p * stdalloc=&O;
+Allocator_p * stdalloc;
 readline_t rl;
 rl_terminal rlt(&rl,&vp);
 //Keyscan key;
@@ -73,43 +74,63 @@ void test()
 {//v.putchar('G');
 }
 
-void clr(){v.clean();}
+char Rmas[10000];
+
+
+void reset()
+{unsigned char c;
+	c=inb(0x92);
+	outb(0x92,c|1);
+}
+void clr(){vp.init();}
 
 #include "shed/u_esh.h"
 TSH sh;
 
+AFS_filter f;
+void ddd2()
+{
+//prln(f.calculate(1000));	
+}
+
+Linear_allocator R;
 extern void kmain();
 int main()
 {	
 	
 	OS_init();
 	
-//	O.engage(O_buf,1000);
-	
+R.engage (Rmas,10000);
+
+stdalloc=&R;	
 	SEI();	
-	O.engage(O_buf,10000);
 	registry_standart_utility();
 	registry_alloc_utility();
 	command("pciscan",kmain);
 	command("test",test);
 	command("timer",timerprint);
 	command("clr",clr);
-
+	command("reset",reset);
 vp.init();
+sh.newTimer(ddd2,100,REPEAT);
+
+f.init(300,1,0.1);
+
+median3<uint> m;
+//median m;
+m.init();
+prln(m.calculate(2));
+prln(m.calculate(10));
+prln(m.calculate(3));
+prln(m.calculate(4));
+prln(m.calculate(3));
+prln(m.calculate(2));
+prln(m.calculate(1));
+
+
 rlt.print_prompt();
-//sh.newTimer(ddd,1000,REPEAT);
-//ddd();
-alloca(28);
-init_timer(1000);
-prlnhex(sh.timer_head.next);
-prlnhex(sh.timer_head.next->next);
-prlnhex(sh.timer_head.next->next->next);
-//prln((uint32_t)tim);
-//sh.start();
 	while(1) {
 		sh.start();
-		//vkstream.write(vkstream.read());
-//		rlt.listen();
 	}
 	
 	systemError("Programm end");
@@ -139,4 +160,5 @@ void OS_init()
 	abstract_irq_attach(0x20, TimerHandler);
 	abstract_irq_attach(0x21, KeyboardHandler);
 	//delay_cpu(10000000);
+	init_timer(1000);
 }

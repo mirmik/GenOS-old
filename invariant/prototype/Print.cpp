@@ -269,3 +269,17 @@ size_t Print::printFloat(double number, uint8_t digits)
   
   return n;
 }
+
+
+
+
+	//Print* Print::operator<<(int i) {print(i);return(this);};
+	//Print* Print::operator<<(size_t i){print(i);return(this);};
+	//Print* Print::operator<<(char *str){print(str);return(this);};
+
+
+	Print& operator<<(Print& p,int i){p.print(i);return(p);};;
+	Print& operator<<(Print& p,float i){p.print(i);return(p);};;
+	Print& operator<<(Print& p,char i){p.write(i);return(p);};;
+	Print& operator<<(Print& p,size_t i){p.print(i);return(p);};;
+	Print& operator<<(Print& p,char *str){p.print(str);return(p);};;

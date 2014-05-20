@@ -24,7 +24,6 @@
 
 
 #include "genoslib.h"
-#include "types.h"
 
 //#include "mvirt/WString.h"
 //#include "Printable.h"
@@ -46,7 +45,8 @@ class Print
   protected:
     void setWriteError(int err = 1) { write_error = err; }
   public:
-    Print() : write_error(0) {}
+  
+	Print() : write_error(0) {}
   
     int getWriteError() { return write_error; }
     void clearWriteError() { setWriteError(0); }
@@ -65,7 +65,7 @@ class Print
     size_t print(unsigned int, int = DEC);
     size_t print(long, int = DEC);
     size_t print(unsigned long, int = DEC);
-    size_t print(double, int = 2);
+    size_t print(double, int = 6);
    // size_t print(const Printable&);
 
 //    size_t println(const __FlashStringHelper *);
@@ -77,9 +77,17 @@ class Print
     size_t println(unsigned int, int = DEC);
     size_t println(long, int = DEC);
     size_t println(unsigned long, int = DEC);
-    size_t println(double, int = 2);
+    size_t println(double, int = 6);
   //  size_t println(const Printable&);
     size_t println(void);
 };
+
+
+	Print& operator<<(Print&,int i);
+	Print& operator<<(Print&,float i);
+	Print& operator<<(Print&,char i);
+	Print& operator<<(Print&,size_t i);
+	Print& operator<<(Print&,char *str);
+
 
 #endif

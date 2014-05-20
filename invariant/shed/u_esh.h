@@ -5,7 +5,7 @@
 #define U_ESH_H
 
 #include "platform.h"
-#include "types.h"
+#include "genoslib.h"
 #include "linuxlist.h"
 //#include "simple.h"
 

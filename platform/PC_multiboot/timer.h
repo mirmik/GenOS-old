@@ -1,7 +1,7 @@
 
 #ifndef        TIMER_H
 #define        TIMER_H
-#include "types.h"
+#include "genoslib.h"
 
 #define        BASE_FREQ      1000
 

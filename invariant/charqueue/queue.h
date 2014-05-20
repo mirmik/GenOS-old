@@ -1,5 +1,5 @@
-#ifndef QUEUE_H
-#define QUEUE_H
+#ifndef CHAR_QUEUE_H
+#define CHAR_QUEUE_H
 
 
 #define FULL 2

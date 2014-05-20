@@ -23,9 +23,8 @@
 #define Stream_h
 
 //#include "GenOS.h"
+#include "genoslib.h"
 #include "platform.h"
-#include <inttypes.h>
-#include "types.h"
 #include "simple.h"
 #include "prototype/Print.h"
 
@@ -55,6 +54,8 @@ class Stream : public Print
     virtual void flush() = 0;
 
     Stream() {_timeout=1000;}
+	void operator>>(Print *prnt);
+	void operator>>(Print &prnt);
 
 // parsing methods
 
@@ -99,8 +100,15 @@ class Stream : public Print
   long parseInt(char skipChar); // as above but the given skipChar is ignored
   // as above but the given skipChar is ignored
   // this allows format characters (typically commas) in values to be ignored
-
+	
+	
+	
   float parseFloat(char skipChar);  // as above but the given skipChar is ignored
 };
+
+
+
+
+
 
 #endif

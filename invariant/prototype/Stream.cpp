@@ -26,6 +26,19 @@
 #define PARSE_TIMEOUT 1000  // default number of milli-seconds to wait
 #define NO_SKIP_CHAR  1  // a magic char not found in a valid ASCII numeric field
 
+
+void Stream::operator>>(Print *prnt)
+{
+int i =read();
+if (i!=-1)prnt->write(i);
+}
+
+void Stream::operator>>(Print &prnt)
+{
+int i =read();
+if (i!=-1)prnt.write(i);
+}
+
 // private method to read stream with timeout
 /*int Stream::timedRead()
 {

@@ -1,7 +1,7 @@
 #ifndef FLAG_SH_H
 #define FLAG_SH_H
 
-#include "types.h"
+#include "genoslib.h"
 #include "linuxlist.h"
 #include "allocator/allocator.h"
 

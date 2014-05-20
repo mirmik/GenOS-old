@@ -20,9 +20,9 @@ static unsigned long micros(void)
 
 extern "C" void debug_putchar(char c);
 
-#include "stdlib.h"
-#define kmalloc(a) malloc(a)
-#define kfree(a) free(a)
+//#include "stdlib.h"
+//#define kmalloc(a) malloc(a)
+//#define kfree(a) free(a)
 
 void SystemError_platform();
 
