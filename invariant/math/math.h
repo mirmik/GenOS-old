@@ -10,7 +10,10 @@ float cosx(float);
 
 #define min(a,b) (a>b ? b : a)
 #define max(a,b) (a>b ? a : b)
-#define abs(a)   (a>0 ? a : -a)
+
+template <typename T>
+T abs(const T x) {return (x>0 ? x : -x );}
+
 /*
 float sqrt (float x)
 {
