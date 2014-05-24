@@ -88,6 +88,6 @@ class Print
 	Print& operator<<(Print&,char i);
 	Print& operator<<(Print&,size_t i);
 	Print& operator<<(Print&,char *str);
-
+	
 
 #endif

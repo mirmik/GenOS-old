@@ -8,13 +8,11 @@ float cosx(float);
 
 
 
-#define min(a,b) (a>b ? b : a)
-#define max(a,b) (a>b ? a : b)
+template <typename T> T min(const T a, const T b) {return (a>b ? b : a);}
+template <typename T> T max(const T a, const T b) {return (a>b ? a : b);}
+template <typename T> T abs(const T x) {return (x>0 ? x : -x );}
 
-template <typename T>
-T abs(const T x) {return (x>0 ? x : -x );}
 
-/*
 float sqrt (float x)
 {
 	if (x<0) x=abs(x);
@@ -28,7 +26,7 @@ float sqrt (float x)
       y2 = (y1 + x/y1)/2;
    };
    return y2;
-};*/
+};
 
 
 

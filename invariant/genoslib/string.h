@@ -7,18 +7,18 @@
 extern "C" {
 #endif
 
-extern char * ___strtok;
-extern char * strpbrk(const char *,const char *);
-extern char * strtok(char *,const char *);
-extern char * strsep(char **,const char *);
-extern __kernel_size_t strspn(const char *,const char *);
+//extern char * ___strtok;
+//extern char * strpbrk(const char *,const char *);
+//extern char * strtok(char *,const char *);
+//extern char * strsep(char **,const char *);
+//extern __kernel_size_t strspn(const char *,const char *);
 
 
 /*
  * Include machine specific inline routines
  */
 //#include <asm/string.h>
-
+/*
 #ifndef __HAVE_ARCH_STRCPY
 extern char * strcpy(char *,const char *);
 #endif
@@ -87,7 +87,7 @@ extern void * memchr(const u8 *,int, size_t);
 #ifndef __HAVE_ARCH_MEMCHR_INV
 void *memchr_inv(const u8 *, int, size_t);
 #endif
-
+*/
 #ifdef __cplusplus
 }
 #endif
