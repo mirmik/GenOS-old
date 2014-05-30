@@ -29,11 +29,7 @@ class V_sum : public Vector<n,T3>
 	public:
 	V_sum(Vector<n,T1> const &A, Vector<n,T2> const &B)
 	{
-		A.print();
-		B.print();
-		
 		for(int i=0;i<n;i++) Vector<n,T3>::V[i]=A[i]+B[i];
-		this->print();
 		};
 	
 	~V_sum(){};
@@ -43,6 +39,26 @@ template<uint n,typename T1,typename T2>
 auto const operator+(Vector<n,T1> const &A, Vector <n,T2> const &B) -> V_sum<n,T1,T2,decltype(A[0]+B[0])>
 {return V_sum<n,T1,T2,decltype(A[0]+B[0])>(A,B);};
 //////////////////////////////////////////
+
+
+/////////////////SUB///////////////////////
+template<uint n,typename T1, typename T2, typename T3>
+class V_sub : public Vector<n,T3>
+{
+	public:
+	V_sub(Vector<n,T1> const &A, Vector<n,T2> const &B)
+	{		
+		for(int i=0;i<n;i++) Vector<n,T3>::V[i]=A[i]-B[i];
+		};
+	
+	~V_sub(){};
+};
+
+template<uint n,typename T1,typename T2>
+auto const operator-(Vector<n,T1> const &A, Vector <n,T2> const &B) -> V_sub<n,T1,T2,decltype(A[0]-B[0])>
+{return V_sub<n,T1,T2,decltype(A[0]-B[0])>(A,B);};
+//////////////////////////////////////////
+
 
 
 
@@ -59,7 +75,7 @@ auto const operator*(Vector<n,T1> const &A, Vector <n,T2> const &B) -> decltype(
 
 
 
-///////////////////////MUX////////////////
+///////////////////////ABS////////////////
 template<uint n,typename T1>
 T1 abs(Vector<n,T1> const &A)
 {	
@@ -67,6 +83,7 @@ T1 abs(Vector<n,T1> const &A)
 	for(int i=0;i<n;i++) ex=ex+A[i]*A[i];
 	return sqrt(ex);};
 //////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 

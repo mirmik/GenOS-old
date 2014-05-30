@@ -22,8 +22,8 @@
 //#include <inttypes.h>
 //#include <stdio.h> // for size_t
 
-
 #include "genoslib.h"
+#include "internalClib/string.h"
 
 //#include "mvirt/WString.h"
 //#include "Printable.h"

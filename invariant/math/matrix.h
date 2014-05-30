@@ -22,8 +22,8 @@ const Type* operator[](int i) const {return (M+i*n);};
 
 Matrix<m,n,Type>& operator=(Matrix<m,n,Type> const &M2) {matrix_copy(M2.M,m,n,M); return *this;};
 
-void zero() {for(int i=0;i<m;i++)for(int j=0;j<n;j++)  M[i*n+j]=0;};
-void identity() {for(int i=0;i<m;i++)for(int j=0;j<n;j++)   M[i*n+j]=((i==j) ? 1 : 0);}
+Matrix<m,n,Type>& zero() {for(int i=0;i<m;i++)for(int j=0;j<n;j++)  M[i*n+j]=0;return *this;};
+Matrix<m,n,Type>& identity() {for(int i=0;i<m;i++)for(int j=0;j<n;j++)   M[i*n+j]=((i==j) ? 1 : 0);return *this;}
 void print() const {for(int i=0;i<m;i++) {for(int j=0;j<n;j++)  *stdprint << M[i*n+j]<<'\t'; *stdprint << '\n';};};
 };
 

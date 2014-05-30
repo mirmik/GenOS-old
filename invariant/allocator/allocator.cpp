@@ -61,7 +61,7 @@ return p;
 void operator delete (void * ptr,void*p)
 {
 }
-
+#include "delay.h"
 void * operator new (size_t size,Allocator_p* a)
 {
 return a->allocate(size);	

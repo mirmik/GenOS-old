@@ -16,6 +16,10 @@ complex<T> operator*(int b){return complex<T>(Re*b,Im*b);};
 void operator=(complex<T> a){Re=a.Re;Im=a.Im;};
 void operator=(int a){Re=a;Im=0;};
 
+void print() {pr (Re);
+	if (Im >= 0) pr('+');
+	pr(Im); pr("i");};
+
 complex<T> operator*(complex<T> b){return complex<T>(Re*b.Re - Im*b.Im , Re*b.Im + Im*b.Re);};
 complex<T> operator+(complex<T> b){return complex<T>(Re+b.Re , Im+b.Im);};
 friend complex<T> operator*(int a,complex<T> b){return complex<T>(b.Re*a,b.Im*a);};
@@ -29,6 +33,7 @@ template<typename T>
 Print& operator<<(Print& p,complex<T> t){p << t.Re;
 	if (t.Im >= 0) pr('+');
 	p << t.Im << "i\t";};
+
 
 
 #endif

@@ -1,0 +1,27 @@
+ifndef GENOS
+  $(error GENOS not defined! You must specify where GENOS resides!)
+endif
+
+
+
+
+
+PLATFORMFLAGS = -I$(GENOS)/platform/avr
+PLATFORMSRCPP := 
+
+PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 
+#PLATFORMOBJ += $(PLATFORMSRCC:%.c=$(OBJDIR)/%.o)
+
+CPP = avr-g++
+
+CPPFLAGS = $(GENOSFLAGS) $(PLATFORMFLAGS)  -fno-unwind-tables -fno-rtti -std=c++11
+#-fno-exceptions
+VPATH += $(GENOS)/platform/avr
+
+
+
+TRACE_CPP = @echo "  CPP       " $<
+
+$(OBJDIR)/%.o: %.cpp 
+	$(CPP)  -c $< -o $@
+	#$(TRACE_CPP)

@@ -3,7 +3,7 @@
 #define GENOSLIB_H
 
 #include "genoslib/types.h"
-#include "genoslib/exports.h"
+//#include "genoslib/exports.h"
 
 
 #ifdef __cplusplus
