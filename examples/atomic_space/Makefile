@@ -5,7 +5,7 @@ TARGET =native
 OBJDIR = obj_$(TARGET)
 
 MODULES = debug prototype error genoslib \
-	math allocator intcom internalClib shed
+	math allocator intcom internalClib shed geometry2 container
 
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))
@@ -17,7 +17,7 @@ PROJECT = hello-world
 
 
 src = hello-world.cpp Print.cpp Stream.cpp error.cpp math.cpp debug_print.cpp allocator.cpp utility.cpp \
-command_list.cpp  delay.cpp u_esh.cpp
+command_list.cpp  delay.cpp u_esh.cpp geometry2.cpp List.cpp
 
 	
 OBJ = $(src:%.cpp=$(OBJDIR)/%.o)

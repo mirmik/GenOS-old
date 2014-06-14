@@ -4,7 +4,6 @@
 #include "gmem.h"
 #include "glist.h"
 
-
 class ListNode{
 public:
 list_head list;
@@ -34,6 +33,9 @@ class List
 	//constr
 	List() {list.next=&list;list.prev=&list;};
 	
+	void* operator[](int n);
+	const void* operator[](int n) const;
+
 
 	//method
 	void add(void *O)
@@ -115,7 +117,6 @@ class List_it
 	
 	ListNode* get_node() {return(container_of(p,ListNode,list));}; 
 };
-
 
 
 #endif

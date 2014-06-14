@@ -30,6 +30,7 @@ extern "C" void __cxa_pure_virtual() { debug_print("__cxa_pure_virtual"); while 
 #include "container/List.h"
 #include "genoslib.h"
 #include "simple.h"
+#include "geometry2/geometry2.h"
 //#include <complex>
 //#include "math/complex.h"
 #define WIDTH 200
@@ -44,9 +45,6 @@ p->V[0]=x;p->V[1]=y;
 return p;
 };
 
-
-struct Point {float x; float y; Point(float _x,float _y) : x(_x),y(_y) {};
-	void print() {pr (x);prtab();pr(y);};};
 
 template<uint Width, uint Discr>
 class AtomisticSpace2
@@ -108,8 +106,8 @@ stdalloc=&R;
 registry_standart_utility();
 
 term.begin();
-List_it pl;
-ListNode* ll;
+List_it pl1,pl2;
+ListNode* ll1,*ll2;
 A.add(new_pointer(100,11));
 A.add(new_pointer(100,50));
 A.add(new_pointer(100,101));
@@ -117,19 +115,48 @@ A.add(new_pointer(100,152));
 A.add(new_pointer(100,203));
 A.add(new_pointer(100,250));
 A.add(new_pointer(100,301));
-A.add(new_pointer(100,352));
-A.add(new_pointer(100,403));
-A.add(new_pointer(100,454));
-A.add(new_pointer(100,465));
-A.add(new_pointer(100,506));
+//A.add(new_pointer(100,352));
+//A.add(new_pointer(100,403));
+//A.add(new_pointer(100,454));
+//A.add(new_pointer(100,465));
+//A.add(new_pointer(100,506));
 A.add(new_pointer(100,557));
-for_all_list_obj(pl,A.L,ll,ListNode) ((TV*)(ll->Object))->print();
+for_all_list_obj(pl1,A.L,ll1,ListNode) ((TV*)(ll1->Object))->print();
+
+//for_all_list_obj(pl1,A.L,ll1,ListNode) {for_all_list_obj(pl2,A.L,ll2,ListNode)
+//*stdprint << (abs((*((TV*)(ll1->Object)))-*((TV*)(ll2->Object)))) << '\t';
+//prln();
+//};
+
 A.reconsider();
 
-	A.print();
+prln();
+Point2 P;
+P.x=2; P.y= 10;
+P.print();
 
-SH.newTimer(task,100,REPEAT);
-while(1) SH.start();
+
+prln();
+Geometry2 G;
+G.new_point(10,56);
+G.new_point(11,57);
+
+prln();
+
+G.print_point_list();
+
+Point2* p;
+List_it pl;
+prln();
+prln();
+prln(distance(G.point(0),G.point(1)));
+(G.point(0)-G.point(1)).print();
+prln();
+
+//	A.print();
+
+//SH.newTimer(task,100,REPEAT);
+//while(1) SH.start();
 term.end();
 }
 

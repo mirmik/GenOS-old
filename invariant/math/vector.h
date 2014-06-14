@@ -79,7 +79,7 @@ auto const operator*(Vector<n,T1> const &A, Vector <n,T2> const &B) -> decltype(
 template<uint n,typename T1>
 T1 abs(Vector<n,T1> const &A)
 {	
-	T1 ex;
+	T1 ex=0;
 	for(int i=0;i<n;i++) ex=ex+A[i]*A[i];
 	return sqrt(ex);};
 //////////////////////////////////////////////////////////////////////////////////////////////////

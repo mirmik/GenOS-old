@@ -1,6 +1,6 @@
 
 
-
+#include "math/math.h"
 
 
 
@@ -33,5 +33,22 @@ float cosx(float x) {
     return sum;
 }
 
+int abs(const int x) {return (x>0 ? x : -x );}
+ float abs(const float x) {return (x>0 ? x : -x );}
+
+float sqrt (float x)
+{
+	if (x<0) x=abs(x);
+	if (x==0) return(0);
+   float y1 , y2;
+ 
+   y2 = x;
+   for (int i=0;i<10;i++)
+   {
+      y1 = y2;
+      y2 = (y1 + x/y1)/2;
+   };
+   return y2;
+};
 
 
