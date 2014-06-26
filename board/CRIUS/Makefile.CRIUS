@@ -1,0 +1,17 @@
+
+ifndef GENOS
+  $(error GENOS not defined! You must specify where GENOS resides!)
+endif
+
+
+
+
+BOARDSRCPP :=  LEDS_func.cpp CRIUS.cpp
+BOARDSRCC :=  
+
+PLATFORMOBJ += $(BOARDSRCPP:%.cpp=$(OBJDIR)/%.o) 
+PLATFORMOBJ += $(BOARDSRCC:%.c=$(OBJDIR)/%.o)
+
+CPPFLAGS += -I$(GENOS)/board/CRIUS/
+
+VPATH += $(GENOS)/board/CRIUS

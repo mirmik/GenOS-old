@@ -50,8 +50,8 @@ class List
 		list_add_tail(&l->list,&list);
 		};
 	
-	void print_list(){
-		*stdprint << "num" << "\t" << "pointer" << "\t\t" << "next" << "\t\t" << "prev" <<"\t\t" << "data" << '\n' ;
+	void print(){
+		*stdprint << "num" << "\t" << "pointer" << "\t\t" << "next" << "\t\t" << "prev" <<"\t\t" << "data" << '\n\r' ;
 		pr("head"); prtab(); prhex(&list); pr(" ");prtab(); prhex(list.next); pr(" ");prtab(); prhex(list.prev); pr(" "); prln();
 		
 		list_head *p;int i=0;

@@ -29,6 +29,9 @@ int del(int i);
 int right(int i);
 int left(int i);
 //int del(int i);
+
+int execute(int i);
+
 size_t write(uint8_t c);
 //void set_execute_callback (int (*_execute)(int, const char* const*));
 };

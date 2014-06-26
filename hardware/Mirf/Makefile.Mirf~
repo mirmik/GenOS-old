@@ -1,0 +1,7 @@
+
+VPATH += $(GENOS)/hardware/Mirf
+
+
+PLATFORMOBJ+=Mirf.o
+
+CPPFLAGS+= -I$(GENOS)/hardware/Mirf

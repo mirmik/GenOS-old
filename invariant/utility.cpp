@@ -13,10 +13,10 @@ void ptest(int argv,char** argc)
 for (int i=0;i<argv;i++) prln(argc[i]);		
 }
 
-void meminfo(int argv,char** argc)
-{
-pr(stdalloc->freeinfo());		
-}
+//void meminfo(int argv,char** argc)
+//{
+//pr(stdalloc->freeinfo());		
+//}
 
 void registry_standart_utility()
 {
@@ -28,7 +28,7 @@ command("list",command_print);
 
 void registry_alloc_utility()
 {
-command("memlist",meminfo);
+//command("memlist",meminfo);
 }
 
 

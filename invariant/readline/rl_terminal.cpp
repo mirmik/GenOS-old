@@ -190,10 +190,10 @@ void	rl_terminal::print_prompt()
 	{
 		switch(c)
 		{
-		case '\r': break;
+		case '\n': break;
 		case '\b': if (left(1)) del(1); break;
-		case '\n': ring_hist.hist_save_line (rl->get_line(), rl->cmdlen);
-		echo->write(c);rl->write(c);print_prompt();break;		
+		case '\r': ring_hist.hist_save_line (rl->get_line(), rl->cmdlen);
+		echo->write(c);echo->write('\n');rl->execute(0);print_prompt();break;		
 		default:
 		if (rl->write(c)) 
 		if (rl->cmdlen - rl->cursor > 0) {rl->left(1);rl_rewrite();rl->right(1);echo->right(1);}

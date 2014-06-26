@@ -1,0 +1,49 @@
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c hello-world.cpp -o obj_arduino/hello-world.o 
+#@echo "  CPP       " hello-world.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/debug/debug_print.cpp -o obj_arduino/debug_print.o 
+#@echo "  CPP       " ../../invariant/debug/debug_print.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/strm/StrmDebug.cpp -o obj_arduino/StrmDebug.o 
+#@echo "  CPP       " ../../invariant/strm/StrmDebug.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/prototype/Stream.cpp -o obj_arduino/Stream.o 
+#@echo "  CPP       " ../../invariant/prototype/Stream.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/prototype/Print.cpp -o obj_arduino/Print.o 
+#@echo "  CPP       " ../../invariant/prototype/Print.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/strm/DBStream.cpp -o obj_arduino/DBStream.o 
+#@echo "  CPP       " ../../invariant/strm/DBStream.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/charqueue/ring.cpp -o obj_arduino/ring.o 
+#@echo "  CPP       " ../../invariant/charqueue/ring.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/charqueue/dynamicring.cpp -o obj_arduino/dynamicring.o 
+#@echo "  CPP       " ../../invariant/charqueue/dynamicring.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/charqueue/queue.cpp -o obj_arduino/queue.o 
+#@echo "  CPP       " ../../invariant/charqueue/queue.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/shed/u_esh.cpp -o obj_arduino/u_esh.o 
+#@echo "  CPP       " ../../invariant/shed/u_esh.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/intcom/command_list.cpp -o obj_arduino/command_list.o 
+#@echo "  CPP       " ../../invariant/intcom/command_list.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/readline/rl_terminal.cpp -o obj_arduino/rl_terminal.o 
+#@echo "  CPP       " ../../invariant/readline/rl_terminal.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/PrintTransformer/ASCII2KeyCom.cpp -o obj_arduino/ASCII2KeyCom.o 
+#@echo "  CPP       " ../../invariant/PrintTransformer/ASCII2KeyCom.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/readline/readline.cpp -o obj_arduino/readline.o 
+#@echo "  CPP       " ../../invariant/readline/readline.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/prototype/KeyCom.cpp -o obj_arduino/KeyCom.o 
+#@echo "  CPP       " ../../invariant/prototype/KeyCom.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/PrintTransformer/KeyCom2ASCII.cpp -o obj_arduino/KeyCom2ASCII.o 
+#@echo "  CPP       " ../../invariant/PrintTransformer/KeyCom2ASCII.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/utility.cpp -o obj_arduino/utility.o 
+#@echo "  CPP       " ../../invariant/utility.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../invariant/shed/subst_shed.cpp -o obj_arduino/subst_shed.o 
+#@echo "  CPP       " ../../invariant/shed/subst_shed.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../platform/avr/new.cpp -o obj_arduino/new.o 
+#@echo "  CPP       " ../../platform/avr/new.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../platform/avr/HardwareSerial.cpp -o obj_arduino/HardwareSerial.o 
+#@echo "  CPP       " ../../platform/avr/HardwareSerial.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../platform/avr/SPI.cpp -o obj_arduino/SPI.o 
+#@echo "  CPP       " ../../platform/avr/SPI.cpp
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../platform/avr/main.cpp -o obj_arduino/main.o 
+#@echo "  CPP       " ../../platform/avr/main.cpp
+avr-gcc -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../platform/avr/wiring.c -o obj_arduino/wiring.o 
+#@echo "  CPP       " ../../platform/avr/wiring.c
+avr-gcc -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf -mmcu=atmega328 -c ../../platform/avr/wiring_digital.c -o obj_arduino/wiring_digital.o 
+#@echo "  CPP       " ../../platform/avr/wiring_digital.c
+avr-g++ -I../../invariant -I../../invariant/prototype -I../../platform/avr  -fno-unwind-tables -fno-rtti -std=c++11 -I/usr/lib/avr/include/ -I../../cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections -I../../hardware/Mirf   -mmcu=atmega328  obj_arduino/hello-world.o obj_arduino/debug_print.o obj_arduino/StrmDebug.o obj_arduino/Stream.o obj_arduino/Print.o obj_arduino/DBStream.o obj_arduino/ring.o obj_arduino/dynamicring.o obj_arduino/queue.o obj_arduino/u_esh.o obj_arduino/command_list.o obj_arduino/rl_terminal.o obj_arduino/ASCII2KeyCom.o obj_arduino/readline.o obj_arduino/KeyCom.o obj_arduino/KeyCom2ASCII.o obj_arduino/utility.o obj_arduino/subst_shed.o obj_arduino/new.o obj_arduino/HardwareSerial.o obj_arduino/SPI.o obj_arduino/main.o  obj_arduino/wiring.o obj_arduino/wiring_digital.o    Mirf.o -o hello-world.hex

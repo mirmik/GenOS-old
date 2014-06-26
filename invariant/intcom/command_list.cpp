@@ -1,6 +1,6 @@
 
 
-#include "command_list.h"
+#include "intcom/command_list.h"
 #include "genoslib.h"
 
 
@@ -66,7 +66,7 @@ void split (char* temp, argvc_t &a)
 }
 
 
-void execute(char* c)
+void sysexecute(char* c)
 {
 		argvc_t a;
 		char* argv [10];

@@ -1,0 +1,10 @@
+
+VPATH += $(GENOS)/hardware/Mirf
+
+HPLATFORMSRCPP :=  Mirf.cpp MirfHardwareSpiDriver.cpp
+HPLATFORMSRCC :=   
+
+PLATFORMOBJ += $(HPLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 
+PLATFORMOBJ += $(HPLATFORMSRCC:%.c=$(OBJDIR)/%.o)
+
+CPPFLAGS += -I$(GENOS)/hardware/Mirf

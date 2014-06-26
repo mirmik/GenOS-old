@@ -1,0 +1,26 @@
+ifndef GENOS
+  $(error GENOS not defined! You must specify where GENOS resides!)
+endif
+
+
+
+
+
+PLATFORMFLAGS = -I$(GENOS)/platform/arduino
+PLATFORMSRCPP :=  new.cpp HardwareSerial.cpp SPI.cpp main.cpp
+PLATFORMSRCC :=  wiring.c wiring_digital.c 
+
+PLATFORMOBJ += $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 
+PLATFORMOBJ += $(PLATFORMSRCC:%.c=$(OBJDIR)/%.o)
+
+CPP = avr-g++
+CC = avr-gcc
+
+CPPFLAGS = $(GENOSFLAGS) $(PLATFORMFLAGS)  -fno-unwind-tables -fno-rtti -std=c++11 \
+-I/usr/lib/avr/include/ -I$(GENOS)/cpu/AVR_MEGA328 -O2  -ffunction-sections -Wl,--gc-sections
+
+
+#-fno-exceptions
+VPATH += $(GENOS)/platform/arduino
+
+

@@ -41,7 +41,7 @@ size_t DBStream::write(uint8_t c){
 	else 
 	{
 	int temp = tx->push(c);
-	if (temp == -1) {
+	if (temp != -1) {
 					if (on_write != 0) on_write();
 					return(1);
 					}
@@ -58,7 +58,9 @@ rx->push(c);
 };
 
  int DBStream::available(){}
+ 
  int DBStream::read(){
 	 return(rx->pop());}
+	 
  int DBStream::peek(){}
  void DBStream::flush(){}

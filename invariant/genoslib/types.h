@@ -21,8 +21,6 @@ typedef size_t phys_addr_t;
 typedef size_t phys_size_t;
 //typedef size_t ptrdiff_t;
 
-#define NULL 0
-
 
 
 

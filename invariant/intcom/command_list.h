@@ -13,7 +13,7 @@ struct argvc_t {
 
 void split(char* temp, argvc_t &a);
 
-void execute(char* c);
+void sysexecute(char* c);
 
  extern list_head command_head;
   

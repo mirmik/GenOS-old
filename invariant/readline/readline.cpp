@@ -23,13 +23,16 @@ return cmdline;
 #define LOCAL_TRACERT 7
 
 
+int readline_t::execute(int i)
+{if(cmdlen!=0) {get_line();sysexecute(cmdline);} ;init();};
+	
+
 
 size_t readline_t::write(uint8_t c)
 {	
 	switch(c)
 	{
 	case '\b': backspace();break;
-	case '\n': if(cmdlen!=0) {get_line();execute(cmdline);} ;init();break;
 	default:
 	cmdlen++;
 	if (cursor!=cmdlen-1)

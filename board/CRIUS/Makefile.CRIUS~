@@ -1,0 +1,17 @@
+
+ifndef GENOS
+  $(error GENOS not defined! You must specify where GENOS resides!)
+endif
+
+
+
+
+BOARDSRCPP :=  
+BOARDSRCC :=  
+
+PLATFORMOBJ += $(BOARDSRCPP:%.cpp=$(OBJDIR)/%.o) 
+PLATFORMOBJ += $(BOARDSRCC:%.c=$(OBJDIR)/%.o)
+
+
+
+VPATH += $(GENOS)/board/CRIUS

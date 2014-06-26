@@ -7,7 +7,7 @@
 #include <inttypes.h>
 //#include <stdio.h> // for size_t
 #include "platform.h" // for kmalloc
-#include "linuxlist.h"
+#include "glist.h"
 
 struct ring_list
 {

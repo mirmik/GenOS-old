@@ -17,8 +17,8 @@ struct hlist_head {
 struct hlist_node {
 	struct hlist_node *next, **pprev;
 };
-
-
+#define offsetof(st, m) ((size_t)(&((st *)0)->m))
+#define container_of(ptr, type, member) (type *)( (char *)(ptr) - offsetof(type,member) )
 
 
 

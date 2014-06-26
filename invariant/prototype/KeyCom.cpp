@@ -8,3 +8,4 @@ int KeyCom::up(int i){}
 int KeyCom::down(int i){}
 int KeyCom::left(int i){}
 int KeyCom::right(int i){}
+int KeyCom::execute(int i){};

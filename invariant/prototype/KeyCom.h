@@ -14,5 +14,6 @@ virtual int down(int i);
 virtual int left(int i);
 virtual int right(int i);
 
+virtual int execute(int i);
 };
 #endif

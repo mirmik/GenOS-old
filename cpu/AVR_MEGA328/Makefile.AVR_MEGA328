@@ -1,0 +1,22 @@
+
+VPATH += $(GENOS)/cpu/$(CPU)/
+
+CPUSRC := 
+CPUSRCS := 
+
+CPUOBJ := $(CPUSRC:%.c=$(OBJDIR)/%.o) 
+CPUOBJ += $(CPUSRCS:%.S=$(OBJDIR)/%.o)
+
+PLATFORMOBJ += $(CPUOBJ)
+
+
+
+TRACE_CPP = @echo "  CPP       " $<
+
+$(OBJDIR)/%.o: %.cpp 
+	$(CPP) $(CPPFLAGS) -mmcu=atmega328 -c $< -o $@ 
+	#$(TRACE_CPP)
+
+$(OBJDIR)/%.o: %.c 
+	$(CC) $(CPPFLAGS) -mmcu=atmega328 -c $< -o $@ 
+	#$(TRACE_CPP)
