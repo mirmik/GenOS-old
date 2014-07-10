@@ -1,14 +1,20 @@
 
 #include "C_stream.h"
-
-C_stream_t term;
+#include "debug_print.h"
+#include "platform.h"
 
 
 int main(){
-term.begin();
+//term.begin();
+
+putchar('f');
+debug_putchar('c');
+debug_print("hello_world\n");
 
 
-term.end();
+while(1);
+
+//term.end();
 }
 
 

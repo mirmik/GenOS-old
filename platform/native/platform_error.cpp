@@ -2,7 +2,7 @@
 
 
 #include "platform.h"
-#include "debug/debug.h"
+#include "debug_print.h"
 
 void systemError_platform()
 {

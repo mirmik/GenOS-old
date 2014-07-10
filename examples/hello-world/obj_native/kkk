@@ -1,0 +1,17 @@
+
+debug_putchar.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <debug_putchar>:
+   0:	55                   	push   %rbp
+   1:	48 89 e5             	mov    %rsp,%rbp
+   4:	48 83 ec 10          	sub    $0x10,%rsp
+   8:	89 f8                	mov    %edi,%eax
+   a:	88 45 fc             	mov    %al,-0x4(%rbp)
+   d:	0f be 45 fc          	movsbl -0x4(%rbp),%eax
+  11:	89 c7                	mov    %eax,%edi
+  13:	e8 00 00 00 00       	callq  18 <debug_putchar+0x18>
+  18:	c9                   	leaveq 
+  19:	c3                   	retq   

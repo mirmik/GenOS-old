@@ -1,7 +1,8 @@
 
 //#include "platform.h"
 //#include "genoslib.h"
-#include "types.h"
+#include <inttypes.h>
+#include <stdio.h> // for size_t
 //#include "delay.h"
 
 #define dpr_tab() {debug_putchar('\t');}
