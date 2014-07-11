@@ -24,6 +24,7 @@
 #define isnan(a) 0
 #define isinf(a) 0
 
+#include <string.h>
 #include "Print.h"
 // Public Methods //////////////////////////////////////////////////////////////
 

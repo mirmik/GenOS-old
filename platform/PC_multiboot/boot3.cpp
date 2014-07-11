@@ -1,10 +1,11 @@
 #include "descriptor_tables/descriptor_tables.h"
-#include "debug/debug.h"
+#include "debug_print.h"
+#include "platform.h"
 
 void platform_init()
 {
-printd(">>PLATFORM_INIT\r\n");
-printd("PLATFORM:");printd(PLATFORM_NAME);dln;
-printd("CPU:");printd(CPU_NAME);dln;
+debug_print(">>PLATFORM_INIT\r\n");
+debug_print("PLATFORM:");debug_print(PLATFORM_NAME);dln;
+debug_print("CPU:");debug_print(CPU_NAME);dln;
 init_descriptor_tables();
 }

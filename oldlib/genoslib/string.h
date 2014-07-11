@@ -18,7 +18,7 @@ extern "C" {
  * Include machine specific inline routines
  */
 //#include <asm/string.h>
-/*
+
 #ifndef __HAVE_ARCH_STRCPY
 extern char * strcpy(char *,const char *);
 #endif
@@ -87,7 +87,7 @@ extern void * memchr(const u8 *,int, size_t);
 #ifndef __HAVE_ARCH_MEMCHR_INV
 void *memchr_inv(const u8 *, int, size_t);
 #endif
-*/
+
 #ifdef __cplusplus
 }
 #endif

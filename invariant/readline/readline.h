@@ -2,7 +2,7 @@
 #ifndef _READLINE_H_
 #define _READLINE_H_
 
-#include "prototype/KeyCom.h"
+#include "KeyCom.h"
 
 #undef ENDL
 #define ENDL '\n'

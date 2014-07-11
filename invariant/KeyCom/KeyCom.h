@@ -2,7 +2,7 @@
 #ifndef _KEY_COMMAND_H
 #define _KEY_COMMAND_H
 
-#include "prototype/Print.h"
+#include "Print.h"
 
 class KeyCom : public Print
 {public:

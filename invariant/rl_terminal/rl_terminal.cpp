@@ -1,6 +1,5 @@
 
-#include "readline/rl_terminal.h"
-#include "genoslib.h"
+#include "rl_terminal.h"
 
 
 
@@ -171,7 +170,7 @@ int ring_history_t::hist_restore_line (char * line, int dir)
 	return -1;
 }
 
-#include "GenOS.h"
+#include "GenOSInfo.h"
 void	rl_terminal::print_prompt()
 {
 	echo->print(MACHINE_NAME);echo->print(":");
@@ -184,8 +183,8 @@ void	rl_terminal::print_prompt()
    void	rl_terminal::init(readline_t* _rl,KeyCom* _echo)
 	{echo=_echo; rl=_rl;mode=0;}
 
-#include "intcom/command_list.h"
-#include "debug/debug.h"
+//#include "intcom/command_list.h"
+//#include "debug/debug.h"
    size_t	rl_terminal::write(uint8_t c)
 	{
 		switch(c)

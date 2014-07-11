@@ -1,6 +1,6 @@
 #ifndef        DESCRIPTOR_TABLES_H
 #define        DESCRIPTOR_TABLES_H
-#include "types.h"
+#include "stdint.h"
 
 #define        PIC1_ICW1    0x11
 #define        PIC1_ICW2    0x20

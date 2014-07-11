@@ -1,8 +1,8 @@
 
-#include    "descriptor_tables.h"
-#include "types.h"
-#include "genoslib.h"
-#include "debug/debug.h"
+#include "descriptor_tables.h"
+#include "stdint.h"
+#include "debug_print.h"
+#include "string.h"
 
 /* Загрузка регистра GDT */
 extern "C" void gdt_flush(uint32_t);
@@ -101,7 +101,7 @@ void idt_set_gate(uint8_t num,       /* номер прерывания */
                                   /* режима */ ;
 }
 
-#include "error/error.h"
+#include "error.h"
 void StubISR(){
 systemError("StubIRQ");
 	};

@@ -1,8 +1,10 @@
-#include "types.h"
+#include "stdint.h"
 //#include "printf.h"
 #include "io.h"
 #include "pci_search.h"
-#define NULL 0
+#include "GenosPrint.h"
+#include "redirect_inc/types.h"
+
 
 typedef struct 
 {
@@ -93,7 +95,6 @@ int ReadPCIDevHeader(u32 bus, u32 dev, u32 func, PCIDevHeader *p_pciDevice)
     return 0;
 }
 
-#include "simple.h"
 void PrintPCIDevHeader(u32 bus, u32 dev, u32 func, PCIDevHeader *p_pciDevice)
 {
     char *class_name;

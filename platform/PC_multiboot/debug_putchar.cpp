@@ -3,9 +3,9 @@
 
 
 #include "platform.h"
-#include "debug/debug.h"
+#include "debug_print.h"
 #include "video_page.h"
-#include "genoslib.h"
+#include "string.h"
 
 #define        SCREEN_WIDTH  80
 #define        SCREEN_HEIGHT 25

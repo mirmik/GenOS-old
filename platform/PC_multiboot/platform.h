@@ -20,6 +20,6 @@ if (info->int_num >= 32) outb (0x20,0x20);
 
 void debug_reset_cursor();
 
-uint64_t millis();
+long long millis();
 
 #endif

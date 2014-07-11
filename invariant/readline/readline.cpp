@@ -1,7 +1,6 @@
 
-#include "readline/readline.h"
-#include "genoslib.h"
-#include "intcom/command_list.h"
+#include "readline.h"
+#include "command_list.h"
 
 readline_t::readline_t()
 {
@@ -18,9 +17,6 @@ char* readline_t::get_line()
 cmdline[cmdlen]=0;
 return cmdline;	
 }
-
-#include "simple.h"
-#define LOCAL_TRACERT 7
 
 
 int readline_t::execute(int i)

@@ -2,9 +2,9 @@
 
 
 #include    "isr.h"
-#include 	"debug/debug.h"
-#include 	"error/error.h"
-#include 	"abstract_irq/abstract_irq.h"
+#include 	"debug_print.h"
+#include 	"error.h"
+#include 	"abstract_irq.h"
 /*----------------------------------------------------------
 // Наш простецкий обработчик, для иллюстрации и тестирования
 //--------------------------------------------------------*/

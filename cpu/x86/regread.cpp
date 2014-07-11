@@ -1,4 +1,6 @@
-#include "types.h"
+
+#include "stdint.h"
+#include "stdio.h"
 #include "cpu_register.h"
 
  

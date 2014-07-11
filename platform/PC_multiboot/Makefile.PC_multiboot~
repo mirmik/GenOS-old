@@ -1,0 +1,67 @@
+ifndef GENOS
+  $(error GENOS not defined! You must specify where GENOS resides!)
+endif
+
+ifndef CPU
+  $(error CPU not defined! You must specify where CPU resides!)
+endif
+
+
+VPATH += $(GENOS)/platform/$(TARGET)/descriptor_tables
+
+PLATFORMFLAGS =  -I$(GENOS)/platform/$(TARGET) -I$(GENOS)/cpu/$(CPU)
+PLATFORMSRCPP := debug_putchar.cpp boot3.cpp error_platform.cpp  descriptor_tables.cpp timer.cpp \
+				 pci_search.cpp
+PLATFORMSRCAS := gdt.S 	
+
+PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 
+PLATFORMOBJ += $(PLATFORMSRCAS:%.S=$(OBJDIR)/%.o)
+
+include $(GENOS)/cpu/$(CPU)/Makefile.$(CPU)
+
+
+CPP = g++ 
+CC = gcc 
+OBJCOPY= objcopy
+AS=as
+
+# Флаги компилятора языка C
+COMPILEFLAGS= -O0  -m32 -nostdlib -fno-exceptions -fno-unwind-tables -fno-rtti
+
+# Флаги компоновщика
+LDFLAGS:=-T $(GENOS)/platform/PC_multiboot/link.ld 
+
+# Флаги ассемблера
+ASFLAGS=--32
+#ASFLAGS=--64
+CPPFLAGS:= $(COMPILEFLAGS) $(GENOSFLAGS) $(PLATFORMFLAGS)
+CFLAGS:= $(COMPILEFLAGS) $(GENOSFLAGS) $(PLATFORMFLAGS)
+
+VPATH += $(GENOS)/platform/$(TARGET)
+
+all: $(OBJDIR) $(OBJ) platform LINK
+	mv hello-world hello-world.$(TARGET)
+	cp hello-world.$(TARGET) kernel
+	objdump -d kernel > kkk
+
+
+
+TRACE_CPP = @echo "  CPP       " $<
+TRACE_AS = @echo "  AS       " $<
+TRACE_CC = @echo "  CC       " $<
+$(OBJDIR)/%.o: %.cpp 
+	$(CPP) $(CPPFLAGS) -c $< -o $@
+	#$(TRACE_CPP)
+$(OBJDIR)/%.o: %.S 
+	@$(AS) $(ASFLAGS) $< -o $@
+	$(TRACE_AS)
+$(OBJDIR)/%.o: %.c 
+	@$(CC) $(CFLAGS) $< -o $@
+	$(TRACE_CC)
+
+
+install: 
+	cp kernel /mnt/boot/kernel
+	sync
+
+	

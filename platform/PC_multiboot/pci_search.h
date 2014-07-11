@@ -1,7 +1,7 @@
 #ifndef _PCI_H
 #define _PCI_H
 
-#include "types.h"
+#include "redirect_inc/types.h"
 
 #define PCI_CONFIG_PORT      0x0CF8
 #define PCI_DATA_PORT        0x0CFC

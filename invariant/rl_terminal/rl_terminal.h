@@ -2,8 +2,8 @@
 #define RL_TERMINAL_H
 
 
-#include "prototype/KeyCom.h"
-#include "readline/readline.h"
+#include "KeyCom.h"
+#include "readline.h"
 
 // direction of history navigation
 #define _HIST_UP   0
