@@ -21,6 +21,8 @@
 //readline_t rl;
 //rl_terminal rlt(&vkstream,&rl);
 
+
+extern "C" void __cxa_pure_virtual() { while (1); }
 Print* stdprint;
 
 char aic[0x900];

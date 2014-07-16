@@ -14,31 +14,17 @@
  * -  Added strsep() which will replace strtok() soon (because strsep() is
  *    reentrant and should be faster). Use only strsep() in new code, please.
  */
-//#include "stdio.h"
-//#include "inttypes.h"
-#include "string.h"
-//#include "ctype.h"
+#include "types.h"
+#include "genoslib/string.h"
+#include "genoslib/ctype.h"
 
-//#define NULL 0
-
-
- /*
-  * Fast implementation of tolower() for internal usage. Do not use in your
-  * code.
-   */
- static inline char _tolower(const char c)
- {
-         return c | 0x20;
- }
-
-#define tolower(a) _tolower(a)
 
 /**
  * strncasecmp - Case insensitive, length-limited string comparison
  * @s1: One string
  * @s2: The other string
  * @len: the maximum number of characters to compare
- */ 
+ */
 int strncasecmp(const char *s1, const char *s2, size_t len)
 {
 	/* Yes, Virginia, it had better be unsigned */
@@ -429,7 +415,7 @@ void * memset(void * s,int c,size_t count)
 	int i;
 
 	/* do it one word at a time (32 bits or 64 bits) while possible */
-	if ( ((unsigned long)s & (sizeof(*sl) - 1)) == 0) {
+	if ( ((ulong)s & (sizeof(*sl) - 1)) == 0) {
 		for (i = 0; i < sizeof(*sl); i++) {
 			cl <<= 8;
 			cl |= c & 0xff;
@@ -491,7 +477,7 @@ void * memcpy(void *dest, const void *src, size_t count)
 		return dest;
 
 	/* while all data is aligned (common case), copy a word at a time */
-	if ( (((unsigned long)dest | (unsigned long)src) & (sizeof(*dl) - 1)) == 0) {
+	if ( (((ulong)dest | (ulong)src) & (sizeof(*dl) - 1)) == 0) {
 		while (count >= sizeof(*dl)) {
 			*dl++ = *sl++;
 			count -= sizeof(*dl);
@@ -552,7 +538,7 @@ int memcmp(const void * cs,const void * ct,size_t count)
 	const unsigned char *su1, *su2;
 	int res = 0;
 
-	for( su1 = (uint8_t*)cs, su2 = (uint8_t*)ct; 0 < count; ++su1, ++su2, count--)
+	for( su1 = (u8*)cs, su2 = (u8*)ct; 0 < count; ++su1, ++su2, count--)
 		if ((res = *su1 - *su2) != 0)
 			break;
 	return res;
@@ -632,7 +618,7 @@ void *memchr(const void *s, int c, size_t n)
 /*
 #endif
 #ifndef __HAVE_ARCH_MEMCHR_INV
-static void *check_bytes8(const uint8_t *start, uint8_t value, unsigned int bytes)
+static void *check_bytes8(const u8 *start, u8 value, unsigned int bytes)
 {
 	while (bytes) {
 		if (*start != value)
@@ -652,9 +638,9 @@ static void *check_bytes8(const uint8_t *start, uint8_t value, unsigned int byte
  * if the whole buffer contains just @c.
  */
  /*
-void *memchr_inv(const uint8_t *start, int c, size_t bytes)
+void *memchr_inv(const u8 *start, int c, size_t bytes)
 {
-	uint8_t value = c;
+	u8 value = c;
 	u64 value64;
 	unsigned int words, prefix;
 
@@ -668,7 +654,7 @@ void *memchr_inv(const uint8_t *start, int c, size_t bytes)
 
 	prefix = (unsigned long)start % 8;
 	if (prefix) {
-		uint8_t *r;
+		u8 *r;
 
 		prefix = 8 - prefix;
 		r = check_bytes8(start, value, prefix);
