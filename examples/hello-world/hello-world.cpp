@@ -10,6 +10,7 @@
 
 #include "ASCII2KeyCom.h"
 #include "KeyCom2ASCII.h"
+#include "utility.h"
 
 KeyCom2ASCII K2A(&term);
 readline_t rl;
@@ -27,6 +28,7 @@ int main(){
 term.begin();
 term.print("helloWorld\n");
 
+registry_standart_utility();
 command("task1",task1);
 command_print();
 

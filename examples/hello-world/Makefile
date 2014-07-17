@@ -5,7 +5,7 @@ TARGET =native
 OBJDIR = obj_$(TARGET)
 
 MODULES = StreamPrint debug_print intcom command_list GenosPrint PrintTransform readline \
-	rl_terminal KeyCom GenosInfo
+	rl_terminal KeyCom GenosInfo stdutility
  
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))
@@ -18,7 +18,7 @@ PROJECT = hello-world
 
 
 src = hello-world.cpp Print.cpp Stream.cpp debug_print.cpp command_list.cpp ASCII2KeyCom.cpp KeyCom.cpp \
-	KeyCom2ASCII.cpp readline.cpp rl_terminal.cpp
+	KeyCom2ASCII.cpp readline.cpp rl_terminal.cpp utility.cpp
 	
 OBJ = $(src:%.cpp=$(OBJDIR)/%.o)
 

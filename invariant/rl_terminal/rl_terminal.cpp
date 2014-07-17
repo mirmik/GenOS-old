@@ -183,16 +183,20 @@ void	rl_terminal::print_prompt()
    void	rl_terminal::init(readline_t* _rl,KeyCom* _echo)
 	{echo=_echo; rl=_rl;mode=0;}
 
+
+static char oldchar=0;
 //#include "intcom/command_list.h"
 //#include "debug/debug.h"
    size_t	rl_terminal::write(uint8_t c)
-	{
+	{	
+		if ((oldchar=='\n' && c=='\r') || (oldchar=='\r' && c=='\n')) return 0;
+		oldchar=c;		
 		switch(c)
 		{
-		case '\n': break;
 		case '\b': if (left(1)) del(1); break;
+		case '\n': 
 		case '\r': ring_hist.hist_save_line (rl->get_line(), rl->cmdlen);
-		echo->write(c);echo->write('\n');rl->execute(0);print_prompt();break;		
+		echo->write('\r');echo->write('\n');rl->execute(0);print_prompt();break;		
 		default:
 		if (rl->write(c)) 
 		if (rl->cmdlen - rl->cursor > 0) {rl->left(1);rl_rewrite();rl->right(1);echo->right(1);}

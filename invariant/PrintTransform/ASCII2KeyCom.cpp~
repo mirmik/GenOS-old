@@ -1,7 +1,6 @@
 
 
-#include "PrintTransformer/ASCII2KeyCom.h"
-#include "debug/debug.h"
+#include "ASCII2KeyCom.h"
 
 
  /* define the Key codes */
@@ -162,6 +161,9 @@ size_t ASCII2KeyCom::write(uint8_t c)
 			//dpr("del");
 			out->write('\b');
 			break;
+
+			case '\n': out->print ("\\n"); break;
+			case '\r': out->print ("\\r"); break;
 
 //			case KEY_ETX:
 			//if (this->sigint != NULL)
