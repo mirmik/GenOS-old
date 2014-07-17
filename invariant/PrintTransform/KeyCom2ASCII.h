@@ -1,8 +1,7 @@
 
 #ifndef KeyCom2ASCII_H
 #define KeyCom2ASCII_H
-#include "prototype/KeyCom.h"
-#include "genoslib.h"
+#include "KeyCom.h"
 
 
 class KeyCom2ASCII : public KeyCom {

@@ -183,8 +183,8 @@ void	rl_terminal::print_prompt()
    void	rl_terminal::init(readline_t* _rl,KeyCom* _echo)
 	{echo=_echo; rl=_rl;mode=0;}
 
-#include "intcom/command_list.h"
-#include "debug/debug.h"
+//#include "intcom/command_list.h"
+//#include "debug/debug.h"
    size_t	rl_terminal::write(uint8_t c)
 	{
 		switch(c)

@@ -1,39 +1,37 @@
 
 
-#include "intcom/command_list.h"
-#include "genoslib.h"
+#include "command_list.h"
+#include "GenosPrint.h"
+#include "string.h"
 
-
-LIST_HEAD (command_head);
-
+std::vector<command_t> command_vector;
 
  void command_add (char* a,size_t c)
  {command_t* temp=new command_t;
- list_add_tail(&temp->list,&command_head);
  temp->mnem=a;
  temp->func=c;
+ command_vector.push_back(*temp);
  }
 
 
 void command_print()
-{command_t* p;
-list_for_each_entry(p,command_t,&command_head,list)
 {
-pr(p->mnem); 
+for (std::vector<command_t>::iterator it = command_vector.begin() ; it != command_vector.end() ; it++)
+{
+pr(it->mnem); 
 prln();
 };
 };
 
 int interpreter(int argc, const char* const* argv){
-	//Stream* tempstrm
-	command_t* p;
-list_for_each_entry(p,command_t,&command_head,list)
 
-if (!strcmp(argv[0],p->mnem)) 
+for (std::vector<command_t>::iterator it = command_vector.begin() ; it != command_vector.end() ; it++)
+
+if (!strcmp(argv[0],it->mnem)) 
 {
 //tempstrm=(Stream*)stdio;
 //stdio=strm;
-((void (*)(int, const char* const*))(p->func))(argc,argv);
+((void (*)(int, const char* const*))(it->func))(argc,argv);
 //stdio=tempstrm; 
 return 0;
 }

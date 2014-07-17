@@ -1,5 +1,5 @@
 
-#include "prototype/KeyCom.h"
+#include "KeyCom.h"
 
 int KeyCom::del(int i){}
 int KeyCom::home(int i){}

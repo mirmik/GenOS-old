@@ -1,10 +1,8 @@
 #ifndef COMMAND_LIST_H
 #define COMMAND_LIST_H
 
-#include "glist.h"
-#include "simple.h"
-//#include "allocator/allocator.h"
-//#include "GenOS.h"
+#include <vector>
+#include "stdio.h"
 
 struct argvc_t {
 	char ** argv;
@@ -15,14 +13,16 @@ void split(char* temp, argvc_t &a);
 
 void sysexecute(char* c);
 
- extern list_head command_head;
+// extern list_head command_head;
   
+
  struct command_t
  {
 char* mnem; 
-list_head list;
 size_t func;
  };
+
+
  
  #define command(a,c) command_add(a, (size_t) c)
   void command_add (char* a, size_t c);

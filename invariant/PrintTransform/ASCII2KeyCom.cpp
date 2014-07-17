@@ -1,7 +1,6 @@
 
 
-#include "PrintTransformer/ASCII2KeyCom.h"
-#include "debug/debug.h"
+#include "ASCII2KeyCom.h"
 
 
  /* define the Key codes */

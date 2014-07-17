@@ -2,6 +2,8 @@
 #include "readline.h"
 #include "command_list.h"
 
+#include "string.h"
+
 readline_t::readline_t()
 {
 init();	

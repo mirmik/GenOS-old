@@ -1,6 +1,6 @@
 
 #include "readline.h"
-//#include "command_list.h"
+#include "command_list.h"
 
 readline_t::readline_t()
 {

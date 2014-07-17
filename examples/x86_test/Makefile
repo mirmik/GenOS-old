@@ -6,7 +6,7 @@ CPU=x86
 OBJDIR = obj_$(TARGET)
 
 MODULES = debug_print delay error StreamPrint abstract_irq initenv charqueue intcom allocator \
-KeyCom intcom Delay GenosInfo readline rl_terminal GenosPrint InternalClib
+KeyCom intcom Delay GenosInfo readline rl_terminal GenosPrint InternalClib charqueue VideoPage genosmath
  
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))
@@ -19,7 +19,7 @@ PROJECT = hello-world
 
 src = hello-world.cpp debug_print.cpp delay_cpu.cpp \
 	error.cpp Stream.cpp Print.cpp abstract_irq.cpp \
-	initenv.cpp string.cpp
+	initenv.cpp string.cpp staticring.cpp queue.cpp VideoPage.cpp 
 		
 OBJ = $(src:%.cpp=$(OBJDIR)/%.o)
 

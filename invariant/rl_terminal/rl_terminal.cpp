@@ -1,7 +1,7 @@
 
 #include "rl_terminal.h"
 
-
+#include "string.h"
 
 
 

@@ -15,7 +15,7 @@ PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o)
 
 CPP = g++
 
-CPPFLAGS = $(GENOSFLAGS) $(PLATFORMFLAGS)  -fno-unwind-tables -fno-rtti -std=c++11
+CPPFLAGS = $(GENOSFLAGS) $(PLATFORMFLAGS)  -fno-unwind-tables -fno-rtti
 #-fno-exceptions
 VPATH += $(GENOS)/platform/native/module/strm 
 VPATH += $(GENOS)/platform/native

@@ -4,7 +4,9 @@
 #include "platform.h"
 #include "abstract_irq.h"
 //#include "keyscan.h"
-//#include "charqueue/staticring.h"
+#include "staticring.h"
+#include "VideoPage.h"
+#include "VideoPagePrint.h"
 //#include "allocator/allocator.h"
 #include "readline.h"
 #include "rl_terminal.h"
@@ -14,16 +16,17 @@
 
 //char O_buf[1000];
 //Object_cache O(sizeof(command_t));
+VideoPage vpage(0xB800,20,20);
+//VideoPagePrint vprint(&vpage);
 
 //Allocator_p * stdalloc=&O;
-//Stream* stdio;
-//staticring_t rx,tx;
+Print* stdprint;
+staticring_t rx,tx;
 //readline_t rl;
 //rl_terminal rlt(&vkstream,&rl);
 
 
 extern "C" void __cxa_pure_virtual() { while (1); }
-Print* stdprint;
 
 char aic[0x900];
 
@@ -56,7 +59,7 @@ int main()
 //	vkstream.send=send;
 //	O.engage(O_buf,1000);
 	SEI();	
-	
+	vpage.putchar(2,2,'k');
 //	registry_standart_utility();
 //	registry_alloc_utility();
 	

@@ -1,0 +1,32 @@
+ifndef GENOS
+  $(error GENOS not defined! You must specify where GENOS resides!)
+endif
+
+
+
+
+
+PLATFORMFLAGS = -I$(GENOS)/platform/native -I$(GENOS)/platform/native/module/strm
+PLATFORMSRCPP := C_stream.cpp	debug_putchar.cpp platform_error.cpp
+#PLATFORMSRCC := 	
+
+PLATFORMOBJ = $(PLATFORMSRCPP:%.cpp=$(OBJDIR)/%.o) 
+#PLATFORMOBJ += $(PLATFORMSRCC:%.c=$(OBJDIR)/%.o)
+
+CPP = g++
+
+CPPFLAGS = $(GENOSFLAGS) $(PLATFORMFLAGS)  -fno-unwind-tables -fno-rtti -std=c++11
+#-fno-exceptions
+VPATH += $(GENOS)/platform/native/module/strm 
+VPATH += $(GENOS)/platform/native
+
+
+all: $(OBJDIR) $(OBJ) platform LINK
+	mv hello-world hello-world.$(TARGET)
+
+
+TRACE_CPP = @echo "  CPP       " $<
+
+$(OBJDIR)/%.o: %.cpp 
+	@$(CPP) $(CPPFLAGS) -c $< -o $@
+	$(TRACE_CPP)

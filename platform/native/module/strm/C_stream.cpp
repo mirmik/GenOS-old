@@ -4,6 +4,7 @@
 
 #include "C_stream.h"
 #include "stdio.h"
+#include "string.h"
 
 C_stream_t term;
 

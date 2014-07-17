@@ -1,7 +1,6 @@
 
 
-#include "PrintTransformer/KeyCom2ASCII.h"
-#include "debug/debug.h"
+#include "KeyCom2ASCII.h"
 
 KeyCom2ASCII::KeyCom2ASCII(Print *a)
 {init(a);}
