@@ -5,18 +5,18 @@ CPU=AVR_MEGA328
 
 OBJDIR = obj_$(TARGET)
 
-MODULES = prototype debug strm charqueue shed readline intcom PrintTransformer
-
+MODULES = prototype debug strm charqueue shed readline intcom PrintTransformer stl
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))
 VPATH += $(GENOS)/invariant/
 
+GENOSFLAGS:= $(addprefix -I../../invariant/,$(MODULES))
 GENOSLIB := $(wildcard $(GENOS)/invariant/genoslib/*.c)
 
 PROJECT = hello-world 
 
 
-src = hello-world.cpp Stream.cpp Print.cpp
+src = hello-world.cpp Stream.cpp Print.cpp 
 # debug_print.cpp StrmDebug.cpp Stream.cpp Print.cpp \
 #	DBStream.cpp ring.cpp dynamicring.cpp queue.cpp \
 #	u_esh.cpp command_list.cpp rl_terminal.cpp ASCII2KeyCom.cpp readline.cpp KeyCom.cpp \
@@ -30,11 +30,9 @@ all: $(OBJDIR) $(OBJ) platform LINK
 	
 
 
-include $(GENOS)/invariant/Makefile.invariant
 include $(GENOS)/platform/$(TARGET)/Makefile.$(TARGET)
 include $(GENOS)/cpu/$(CPU)/Makefile.$(CPU)
 #include $(GENOS)/board/$(BOARD)/Makefile.$(BOARD)
-include $(GENOS)/hardware/Mirf/Makefile.Mirf
 
 platform: $(PLATFORMOBJ)
 		

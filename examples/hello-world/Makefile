@@ -5,7 +5,7 @@ TARGET =native
 OBJDIR = obj_$(TARGET)
 
 MODULES = StreamPrint debug_print intcom command_list GenosPrint PrintTransform readline \
-	rl_terminal KeyCom GenosInfo stdutility
+	rl_terminal KeyCom GenosInfo stdutility ustl
  
 
 VPATH := $(addprefix ../../invariant/,$(MODULES))

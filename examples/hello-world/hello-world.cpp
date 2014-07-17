@@ -2,7 +2,7 @@
 #include "C_stream.h"
 #include "debug_print.h"
 #include "platform.h"
-#include <vector>
+//#include <vector>
 #include "readline.h"
 #include "rl_terminal.h"
 
@@ -11,6 +11,7 @@
 #include "ASCII2KeyCom.h"
 #include "KeyCom2ASCII.h"
 #include "utility.h"
+
 
 KeyCom2ASCII K2A(&term);
 readline_t rl;
@@ -22,7 +23,7 @@ void task1 () {};
 Print* stdprint = &term; 
 
 extern "C" void __cxa_pure_virtual() { while (1); }
-std::vector<float> F;
+//std::vector<float> F;
 
 int main(){
 term.begin();
